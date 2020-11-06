@@ -1,0 +1,549 @@
+.bg-image-default
+  background: url('https://firebasestorage.googleapis.com/v0/b/ratoong-dev.appspot.com/o/service-images%2Fbackgrounds%2Fbg-default.jpg?alt=media&token=ff59a8b9-fdb7-4f9c-a319-c9cfc3471643') no-repeat center
+  height: 100vh
+  width: 100%
+  position: fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  z-index: -1
+  @include media-portrait-down(lg)
+    background: url('https://firebasestorage.googleapis.com/v0/b/ratoong-dev.appspot.com/o/service-images%2Fbackgrounds%2Fbg-m-default.jpg?alt=media&token=0b7a6037-a284-47e9-9479-348061170ff2') no-repeat
+    background-size: cover
+  @include media-breakpoint-down(lg)
+    background-position: inherit
+a
+  color: $color-ratoong-dark-gray
+  &:hover
+    text-decoration: none
+    color: darken($color-ratoong-dark-gray, 5%)
+
+.web-view
+  @include media-breakpoint-down(xs)
+    display: none
+  @include media-breakpoint-down(sm)
+    display: none
+.mobile-view
+  @include media-breakpoint-down(md)
+    display: none
+  @include media-breakpoint-down(lg)
+    display: none
+  @include media-breakpoint-down(xl)
+    display: none
+/* start dropdown sections */
+.ratoong-destination-block
+  font-size: $font-size-base
+  font-family: $font-family-base
+  margin: 20px auto
+  position: relative
+  padding: 2em 3em
+  background-color: rgb(255, 255, 255)
+  /* Fall-back for browsers that don'tsupport rgba */
+  background-color: rgba(255, 255, 255, .8)
+  max-width: 100%
+  @include media-breakpoint-down(sm)
+    margin: 10px auto 0
+    padding: 7px 5px
+  @include media-breakpoint-down(md)
+    padding: 7px 5px
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-base
+.RatoongSearch,
+.RatoongRate
+  border-radius: 0
+  font-size: $font-size-base
+  font-family: $font-family-base
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-base
+  &.form-control
+    height: 100% !important
+.form-control
+  background-color: transparent
+.RatoongSearch
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  background-color: transparent
+  z-index: 1
+  opacity: 0.99
+  &:focus
+    background-color: transparent
+label[for="RatoongRate"],
+label[for="RatoongSearch"]
+  position: absolute
+  height: 40px
+  width: 40px
+  top: 0px
+  right: 0px
+  opacity: 0.99
+  z-index: 0
+.RatoongRate
+  border: none
+  border-bottom: 1px solid $color-light-gray-83
+  background: url('/assets/images/src/search.svg') no-repeat transparent
+  background-position: right 5px center
+  background-size: 30px
+  &:focus
+    border-color: $color-ratoong-blue-43
+    box-shadow: 0px 0.4rem 0.2rem -2px rgba($color-ratoong-blue-43, 0.25)
+.RatoongRateSearch
+  border-radius: 0
+  font-size: $font-size-base
+  font-family: $font-family-base
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-base
+  &.form-control
+    height: 100% !important
+  border: 1px solid $color-light-gray-83
+  &:focus
+    border-color: $color-ratoong-blue-43
+    box-shadow: 0px 0.4rem 0.2rem -2px rgba($color-ratoong-blue-43, 0.25)
+.RatoongResortSearchButton
+  border-radius: 0
+  font-size: $font-size-base
+  font-family: $font-family-base
+  background: url('/assets/images/src/search.svg') no-repeat transparent
+  background-position: right 5px center
+  background-size: 30px
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-base
+  &.form-control
+    height: 100% !important
+  border: 1px solid $color-light-gray-83
+  &:focus
+    border-color: $color-ratoong-blue-43
+    box-shadow: 0px 0.4rem 0.2rem -2px rgba($color-ratoong-blue-43, 0.25)
+label[for="RatoongSearch"]
+  background: url('/assets/images/src/arrow.png') no-repeat
+  background-size: contain
+  transform: rotate(90deg) translate3d(50%, 75%, 0)
+  @include media-breakpoint-down(lg)
+    transform: rotate(90deg) translate3d(30%, 75%, 0)
+  @include media-breakpoint-down(md)
+    transform: rotate(90deg) translate3d(20%, 50%, 0)
+label[for="RatoongRate"]
+  background: url('/assets/images/src/search.svg') no-repeat
+  background-size: contain
+  transform: translate3d(-50%, 25%, 0)
+  @include media-breakpoint-down(lg)
+      transform: translate3d(-50%, -15%, 0)
+/* end dropdown sections */
+
+.ratoong-component-title
+  margin: 5px auto 10px
+  font-size: $font-size-heading
+  font-weight: 600
+  text-align: center
+  text-transform: uppercase
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-heading
+.ratoong-component-subtitle
+  margin: 5px auto 10px
+  font-size: $font-size-base
+  font-weight: 400
+  text-align: center
+  text-transform: uppercase
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-footer
+    line-height: $font-size-mb-footer
+
+/*  INPUT TYPE RANGE  */
+input
+  font-family: "Oswald" !important
+
+
+input[type=range].range-ratoong
+  -webkit-appearance: none
+  /* Hides the slider so that custom slider can be made */
+  width: 100%
+  /* Specific width is required for Firefox. */
+  background: transparent
+  /* Otherwise white in Chrome */
+
+input[type=range].range-ratoong::-webkit-slider-thumb
+  -webkit-appearance: none
+
+input[type=range].range-ratoong:focus
+  outline: none
+  /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+
+input[type=range].range-ratoong::-ms-track
+  width: 100%
+  cursor: pointer
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent
+  border-color: transparent
+  color: transparent
+
+input[type=range].range-ratoong::-webkit-slider-thumb
+  -webkit-appearance: none
+  height: 36px
+  width: 16px
+  background: $color-ratoong-blue-43
+  cursor: pointer
+  margin-top: -14px /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+
+input[type=range].range-ratoong::-moz-range-thumb
+  height: 36px
+  width: 16px
+  background: $color-ratoong-blue-43
+  cursor: pointer
+
+input[type=range].range-ratoong::-ms-thumb
+  height: 36px
+  width: 16px
+  background: $color-ratoong-blue-43
+  cursor: pointer
+
+input[type=range].range-ratoong::-webkit-slider-runnable-track
+  width: 100%
+  height: 8.4px
+  cursor: pointer
+  background: $color-ratoong-blue-43
+
+input[type=range].range-ratoong:focus::-webkit-slider-runnable-track
+  background: $color-ratoong-blue-43
+
+input[type=range].range-ratoong::-moz-range-track
+  width: 100%
+  height: 8.4px
+  cursor: pointer
+  background: $color-ratoong-blue-43
+
+input[type=range].range-ratoong::-ms-track
+  width: 100%
+  height: 8.4px
+  cursor: pointer
+  background: $color-ratoong-blue-43
+  color: transparent
+
+input[type=range].range-ratoong::-ms-fill-lower
+  background: $color-ratoong-blue-43
+
+input[type=range].range-ratoong::-ms-fill-upper
+  background: $color-ratoong-blue-43
+
+input[type=range].range-ratoong:focus::-ms-fill-upper
+  background: $color-ratoong-blue-43
+
+/*  END INPUT TYPE RANGE  */
+
+.btn-group > .switcher-ratoong
+  color: $color-light-gray-83
+  border-radius: 0px
+  border: none
+  cursor: pointer
+  background-color: $color-light-gray-83
+
+.btn-group > .switcher-ratoong.bg-ratoong
+  background-color: $color-ratoong-blue-43
+
+.divider
+  margin: 1rem 0 1rem
+  display: block
+  width: 100%
+  height: 0px
+  border-bottom: 2px solid $color-raven-gray-51
+
+/* start headers ratoong */
+.ratoong-title
+  font-family: $bebas-neue
+  display: block
+  margin: .1em 0
+  text-transform: uppercase
+  text-align: center
+  @include media-breakpoint-up(xl)
+    font-size: $font-size-heading
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-heading
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-heading
+  &-left
+    @extend .ratoong-title
+    text-align: left
+  &-right
+    @extend .ratoong-title
+    text-align: right
+.title-margin-down
+  margin-top: 15vh
+.title-margin-up
+  margin-top: 5vh
+/* end headers ratoong  */
+/* start rate / find boxes headings */
+.findbox-header
+  font-weight: bold
+  font-size: $font-size-tb-heading
+/* end rate / find boxes headings */
+.opasity-white
+  margin-top: 20px
+  margin-left: 2em auto
+  margin-right: 2em auto
+  margin-bottom: 2em auto
+  background-color: rgba($white, 0.61)
+
+
+/*  BUTTONS  */
+.ratoong-btn
+  font-size: $font-size-button
+  padding: .5em .7em
+  background-color: $color-ratoong-blue-43
+  border: none
+  color: $body-color
+  cursor: pointer
+  margin: .5em
+  line-height: 2em
+  @include media-breakpoint-down(md)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(lg)
+    margin: .5em auto
+  width: 350px
+  max-width: 100%
+  img.arrow-btn
+    float: right
+    max-height: 2em
+    /*  rating ngx-valor  */
+button.rating-flakes
+  padding: 0
+  margin: 0
+  background-color: transparent
+  border: none
+  width: auto
+  height: auto
+  cursor: pointer
+  outline: none
+
+/* start for rate autocomplete (input) */
+.list-group
+  display: block
+  position: absolute
+  background-color: $white
+  left: 0
+  z-index: 1
+  overflow-y: scroll
+  @include media-breakpoint-up(xl)
+    top: 100%
+    max-height: 260px
+  @include media-breakpoint-between(md, lg)
+    top: 100%
+    max-height: 260px
+  @include media-breakpoint-down(sm)
+    bottom: 100%
+    max-height: calc(1em * 6)
+  // transform: translateX(-95%)
+ul > span > .list-group-item
+  min-height: 1.2em
+  padding: 0px 2px 2px 1.2em
+  line-height: 1.17
+  border: none
+  border-bottom-right-radius: 0
+  border-bottom-left-radius: 0
+  border-top-left-radius: 0
+  border-top-right-radius: 0
+  &:hover
+    background-color: $color-ratoong-blue-43
+    > a
+      color: $color-ratoong-yellow-48
+/* end for rate autocomplete (input) */
+.loader
+  display: block
+  position: absolute
+  width: 100px
+  height: 100px
+  top: 50%
+  left: 50%
+  transform: translate3d(-50%, -50%, 0)
+  background: url('/assets/images/src/load.png') no-repeat
+  background-size: contain
+  animation: rotate360 2s linear infinite
+
+@keyframes rotate360
+  0%
+    transform: translate3d(-50%, -50%, 0) rotate(0deg)
+  100%
+    transform: translate3d(-50%, -50%, 0) rotate(360deg)
+.select
+  background: transparent
+  background-position: right 5px center
+  background-size: 30px
+  padding: .25em 35px .25em 1.2em
+  border: 1px solid $color-light-gray-83
+  -webkit-appearance: none
+  appearance: none
+  @include media-breakpoint-down(sm)
+    padding: .25em 3em .25em 2.2em
+  &:focus
+    outline: none
+    box-shadow: none
+    border-color: $color-light-gray-83
+  & option
+    background-color: rgba(255, 255, 255, 0.3)
+    border: 1px solid $color-light-gray-83
+  &.white
+    background: url(/assets/images/src/arrow-01.svg) no-repeat $color-alabaster-white-98
+    background-position: right 5px center
+    background-size: 30px
+select
+  color: #495057
+  > .select-options
+    color: $color-ratoong-blue-43
+.subtitle
+  font-size: $font-size-sub-title
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-sub-title
+  @include media-breakpoint-down(sm)
+    font-size: $font-size-mb-sub-title
+.legend-text
+  font-size: $font-size-base
+  font-family: $bebas-neue
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-base
+.svgText
+  font-size: $font-size-base
+  font-family: $bebas-neue
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-mb-base
+  @include media-breakpoint-down(sm)
+    font-size: $font-size-tb-base
+.modal-largest
+  margin-top: 70px !important
+  max-width: 80% !important
+  width: 80% !important
+  height: 80% !important
+  position: relative
+  overflow: auto
+.lh-2
+  line-height: 2em
+.cp
+  cursor: pointer
+svg
+  overflow: visible !important
+.fixed-top
+  opacity: 1 !important
+  z-index: 999 !important
+.overlay-menu
+  display: block
+  width: 100vw
+  height: 100vh
+  background: transparent
+.modal-dialog .modal-content
+  margin-top: 4em
+  border-radius: 0
+  padding: 10px
+
+.missing-snow-msg-container
+  display: flex
+  align-items: center
+.wal
+  text-align: left
+.war
+  text-align: right
+.mac
+  @include media-breakpoint-down(xs)
+    text-align: center
+.mar
+  @include media-breakpoint-down(xs)
+    text-align: right
+h2
+  @include media-breakpoint-down(md)
+    font-size: 1.5rem
+.block-content-center
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100%
+.rate-title
+  font-size: 2.5rem !important
+  color: #525151 !important
+  text-align: left !important
+  padding-left: 110px
+  background: transparent url('/assets/images/src/look-up.png') no-repeat left 15px center
+  background-size: 70px
+  @include media-breakpoint-down(md)
+    font-size: 2rem !important
+    background-size: 65px
+  @include media-breakpoint-down(sm)
+    font-size: 1.5rem !important
+    background-size: 2.5rem
+    margin-bottom: 1rem
+.ratoong-rate-btn
+  display: block
+  padding: .2em
+  border: none
+  min-height: 40px
+  width: 100%
+  height: 100%
+  color: white
+  font-weight: bold
+  background-color: #35a0a8
+  cursor: pointer
+
+.ambassador-item
+  &__wrapper
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+  &__img
+    border-radius: 50%
+    object-fit: cover
+    width: 170px
+    height: 170px
+  &__name
+    font-family: "Bebas Neue Regular"
+    font-size: 23px
+    margin: 15px 0
+    color: #565D63
+    @include media-breakpoint-down(md)
+      font-size: 20px
+  &__description
+    font-family: 'Oswald', sans-serif
+    font-size: 1rem
+    flex-grow: 1
+    max-width: 385px
+    width: 100%
+    color: #565D63
+    text-align: justify
+    line-height: 1.6
+    @include media-breakpoint-down(md)
+      font-size: 18px
+  &__social-links
+    display: flex
+    justify-content: center
+    margin: 14px 0 auto
+    max-width: 202px
+    width: 100%
+    &-icon
+      display: block
+      padding: 5px
+      width: 50px
+      height: 50px
+.ResortChoose
+  padding: 0px
+  color: $input-color
+  padding: 0.375rem 0.75rem
+  font-size: $font-size-base
+  @include media-breakpoint-down(lg)
+    font-size: $font-size-tb-base
+  @include media-breakpoint-down(md)
+    font-size: $font-size-mb-base
+  &:hover
+    color: $input-color
+  &:focus
+    color: $input-color
+
+
+.container-fluid
+  max-width: 1600px

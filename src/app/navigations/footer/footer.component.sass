@@ -1,0 +1,52 @@
+@import "src/styles"
+
+
+#facebookMessenger
+    position: fixed
+    right: 0
+    z-index: 99999
+.msg-hide
+    bottom: 0
+    max-width: 0px
+    max-height: 0px
+.container-fluid
+  max-width: none
+
+.msg-show
+    bottom: 50px
+    max-width: 340px
+    max-height: 535px
+.facebookMsgClose
+    color: #fff
+    display: block
+    float: right
+    padding: 4px 20px
+    background-color: #343a40
+    line-height: 20px
+    border-top-left-radius: 8px
+#facebookMessenger img
+    margin-right: 10px
+    width: 25px
+    border: 0
+    max-width: 100%
+    height: auto!important
+    vertical-align: middle
+.fas,
+.fab
+  color: #FFF
+  font-size: 1.8rem
+  padding-right: 20px
+  &:hover
+    color: lightgray
+.active
+  color: $color-ratoong-green-44
+a
+  display: flex
+
+@media screen and (max-width: 580px)
+  .fas,
+  .fab
+    font-size: 1.4rem
+    padding-right: 15px
+
+

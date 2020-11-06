@@ -1,0 +1,148 @@
+@font-face {
+    font-family: 'Bebas Neue Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('/assets/fonts/BebasNeueRegular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Roboto Thin';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Roboto Light'), url('/assets/fonts/Roboto-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto-Regular'), url('/src/assets/fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html {
+    // position: relative;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+html,
+body {
+    display: block !important;
+    min-height: 100% !important;
+}
+
+app-root,
+app-home,
+app-rate-estimate-resort,
+app-rate-estimate-end,
+main {
+    display: block !important;
+    min-height: 100% !important;
+    min-width: 100% !important;
+}
+
+body {
+    font-family: $font-family-base !important;
+    font-size: $font-size-base !important;
+    // margin-bottom: 60px;
+    @include media-breakpoint-down(lg) {
+        font-size: $font-size-tb-base !important;
+    }
+    @include media-breakpoint-down(md) {
+        font-size: $font-size-mb-base !important;
+    }
+}
+
+a,
+p,
+button,
+h2 {
+    font-family: $font-family-base;
+}
+
+main[role="main"] {
+    min-height: 100%;
+    padding-top: $nav-height;
+    padding-bottom: $footer-height;
+    @include media-breakpoint-down(sm) {
+        padding-top: $nav-mb-height;
+    }
+    @include media-breakpoint-down(sm) {
+        padding-bottom: 0;
+    }
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    @include media-breakpoint-down(sm) {
+        min-height: calc(100vh - #{$footer-height}) !important;
+    }
+    @include media-breakpoint-down(xs) {
+        min-height: calc(100vh - #{$footer-mb-height}) !important;
+    }
+}
+
+.footer {
+    display: grid;
+    align-items: center;
+    font-family: $roboto;
+    color: $color-ratoong-yellow-48;
+    font-size: $font-size-footer;
+    position: fixed;
+    padding: 0px;
+    bottom: 0;
+    width: 100%;
+    height: $footer-height;
+    @include media-breakpoint-down(xs) {
+        height: $footer-mb-height;
+    }
+    @include media-breakpoint-down(sm) {
+        font-size: $font-size-mb-footer;
+        line-height: $font-size-mb-footer + 5px;
+        text-align: center;
+        position: relative;
+    }
+    @include media-breakpoint-up(md) {
+        height: $footer-height;
+    }
+    @include media-breakpoint-up(xl) {
+        line-height: $footer-height;
+    }
+    .footer-title {
+        font-size: $font-size-footer;
+        font-family: $bebas-neue;
+        display: block;
+        color: $color-ratoong-yellow-48;
+        a {
+            font-family: $bebas-neue;
+            color: inherit;
+        }
+        @include media-breakpoint-between(md,
+        lg) {
+            font-size: $font-size-tb-footer;
+            padding: 5px;
+            line-height: $font-size-tb-footer + 5px;
+        }
+        @include media-breakpoint-down(md) {
+            font-size: $font-size-mb-footer;
+            padding: 5px;
+            line-height: $font-size-mb-footer + 5px;
+        }
+    }
+    .sm {
+        display: inline-block;
+        color: $white;
+        width: $footer-height - 20px;
+        height: $footer-height - 20px;
+        line-height: $footer-height;
+        text-align: right;
+        margin: .2em;
+        &-icons {
+            text-align: right;
+            @include media-breakpoint-down(lg) {
+                padding: 5px 0 !important;
+                text-align: center;
+            }
+        }
+    }
+}

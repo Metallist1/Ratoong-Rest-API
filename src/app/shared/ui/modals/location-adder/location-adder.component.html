@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Close" (click)="closeModal('Location-adder')">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+<div class="modal-body">
+        <div *ngIf="!destinationAdded" >
+          <div class="ratoong-title">add a ski resort</div>
+          <div class="modal-body">
+            <p class="text-center"> WE WILL DO OUR BEST TO ADD YOUR NEW SKI DESTINATION AS SOON AS POSSIBLE!</p>
+            <form [formGroup]="newLocation" (ngSubmit)="addDest()" novalidate>
+              <div class="form-group">
+                <input type="city" class="form-control" placeholder="CITY" formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                  <div *ngIf="f.city.errors.required">City is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="DESTINATION NAME" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="HOMEPAGE" formControlName="website" [ngClass]="{ 'is-invalid': submitted && f.website.errors }">
+                <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
+                  <div *ngIf="f.website.errors.required">Website is required</div>
+                </div>
+              </div>
+              <div class="form-group"><input type="submit" [ngClass]="!newLocation.valid ? 'disabled' : ''" class="ratoong-btn mx-auto" value="ADD RESORT">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div *ngIf="destinationAdded">
+          <p class="text-center">The RATOONG team will review {{ newLocationName }} and add it on a later date.</p>
+        </div>
+</div>
+

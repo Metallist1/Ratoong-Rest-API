@@ -1,0 +1,15 @@
+{
+  "targets": {
+    "ratoong-dev": {
+      "hosting": {
+        "ratoong": [
+          "ratoong-dev"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ratoong-333eb",
+    "development": "ratoong-dev"
+  }
+}

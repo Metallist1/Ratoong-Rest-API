@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/_variables";
+@import "./src/app/styles/mixins";
+@import "./src/app/styles/variables";
+@import "./src/app/styles/global";
+@import "./src/app/styles/common";
+
+.really-custom .tooltip-inner {
+  background-color: #69B8BE;
+  font-size: 1.2rem;
+}
+.really-custom .arrow::before {
+  border-top-color: #69B8BE;
+}

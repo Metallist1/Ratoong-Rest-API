@@ -1,0 +1,80 @@
+$mint: #69b8be;
+$facebook: #3a589b;
+$google: #cf4332;
+
+/*  grid scale */
+
+// $xxl: 1600px;
+// $xxxl: 1920px;
+// $container-max-widths: ( xxl: $xxl, xxxl: $xxxl);
+
+/* font */
+
+$bebas-neue: 'Bebas Neue Regular';
+$oswald: 'Oswald', sans-serif;
+$roboto: 'Roboto Thin';
+$font-size-base: 23px;
+$font-size-tb-base: 20px;
+$font-size-mb-base: 14px;
+$font-size-heading: 45px;
+$font-size-mb-heading: 36px;
+$font-size-mb-landscape-heading: 26px;
+$font-size-sub-title: 30px;
+$font-size-tb-sub-title: 30px;
+$font-size-mb-sub-title: 20px;
+$font-size-tb-heading: $font-size-tb-base * 1.8;
+$font-size-big-text: 150px;
+$font-size-middle-text: 90px;
+$font-size-lg-big-text: 100px;
+$font-size-tb-big-text: 80px;
+$font-size-mb-big-text: 35px;
+$font-size-button: $font-size-base;
+$font-size-menu: $font-size-base;
+$font-family-base: $bebas-neue;
+
+/* sponsor's logos */
+
+$sponsor-home-height: 100px;
+$sponsor-home-mb-height: 40px;
+$sponsor-font-size: $font-size-base;
+
+/*footer */
+
+$footer-height: 50px;
+$footer-mb-height: 50px;
+$font-size-footer: 23px;
+$font-size-tb-footer: 20px;
+$font-size-mb-footer: 16px;
+
+/*navbar*/
+
+$navbar-brand-font-size: $font-size-base;
+$nav-height: 70px;
+$nav-mb-height: 70px;
+
+/*  tablet variables  */
+
+
+/* colors */
+
+$body-color: #0A0A0A;
+$input-color: #95989A;
+$color-white-smoke-93: #eee;
+$color-alabaster-white-98: #f9f9f9;
+$color-shark-gray-13: #1d2027;
+$color-hoki-gray-46: #607D8B;
+$color-raven-gray-51: #79828c;
+$color-light-gray-83: #d3d3d3;
+$color-gainsboro-gray-87: #ddd;
+$color-mercury-gray-91: #e7e7e7;
+$color-ratoong-blue-43: #35a0a8;
+$color-ratoong-dark-gray: #495057;
+$color-cerulean-blue-45: #039be5;
+$color-facebook-blue-48: #4667AE;
+$color-ratoong-green-44: #35A0A7;
+$color-apple-green-46: #42A948;
+$color-ratoong-yellow-48: #FAFDFF;
+$color-terracotta-red-46: #a94442;
+$ratoong-white-opacity-background: rgba(256, 256, 256, 0.6);
+
+/* header */
