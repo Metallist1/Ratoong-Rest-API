@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ModalService} from '../../shared/services';
+import {ModalService} from '../../../shared/services';
 
 @Component({
   selector: 'app-navbar',

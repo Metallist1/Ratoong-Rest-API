@@ -11,8 +11,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navigations/navbar/navbar.component';
-import { FooterComponent } from './navigations/footer/footer.component';
+
 
 import { environment } from '../environments/environment';
 
@@ -30,9 +29,7 @@ firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
-    FooterComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

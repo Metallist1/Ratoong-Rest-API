@@ -1,0 +1,155 @@
+@import "../../../../styles"
+
+nav.navbar
+  height: $nav-height
+  @include media-breakpoint-down(sm)
+    height: $nav-mb-height
+    padding: 5px 0
+.navbar-toggler
+  position: fixed
+  top: 15px
+  right: 0
+  &:after
+    clear: both
+.navbar-brand
+  padding: 0
+  z-index: 1040
+  img
+    width: calc( #{$nav-height} - 10px)
+    height: calc( #{$nav-height} - 10px)
+  @include media-breakpoint-down(sm)
+    img
+      width: calc( #{$nav-mb-height} - 10px)
+      height: calc( #{$nav-mb-height} - 10px)
+.group
+  @include media-breakpoint-down(sm)
+    text-align: center
+  > .nav-item.account-bnt
+    font-size: 25px
+    @include media-breakpoint-down(sm)
+      margin: auto
+      width: 45%
+      text-align: center
+.navbar
+  padding: .2em .3em
+  @include media-breakpoint-down(md)
+    padding: 0em
+  &-brand
+    @include media-breakpoint-down(md)
+      margin-left: .3em
+      padding-bottom: 0
+  &-toggler
+    @include media-breakpoint-down(md)
+      margin-right: .3em
+  .nav-item
+    font-family: $bebas-neue
+    font-size: $font-size-menu
+    position: relative
+    cursor: pointer
+    & a.nav-link
+      color: $white
+      padding: 0.5rem 1rem
+    & a.padding-nav-link
+      padding: 0.5rem 2.5rem
+      @include media-breakpoint-down(md)
+        padding: 0.5rem 1rem
+      @include media-breakpoint-down(sm)
+        padding: 0.5rem 1rem
+    & .nav-link.active
+      color: $color-ratoong-blue-43 !important
+    &:hover .dropdown-menu
+      display: block
+  & .nav-btn
+    font-size: $font-size-menu
+    border: 1px solid $white
+    & a.nav-link
+      padding: 2px 4px
+      line-height: 1.5
+      &:hover
+        color: $black
+
+/*show mobile menu*/
+.navbar-collapse
+  @include media-breakpoint-down(sm)
+    position: absolute
+    top: 69px
+    width: 100%
+    z-index: 999
+    background-color: #343a40
+  &.showMenu > ul > li.nav-item
+    @include media-breakpoint-down(sm)
+      text-align: center
+      padding: 0
+      border-bottom: 1px solid $color-mercury-gray-91
+.collapse.navbar-collapse
+  &.showMenu
+    @include media-breakpoint-down(sm)
+      display: block
+  &.hideMenu
+    @include media-breakpoint-down(sm)
+      display: none
+ul.navbar-nav > li.nav-btn > a.nav-link
+  line-height: 1.5
+.dropdown-menu
+  display: none
+  top: 95%
+.group.navbar
+  margin-left: auto
+  @include media-breakpoint-down(sm)
+    margin-left: 0
+  position: absolute
+  @include media-breakpoint-down(sm)
+    position: relative
+  right: 0
+  > .nav-item.account-bnt
+    font-size: $font-size-menu / 1.1
+.mobile-item.nav-link
+  text-align: center
+  color: #fff !important
+.mobile-submenu
+  background-color: #343a40
+  @include media-breakpoint-down(sm)
+    background-color: lighten(#343a40, 5%)
+  > li
+    > .dropdown-item
+      text-align: center
+      color: #fff
+      padding: 0
+      border-bottom: 1px solid $color-ratoong-blue-43
+      color: lighten($color-ratoong-blue-43, 45%)
+    &:last-child
+      > .dropdown-item
+        border-bottom: none
+.submenu-item
+  color: #FFF
+  padding: 8px 24px
+  cursor: pointer
+a:hover
+  color: lightgray
+a:focus
+  color: $mint
+.desktop-submenu
+  list-style: none
+  padding: 0
+  position: absolute
+  flex-direction: row
+  font-size: $font-size-menu / 1.1
+  left: 0
+  top: 60px
+  width: 100%
+  color: #FFF
+  display: none
+  @include media-breakpoint-down(sm)
+    display: none !important
+  margin: 0
+  justify-content: center
+.nav-center
+  position: absolute
+  @include media-breakpoint-down(sm)
+    position: relative
+  left: 0
+  width: 100%
+  justify-content: center
+.profile-name
+  color: #FFF
+  cursor: default !important
