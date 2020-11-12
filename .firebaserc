@@ -1,15 +1,15 @@
 {
   "targets": {
-    "ratoong-dev": {
+    "final-exam-9302a": {
       "hosting": {
-        "ratoong": [
-          "ratoong-dev"
+        "final-exam-9302a": [
+          "final-exam-9302a"
         ]
       }
     }
   },
   "projects": {
-    "default": "ratoong-333eb",
-    "development": "ratoong-dev"
+    "default": "final-exam-9302a",
+    "development": "final-exam-9302a"
   }
 }
