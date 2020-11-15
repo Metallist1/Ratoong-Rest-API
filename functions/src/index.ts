@@ -17,37 +17,41 @@ export const syncRatings =  functions.database.ref('NewLocations/{locationId}/Lo
 
 exports.getAllResorts = functions.https.onRequest((req, res) => {
   if(req.method !== "GET"){
-    res.status(400).json({
-      message: "Not Allowed"
+    res.status(405).json({
+      data: "Not Allowed"
     })
   }
   dependencyFactory.getResortController().getAllResorts().then((data) =>{
-    console.log("asynchronous logging has val:",data)
     res.status(200).json({
-      message : JSON.stringify(data)
+      data
     })
   }).catch((error => {
+    res.status(500).json({
+      data: "An error has occurred"
+    })
     console.log('rejected', error);
   }));
 });
 
 exports.getSingleResort = functions.https.onRequest((req, res) => {
   if(req.method !== "GET"){
-    res.status(400).json({
+    res.status(405).json({
       message: "Not Allowed"
     })
   }
   if(!req.query.id){
-    res.status(404).json({
+    res.status(400).json({
       message: "Missing id"
     })
   }
   dependencyFactory.getResortController().getSingleResort(Number(req.query.id)).then((data) =>{
-    console.log("asynchronous logging has val:",data)
     res.status(200).json({
-      message : JSON.stringify(data)
+      data
     })
   }).catch((error => {
+    res.status(500).json({
+      data: "An error has occurred"
+    })
     console.log('rejected', error);
   }));
 });
@@ -58,6 +62,8 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
       message: "Not Allowed"
     })
   }
+  // Need date (Default to no date if none is present
+  // need specific filter. Do not run this query without filter
   const textas = req.query.text;
   const textas2 = req.query.newtext;
   res.status(200).json({
