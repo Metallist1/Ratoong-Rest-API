@@ -57,18 +57,47 @@ exports.getSingleResort = functions.https.onRequest((req, res) => {
 });
 
 exports.getFilteredResort = functions.https.onRequest((req, res) => {
+
   if(req.method !== "GET"){
     res.status(400).json({
       message: "Not Allowed"
     })
   }
+
+  if(!req.query.id){
+    res.status(400).json({
+      message: "Missing id"
+    })
+  }
+
+  if(!req.query.filter){
+    res.status(400).json({
+      message: "Missing filter"
+    })
+  }
+
+  let fromDate = '1971-01-01';
+  let toDate = '2049-01-01';
+
+  if(req.query.fromDate){
+    fromDate = String(req.query.fromDate)
+  }
+  if(req.query.toDate){
+    toDate = String(req.query.toDate)
+  }
   // Need date (Default to no date if none is present
   // need specific filter. Do not run this query without filter
-  const textas = req.query.text;
-  const textas2 = req.query.newtext;
-  res.status(200).json({
-    message : JSON.stringify(textas +" split "+ textas2)
-  })
+  // @ts-ignore
+  dependencyFactory.getResortController().getFilteredResort(Number(req.query.id), String(req.query.filter), fromDate, toDate).then((data: any) =>{
+    res.status(200).json({
+      data
+    })
+  }).catch(((error: any) => {
+    res.status(500).json({
+      data: "An error has occurred"
+    })
+    console.log('rejected', error);
+  }));
 });
 
 

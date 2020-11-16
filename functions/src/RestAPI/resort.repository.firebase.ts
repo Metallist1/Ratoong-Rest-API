@@ -5,7 +5,9 @@ import {Question} from '../Entities/Questions';
 
 
 export class ResortRepositoryFirebase implements ResortRepository {
+
   questionlist: any[]
+
   constructor() {
     this.questionlist = this.getQuestions();
   }
@@ -64,7 +66,7 @@ export class ResortRepositoryFirebase implements ResortRepository {
     return localScores;
   }
 
-   getQuestions(): any {
+   private getQuestions(): any {
     const child: Question[] = [];
      admin.database().ref('/SubCategories').once('value').then((snapshot) => {
       snapshot.forEach((obj) => {
@@ -140,5 +142,9 @@ export class ResortRepositoryFirebase implements ResortRepository {
     }
     // @ts-ignore
     return dataArray;
+  }
+
+  getFilteredResort(id: number, filter: string, fromDate: number, toDate: number): Promise<any> {
+    return Promise.resolve('From ' + fromDate + 'To ' + toDate);
   }
 }
