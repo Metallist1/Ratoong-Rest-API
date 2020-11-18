@@ -128,6 +128,12 @@ export class ResortRepositoryFirebase implements ResortRepository {
     if (type === 'Pistes') {
       listOfData = (snapshot.val().ThePiste === null) ? null : snapshot.val().ThePiste;
     }
+    if (type === 'questionRatings') {
+      listOfData = (snapshot.val().questionRatings === null) ? null : snapshot.val().questionRatings;
+    }
+    if (type === 'userPreference') {
+      listOfData = (snapshot.val().preferences === null) ? null : snapshot.val().preferences;
+    }
     if (listOfData !== null) {
       Object.keys(listOfData).map((personNamedIndex) => {
         // @ts-ignore
@@ -138,13 +144,97 @@ export class ResortRepositoryFirebase implements ResortRepository {
         if (type === 'Pistes') {
           dataArray.push({km: dataObject.km, title: dataObject.title});
         }
+        if (type === 'questionRatings') {
+          dataArray.push({questionId: dataObject.questionId, rating: dataObject.rating});
+        }
+        if (type === 'userPreference') {
+          dataArray.push({name: personNamedIndex,value:dataObject });
+        }
       });
     }
     // @ts-ignore
     return dataArray;
   }
 
-  getFilteredResort(id: number, filter: string, fromDate: number, toDate: number): Promise<any> {
-    return Promise.resolve('From ' + fromDate + 'To ' + toDate);
+  async getFilteredResort(id: number, filter: string, fromDate: number, toDate: number): Promise<any> {
+    let locationReviews = [];
+    const snapshot = await admin.database().ref('/NewLocations/' + id).once('value');
+    if (snapshot.val() !== null) {
+      let locationUserData = [];
+      const name = snapshot.val().Name;
+      const cityName = snapshot.val().CityName;
+      locationReviews = await this.getRelevantReviews(snapshot, fromDate, toDate);
+      for (let i = 0; i < locationReviews.length; i++) {
+        locationUserData.push(await this.getUserData(locationReviews[i]));
+      }
+      return Promise.resolve({
+        id: Number(snapshot.key),
+        name,
+        cityName,
+        locationUserData
+      });
+    }else{
+      return Promise.resolve('Invalid location');
+    }
+  }
+
+  private getRelevantReviews(snapshot:any, dateBefore: number, dateAfter: number): any{
+    // @ts-ignore
+    const localScores = [];
+    if (!snapshot.val().hasOwnProperty('LocationReviews') || snapshot.val().LocationReviews === []){
+      // @ts-ignore
+      return localScores;
+    }
+    Object.keys(snapshot.val().LocationReviews).map((index) => {
+      const data = snapshot.val().LocationReviews[index];
+      if (dateBefore<= data.date && data.date < dateAfter){
+        localScores.push(index);
+      }
+    });
+    // @ts-ignore
+    return localScores;
+  }
+  private async getUserData(id: string): Promise<any>{
+    const data = await admin.database().ref('/Reviews/' + id).once('value');
+        if (data.val().userId !== '') {
+          const userData = await admin.database().ref('/NewUsers/' + data.val().userId).once('value');
+          let userDataSet = {
+            type:'user not found',
+            country: '',
+            gender: '',
+            birth: '',
+            preferenceList:{}
+          };
+          if (userData.val() !== null) {
+            // @ts-ignore
+            const country = (userData.val().country === null) ? '' : userData.val().country;
+            // @ts-ignore
+            const gender = (userData.val().gender === null) ? '' : userData.val().gender;
+            // @ts-ignore
+            const birth = (userData.val().birth  === null) ? '' : userData.val().birth;
+
+            const preferenceList = this.addDataToArray(userData, 'userPreference');
+
+            userDataSet = {
+              type:'user',
+              country,
+              gender,
+              birth,
+              preferenceList
+            };
+          }
+          const questionRatings = this.addDataToArray(data, 'questionRatings');
+          return { userDataSet, questionRatings};
+        }else {
+          const userDataSet = {
+            type:'anonymous',
+            country: '',
+            gender: '',
+            birth: '',
+            preferenceList:{}
+          };
+          const questionRatings = this.addDataToArray(data, 'questionRatings');
+          return { userDataSet, questionRatings};
+        }
   }
 }
