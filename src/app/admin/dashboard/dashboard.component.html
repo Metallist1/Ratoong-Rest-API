@@ -1,6 +1,34 @@
 <header></header>
 <app-navbar></app-navbar>
-<p>Admin dashboard works!</p>
+<div class="main">
+  <div class="form-group form-inline">
+    Full text search: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
+  </div>
+  <table class="table table-striped">
+    <thead style="border-bottom: #0A0A0A 2px solid">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let resort of resortsPage;">
+      <td style="width: 20%">{{ resort.id}}</td>
+      <td style="width: 80%">{{resort.name}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="resorts.length" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+    </ngb-pagination>
+
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+      <option [ngValue]="2">2 items per page</option>
+      <option [ngValue]="4">4 items per page</option>
+      <option [ngValue]="6">6 items per page</option>
+    </select>
+  </div>
+</div>
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
 </footer>

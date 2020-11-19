@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {LocationAdderComponent} from '../ui/modals/location-adder/location-adder.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        NgbModule
     ],
   declarations: [
     LocationAdderComponent

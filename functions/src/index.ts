@@ -22,7 +22,6 @@ exports.getAllResorts = functions.https.onRequest((req, res) => {
     })
   }
   dependencyFactory.getResortController().getAllResorts().then((data) =>{
-    console.log("asynchronous logging has val:",data)
     res.status(200).json({
       message : JSON.stringify(data)
     })

@@ -23,8 +23,9 @@ import {SharedModule} from './shared/modules/shared.module';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AmbassadorsState} from './shared/states/ambassadors/ambassadors.state';
-
+import {ResortState} from './shared/states/resorts/resort.state';
 import * as firebase from 'firebase';
+
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
@@ -40,7 +41,7 @@ firebase.initializeApp(environment.firebaseConfig);
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, ReactiveFormsModule, AngularFireAuthModule,
-    NgxsModule.forRoot([ AmbassadorsState], {
+    NgxsModule.forRoot([ AmbassadorsState, ResortState], {
       developmentMode: !environment.production
     }),
     NgxsStoragePluginModule.forRoot({
