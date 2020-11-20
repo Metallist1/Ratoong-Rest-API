@@ -85,10 +85,50 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
   if(req.query.toDate){
     toDate = String(req.query.toDate)
   }
+  let gender = 'None';
+
+  if(req.query.gender){
+    gender = String(req.query.gender)
+  }
+  let country = 'None';
+
+  if(req.query.country){
+    country = String(req.query.country)
+  }
+  let age = 'None';
+
+  if(req.query.age){
+    age = String(req.query.age)
+  }
+  let skier = false;
+
+  if(req.query.skier){
+    skier = Boolean(req.query.skier)
+  }
+  let snowboarder = false;
+
+  if(req.query.snowboarder){
+    snowboarder = Boolean(req.query.snowboarder)
+  }
+  let purpose = 'None';
+
+  if(req.query.purpose){
+    purpose = String(req.query.purpose)
+  }
+  let weeks = 'None';
+
+  if(req.query.weeks){
+    weeks = String(req.query.weeks)
+  }
+  let level = 'None';
+
+  if(req.query.level){
+    level = String(req.query.level)
+  }
   // Need date (Default to no date if none is present
   // need specific filter. Do not run this query without filter
   // @ts-ignore
-  dependencyFactory.getResortController().getFilteredResort(Number(req.query.id), String(req.query.filter), fromDate, toDate).then((data: any) =>{
+  dependencyFactory.getResortController().getFilteredResort(Number(req.query.id), String(req.query.filter), fromDate, toDate, gender, country, age, skier, snowboarder, purpose, weeks, level).then((data: any) =>{
     res.status(200).json({
       data
     })

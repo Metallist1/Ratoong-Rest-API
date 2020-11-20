@@ -14,13 +14,13 @@ export class ResortService {
     return this.resortRepository.getSingleResort(id);
   }
 
-  getFilteredResort(id: number, filter: string, fromDate: string, toDate: string): Promise<any>  {
+  getFilteredResort(id: number, filter: string, fromDate: string, toDate: string, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<any>  {
     if(!this.checkDate(fromDate) || !this.checkDate(toDate)){
       return Promise.resolve('Invalid Date Format');
     }
 
     const followingDay = new Date(this.convertDate(toDate).getTime() + 86400000); // + 1 day in ms
-    return this.resortRepository.getFilteredResort(id, filter, this.convertDate(fromDate).getTime(), followingDay.getTime());
+    return this.resortRepository.getFilteredResort(id, filter, this.convertDate(fromDate).getTime(), followingDay.getTime(), gender, country, age, skier, snowboarder, purpose, weeks, level);
   }
 
   checkDate(dateToCheck:string): any {

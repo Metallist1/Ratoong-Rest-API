@@ -156,22 +156,23 @@ export class ResortRepositoryFirebase implements ResortRepository {
     return dataArray;
   }
 
-  async getFilteredResort(id: number, filter: string, fromDate: number, toDate: number): Promise<any> {
+  async getFilteredResort(id: number, filter: string, fromDate: number, toDate: number, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<any> {
     let locationReviews = [];
     const snapshot = await admin.database().ref('/NewLocations/' + id).once('value');
     if (snapshot.val() !== null) {
-      let locationUserData = [];
+      const locationUserData = [];
       const name = snapshot.val().Name;
       const cityName = snapshot.val().CityName;
       locationReviews = await this.getRelevantReviews(snapshot, fromDate, toDate);
       for (let i = 0; i < locationReviews.length; i++) {
         locationUserData.push(await this.getUserData(locationReviews[i]));
       }
+      const processedData = await this.processData(locationUserData);
       return Promise.resolve({
         id: Number(snapshot.key),
         name,
         cityName,
-        locationUserData
+        processedData
       });
     }else{
       return Promise.resolve('Invalid location');
@@ -194,6 +195,7 @@ export class ResortRepositoryFirebase implements ResortRepository {
     // @ts-ignore
     return localScores;
   }
+
   private async getUserData(id: string): Promise<any>{
     const data = await admin.database().ref('/Reviews/' + id).once('value');
         if (data.val().userId !== '') {
@@ -236,5 +238,8 @@ export class ResortRepositoryFirebase implements ResortRepository {
           const questionRatings = this.addDataToArray(data, 'questionRatings');
           return { userDataSet, questionRatings};
         }
+  }
+  private async processData(array: any): Promise<any> {
+
   }
 }

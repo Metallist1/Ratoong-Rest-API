@@ -13,8 +13,8 @@ export class ResortControllerFirebase implements ResortController {
     return this.resortService.getSingleResort(id);
   }
 
-  getFilteredResort(id: number, filter: string, fromDate: string, toDate: string): Promise<void> {
-    return this.resortService.getFilteredResort(id,filter, fromDate, toDate);
+  getFilteredResort(id: number, filter: string, fromDate: string, toDate: string, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<void> {
+    return this.resortService.getFilteredResort(id,filter, fromDate, toDate, gender, country, age, skier, snowboarder, purpose, weeks, level);
   }
 
 }
