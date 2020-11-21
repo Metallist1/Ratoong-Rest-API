@@ -5,5 +5,5 @@ export interface ResortRepository {
 
   getSingleResort(id: number): Promise<any>;
 
-  getFilteredResort(id: number, filter: string, fromDate: number, toDate: number, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<void>;
+  getFilteredResort(id: number, fromDate: number, toDate: number, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<void>;
 }

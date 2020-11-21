@@ -70,12 +70,6 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
     })
   }
 
-  if(!req.query.filter){
-    res.status(400).json({
-      message: "Missing filter"
-    })
-  }
-
   let fromDate = '1971-01-01';
   let toDate = '2049-01-01';
 
@@ -103,12 +97,12 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
   let skier = false;
 
   if(req.query.skier){
-    skier = Boolean(req.query.skier)
+    skier = String(req.query.skier).toLowerCase() === "true"
   }
   let snowboarder = false;
 
   if(req.query.snowboarder){
-    snowboarder = Boolean(req.query.snowboarder)
+    snowboarder = String(req.query.snowboarder).toLowerCase() === "true"
   }
   let purpose = 'None';
 
@@ -128,7 +122,7 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
   // Need date (Default to no date if none is present
   // need specific filter. Do not run this query without filter
   // @ts-ignore
-  dependencyFactory.getResortController().getFilteredResort(Number(req.query.id), String(req.query.filter), fromDate, toDate, gender, country, age, skier, snowboarder, purpose, weeks, level).then((data: any) =>{
+  dependencyFactory.getResortController().getFilteredResort(Number(req.query.id), fromDate, toDate, gender, country, age, skier, snowboarder, purpose, weeks, level).then((data: any) =>{
     res.status(200).json({
       data
     })

@@ -156,7 +156,7 @@ export class ResortRepositoryFirebase implements ResortRepository {
     return dataArray;
   }
 
-  async getFilteredResort(id: number, filter: string, fromDate: number, toDate: number, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<any> {
+  async getFilteredResort(id: number, fromDate: number, toDate: number, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<any> {
     let locationReviews = [];
     const snapshot = await admin.database().ref('/NewLocations/' + id).once('value');
     if (snapshot.val() !== null) {
@@ -167,7 +167,7 @@ export class ResortRepositoryFirebase implements ResortRepository {
       for (let i = 0; i < locationReviews.length; i++) {
         locationUserData.push(await this.getUserData(locationReviews[i]));
       }
-      const processedData = await this.processData(locationUserData);
+      const processedData = await this.processData(locationUserData, gender, country, age, skier, snowboarder, purpose, weeks, level);
       return Promise.resolve({
         id: Number(snapshot.key),
         name,
@@ -205,7 +205,11 @@ export class ResortRepositoryFirebase implements ResortRepository {
             country: '',
             gender: '',
             birth: '',
-            preferenceList:{}
+            snowboarder: false,
+            skier: false,
+            tripCount: '',
+            skillLevel: '',
+            holidayType: '',
           };
           if (userData.val() !== null) {
             // @ts-ignore
@@ -214,15 +218,30 @@ export class ResortRepositoryFirebase implements ResortRepository {
             const gender = (userData.val().gender === null) ? '' : userData.val().gender;
             // @ts-ignore
             const birth = (userData.val().birth  === null) ? '' : userData.val().birth;
+            let snowboarder = false;
+            let skier = false;
+            let tripCount = '';
+            let skillLevel = '';
+            let holidayType = '';
 
-            const preferenceList = this.addDataToArray(userData, 'userPreference');
+          if (userData.val().hasOwnProperty('preferences')) {
+             snowboarder = userData.val().preferences.snowboarder;
+             skier =userData.val().preferences.skier;
+             tripCount =userData.val().preferences.tripCount;
+             skillLevel =userData.val().preferences.skillLevel;
+             holidayType =userData.val().preferences.holidayType;
+          }
 
             userDataSet = {
               type:'user',
               country,
               gender,
               birth,
-              preferenceList
+              snowboarder,
+              skier,
+              tripCount,
+              skillLevel,
+              holidayType
             };
           }
           const questionRatings = this.addDataToArray(data, 'questionRatings');
@@ -233,13 +252,65 @@ export class ResortRepositoryFirebase implements ResortRepository {
             country: '',
             gender: '',
             birth: '',
-            preferenceList:{}
+            snowboarder: false,
+            skier: false,
+            tripCount: '',
+            skillLevel: '',
+            holidayType: ''
           };
           const questionRatings = this.addDataToArray(data, 'questionRatings');
           return { userDataSet, questionRatings};
         }
   }
-  private async processData(array: any): Promise<any> {
-
+  private async processData(array: any, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<any> {
+    let filteredList = array;
+    if (array && array.length !== 0) {
+      if(gender !== 'None'){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.gender.toLowerCase().indexOf(gender.toLowerCase()) > -1);
+        });
+      }
+      if(country !== 'None'){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.country.toLowerCase().indexOf(country.toLowerCase()) > -1);
+        });
+      }
+      if(skier){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.skier === skier);
+        });
+      }
+      if(snowboarder){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.snowboarder === snowboarder);
+        });
+      }
+      if(purpose !== 'None'){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.holidayType.toLowerCase().indexOf(purpose.toLowerCase()) > -1);
+        });
+      }
+      if(weeks !== 'None'){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.tripCount.toLowerCase().indexOf(weeks.toLowerCase()) > -1);
+        });
+      }
+      if(level !== 'None'){
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+          return (el.userDataSet.skillLevel.toLowerCase().indexOf(level.toLowerCase()) > -1);
+        });
+      }
+    } else {
+      filteredList = [];
+    }
+    // @ts-ignore
+    return filteredList;
   }
 }
