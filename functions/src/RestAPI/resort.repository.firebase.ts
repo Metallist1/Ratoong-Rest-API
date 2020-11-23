@@ -265,6 +265,22 @@ export class ResortRepositoryFirebase implements ResortRepository {
   private async processData(array: any, gender: string, country: string, age: string, skier: boolean, snowboarder: boolean, purpose: string, weeks: string, level: string): Promise<any> {
     let filteredList = array;
     if (array && array.length !== 0) {
+      if(age !== 'None'){
+        const newarr = age.split("-");
+        const today = new Date();
+        // @ts-ignore
+        filteredList = array.filter((el) => {
+
+          if(el.userDataSet.birth !== '') {
+            const date = new Date(el.userDataSet.birth);
+            const personsAge = today.getFullYear() - date.getFullYear();
+
+            return (Number(newarr[0]) <= personsAge && personsAge <= Number(newarr[1]));
+          }else{
+            return false;
+          }
+        });
+      }
       if(gender !== 'None'){
         // @ts-ignore
         filteredList = array.filter((el) => {

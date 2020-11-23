@@ -92,7 +92,17 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
   let age = 'None';
 
   if(req.query.age){
-    age = String(req.query.age)
+    const userKeyRegExp = /^[0-9]{2}\-[0-9]{2}$/;
+
+    const valid = userKeyRegExp.test(String(req.query.age));
+
+    if(valid){
+      age = String(req.query.age)
+    }else{
+      res.status(400).json({
+        message: "Incorrect age format"
+      })
+    }
   }
   let skier = false;
 
