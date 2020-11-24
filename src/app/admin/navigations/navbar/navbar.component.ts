@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Store } from '@ngxs/store';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalService} from '../../../shared/services';
 

@@ -7,11 +7,11 @@ import {Resort} from '../../shared/states/resorts/entities/resorts';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  templateUrl: './resorts.component.html',
+  styleUrls: ['./resorts.component.scss']
 })
 
-export class DashboardComponent implements OnInit {
+export class ResortsComponent implements OnInit {
   @Select(ResortState.resortList) currentResorts: Observable<Resort[]>;
   resorts = [];
   resortsPage = [];

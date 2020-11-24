@@ -34,7 +34,7 @@ export class ResortState {
   static resortList(state: ResortStateModel): any {
     return state.resortList.filter(resort => matches(resort, state.filterBy));
   }
-
+  // Gets all resorts from DB
   @Action(GetResorts)
   getResorts(ctx: StateContext<ResortStateModel>): any {
     return this.resortList.getResorts().then((result) => {
