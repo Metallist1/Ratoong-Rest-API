@@ -1,12 +1,12 @@
 
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import {Resort} from './entities/resorts';
+import {Resort} from './entities/resort';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResortService {
+export class ResortsService {
   database: any = null;
 
   constructor() {

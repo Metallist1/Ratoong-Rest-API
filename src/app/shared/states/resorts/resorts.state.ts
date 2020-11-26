@@ -1,9 +1,9 @@
 
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetResorts, SetFilter} from './resort.action';
-import {Resort} from './entities/resorts';
-import {ResortService} from './resort.service';
+import {GetResorts, SetFilter} from './resorts.action';
+import {Resort} from './entities/resort';
+import {ResortsService} from './resorts.service';
 
 export class ResortStateModel {
   resortList: Resort[];
@@ -26,9 +26,9 @@ function matches(resort: Resort, term: string): boolean {
 })
 
 @Injectable()
-export class ResortState {
+export class ResortsState {
 
-  constructor(private resortList: ResortService) {}
+  constructor(private resortList: ResortsService) {}
 
   @Selector()
   static resortList(state: ResortStateModel): any {

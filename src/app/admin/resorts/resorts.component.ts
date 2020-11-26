@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ResortState} from '../../shared/states/resorts/resort.state';
+import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
-import {GetResorts, SetFilter} from '../../shared/states/resorts/resort.action';
-import {Resort} from '../../shared/states/resorts/entities/resorts';
+import {GetResorts, SetFilter} from '../../shared/states/resorts/resorts.action';
+import {Resort} from '../../shared/states/resorts/entities/resort';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +12,7 @@ import {Resort} from '../../shared/states/resorts/entities/resorts';
 })
 
 export class ResortsComponent implements OnInit {
-  @Select(ResortState.resortList) currentResorts: Observable<Resort[]>;
+  @Select(ResortsState.resortList) currentResorts: Observable<Resort[]>;
   resorts = [];
   resortsPage = [];
 
@@ -25,11 +25,11 @@ export class ResortsComponent implements OnInit {
         data.forEach((value) => {
           this.resorts.push(value);
         });
-        this.refreshCountries();
+        this.refreshResorts();
     });
   }
 
-  refreshCountries(): void {
+  refreshResorts(): void {
     this.resortsPage = this.resorts
       .map((resort, i) => ({id: i + 1, ...resort}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
