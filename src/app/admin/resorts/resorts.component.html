@@ -2,6 +2,9 @@
 <app-navbar></app-navbar>
 </header>
 <div class="main">
+
+  <div class="loader" *ngIf="isLoading"></div>
+  <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
   <div class="form-group form-inline">
     Full text search: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
@@ -28,6 +31,8 @@
       <option [ngValue]="4">4 items per page</option>
       <option [ngValue]="6">6 items per page</option>
     </select>
+  </div>
+
   </div>
 </div>
 <footer class="footer bg-dark fixed-bottom">

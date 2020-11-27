@@ -1,6 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <ul class="navbar-nav w-100 d-flex nav-center">
-    <li class="nav-item"><a class="nav-link padding-nav-link" href="/admin/users">Users</a></li>
-    <li class="nav-item"><a class="nav-link padding-nav-link" href="/admin/resorts">Resorts</a></li>
+    <li class="nav-item">
+      <a class="nav-link padding-nav-link" [routerLink]="['/admin/users']" >Users</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link padding-nav-link" [routerLink]="['/admin/resorts']" >Resorts</a>
+    </li>
+    <li class="nav-item account-bnt" (click)="signOut();">
+      <a class="nav-link">Log out</a>
+    </li>
   </ul>
 </nav>

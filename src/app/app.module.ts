@@ -22,16 +22,21 @@ import { ModalService} from './shared/services';
 import {SharedModule} from './shared/modules/shared.module';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {AmbassadorsState} from './shared/states/ambassadors/ambassadors.state';
+
 import {ResortsState} from './shared/states/resorts/resorts.state';
 import {UsersState} from './shared/states/users/users.state';
 import * as firebase from 'firebase';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import {AdminAuthState} from './shared/states/admin-auth/admin-auth.state';
+import {NotfoundComponent} from './notfound/notfound.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminLoginComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,11 +47,13 @@ firebase.initializeApp(environment.firebaseConfig);
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, ReactiveFormsModule, AngularFireAuthModule,
-    NgxsModule.forRoot([ AmbassadorsState, ResortsState, UsersState], {
+
+    NgxsModule.forRoot([ResortsState, UsersState, AdminAuthState], {
+
       developmentMode: !environment.production
     }),
     NgxsStoragePluginModule.forRoot({
-      key: ['auth']
+      key: ['AdminAuth']
     }),
     NgbModule,
     FontAwesomeModule,
