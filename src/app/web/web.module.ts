@@ -11,6 +11,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {RestRoutes} from './web-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {NavbarComponent} from './navigations/navbar/navbar.component';
+
 import {FooterComponent} from './navigations/footer/footer.component';
 
 @NgModule({
@@ -28,5 +29,6 @@ import {FooterComponent} from './navigations/footer/footer.component';
   providers: [],
   exports: [],
   declarations: [DashboardComponent, FooterComponent, NavbarComponent]
+
 })
 export class RestModule { }

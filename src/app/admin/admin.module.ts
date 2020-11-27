@@ -7,6 +7,9 @@ import {NavbarComponent} from './navigations/navbar/navbar.component';
 import {SharedModule} from '../shared/modules/shared.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { UsersComponent } from './users/users.component';
+
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { RatingModule } from 'ngx-bootstrap/rating';
@@ -17,6 +20,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AdminRoutes} from './admin-routing.module';
 
 @NgModule({
+
   imports: [
     CommonModule,
     NgbModule,
@@ -29,9 +33,10 @@ import {AdminRoutes} from './admin-routing.module';
     NgbDatepickerModule,
     FontAwesomeModule,
     NgbAlertModule
+
   ],
   providers: [],
   exports: [],
-  declarations: [ResortsComponent, FooterComponent, NavbarComponent]
+  declarations: [ResortsComponent, UsersComponent, FooterComponent, NavbarComponent]
 })
 export class AdminModule { }

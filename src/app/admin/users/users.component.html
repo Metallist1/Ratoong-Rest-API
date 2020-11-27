@@ -1,10 +1,7 @@
 <header>
-<app-navbar></app-navbar>
+  <app-navbar></app-navbar>
 </header>
 <div class="main">
-
-  <div class="loader" *ngIf="isLoading"></div>
-  <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
   <div class="form-group form-inline">
     Full text search: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
@@ -16,23 +13,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let resort of resortsPage;">
-      <td style="width: 20%">{{ resort.id}}</td>
-      <td style="width: 80%">{{resort.name}}</td>
+    <tr *ngFor="let user of usersPage;">
+      <td style="width: 20%">{{ user.id}}</td>
+      <td style="width: 80%">{{user.firstName}}</td>
     </tr>
     </tbody>
   </table>
   <div class="d-flex justify-content-between p-2">
-    <ngb-pagination [collectionSize]="resorts.length" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshResorts()">
+    <ngb-pagination [collectionSize]="users.length" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshUsers()">
     </ngb-pagination>
 
-    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshResorts()">
+    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsers()">
       <option [ngValue]="2">2 items per page</option>
       <option [ngValue]="4">4 items per page</option>
       <option [ngValue]="6">6 items per page</option>
     </select>
-  </div>
-
   </div>
 </div>
 <footer class="footer bg-dark fixed-bottom">
