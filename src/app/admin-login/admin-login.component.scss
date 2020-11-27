@@ -1,0 +1,81 @@
+@import "./../../styles";
+$first-image: url('https://firebasestorage.googleapis.com/v0/b/ratoong-dev.appspot.com/o/service-images%2Fbackgrounds%2Fbg-default.jpg?alt=media&token=ff59a8b9-fdb7-4f9c-a319-c9cfc3471643');
+
+.shade{
+  display: block;
+  position: fixed;
+  background: $first-image no-repeat 0 0;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+.container-fluid{
+  max-width: none;
+}
+.brick {
+  display: inline-block;
+  width: 100%;
+  margin: 1.5em 0 1.5em;
+  padding: 2em 3em;
+  position: relative;
+  background-color: rgba(256, 256, 256, 0.8);
+  box-shadow: 1px 1px 10px 1px #9a9a9a
+}
+.block {
+  font-size: 1rem !important;
+  margin: .3em;
+  padding: 0.375rem 0.75rem;
+  text-align: center;
+  background-color: $color-ratoong-blue-43;
+  color: $color-alabaster-white-98;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+}
+.forgot {
+  display: block;
+  margin: 0 auto 1rem;
+  cursor: pointer;
+}
+.link-signup {
+  display: block;
+  // margin-top: 1rem
+  color: $input-color;
+  text-decoration: underline;
+}
+.app-login{
+  height: 100%;
+  background: transparent;
+  border: none;
+}
+.error-text{
+color: red;
+display: block;
+text-align: center;
+line-height: 1;
+text-shadow: 0 1px 0.1px black;
+}
+.register {
+  display: inline-block;
+  text-align: left;
+  padding-right: 5px;
+  width: 1.5em;
+}
+.help-text{
+  font-size: 65%
+}
+.passwordInput{
+  flex-flow: row
+}
+.eye-design {
+  color: #000 !important;
+  transition: none !important ;
+  border-color: #000000;
+}
+.eye-design:hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+.no-borders {
+  border-radius: 0;
+}
