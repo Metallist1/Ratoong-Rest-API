@@ -49,12 +49,12 @@ export class ResortRepositoryFirebase implements ResortRepository {
       if (found){
         if (found.group === false){
           if (data.masterOverallCount > 1){
-            localScores.push({questionID: Number(index), overallScore: data.masterOverallScore});
+            localScores.push({questionID: Number(index), name: found.name, overallScore: data.masterOverallScore});
           }
         }else{
           const totalRatings = Number(data.anonTotalCount) + Number(data.totalCount);
           if (totalRatings > 1){
-            localScores.push({questionID: Number(index), overallScore: data.overallScore});
+            localScores.push({questionID: Number(index), name: found.name, overallScore: data.overallScore});
           }
         }
       }

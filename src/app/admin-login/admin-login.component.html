@@ -19,9 +19,9 @@
             <div class="input-group">
               <input [type]="fieldTextType ? 'text' : 'password'" class="form-control ratoong" type="password" formControlName="pwd" maxlength="20" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }">
               <div class="input-group-append">
-                              <span class="btn btn-outline-secondary eye-design no-borders" (click)="toggleFieldTextType()">
-                                <i class="far" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></i>
-                              </span>
+                <span class="btn btn-outline-secondary eye-design no-borders" (click)="toggleFieldTextType()">
+                  <i class="far" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></i>
+                </span>
               </div>
               <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback"  >
                 <div *ngIf="f.pwd.errors.required">Password is required</div>
@@ -34,8 +34,7 @@
           </div>
           <!-- end auth form -->
           <small class="text-danger d-flex justify-content-center">{{this.errorMsg}}</small>
-          <input type="submit" class="block-login" value="Log in">
-
+          <input type="submit" class="btn btn-info text-white login-button" value="Log in">
         </form>
       </div>
     </div>

@@ -1,0 +1,14 @@
+@import "./src/styles";
+
+.bg-image-search {
+  background: url('https://firebasestorage.googleapis.com/v0/b/ratoong-333eb.appspot.com/o/service-images%2Fbackgrounds%2Fbg-rate.jpg?alt=media&token=0e1cc065-aa83-4103-9aa3-11c32c823092') no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100%;
+  position: fixed;
+  z-index: -1 ;
+  @include media-portrait-down(lg) {
+    background: url('https://firebasestorage.googleapis.com/v0/b/ratoong-333eb.appspot.com/o/service-images%2Fbackgrounds%2Fbg-m-rate.jpg?alt=media&token=96baae81-77aa-413e-a94c-d23bb4b99340') no-repeat;
+    background-size: cover
+  }
+}

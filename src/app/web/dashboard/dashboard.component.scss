@@ -1,0 +1,12 @@
+@import "./src/styles";
+$first-image: url('https://firebasestorage.googleapis.com/v0/b/ratoong-dev.appspot.com/o/service-images%2Fbackgrounds%2Fbg-default.jpg?alt=media&token=ff59a8b9-fdb7-4f9c-a319-c9cfc3471643');
+
+.shade{
+  display: block;
+  position: fixed;
+  background: $first-image no-repeat 0 0;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  max-width: 100% !important;
+}
