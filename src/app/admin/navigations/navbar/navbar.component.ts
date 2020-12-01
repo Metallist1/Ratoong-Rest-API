@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+
 import {Actions, ofActionSuccessful, Store} from '@ngxs/store';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ModalService} from '../../../shared/services';

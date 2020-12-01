@@ -1,3 +1,4 @@
+
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {Observable, Subject} from 'rxjs';
@@ -13,6 +14,7 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./resorts.component.scss']
 })
 
+
 export class ResortsComponent implements OnInit, OnDestroy {
 
   isLoading = false;
@@ -24,6 +26,7 @@ export class ResortsComponent implements OnInit, OnDestroy {
 
   page = 1;
   pageSize = 4;
+
 
   constructor(private store: Store,
               private actions$: Actions) {
@@ -47,6 +50,7 @@ export class ResortsComponent implements OnInit, OnDestroy {
     });
   }
 
+
   ngOnDestroy(): any{
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
@@ -60,12 +64,15 @@ export class ResortsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
     this.isLoading = true;
+
     this.store.dispatch(new GetResorts());
   }
 
   updateFilter(str): void {
     this.isLoading = true;
+    
     this.store.dispatch(new SetFilter(str));
   }
 }
