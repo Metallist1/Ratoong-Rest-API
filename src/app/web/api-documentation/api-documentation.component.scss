@@ -1,0 +1,84 @@
+@import "./src/styles";
+
+.bg-image-search {
+  background: url('https://firebasestorage.googleapis.com/v0/b/ratoong-333eb.appspot.com/o/service-images%2Fbackgrounds%2Fbg-rate.jpg?alt=media&token=0e1cc065-aa83-4103-9aa3-11c32c823092') no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100%;
+  position: fixed;
+  z-index: -1 ;
+  @include media-portrait-down(lg) {
+    background: url('https://firebasestorage.googleapis.com/v0/b/ratoong-333eb.appspot.com/o/service-images%2Fbackgrounds%2Fbg-m-rate.jpg?alt=media&token=96baae81-77aa-413e-a94c-d23bb4b99340') no-repeat;
+    background-size: cover
+  }
+}
+.details-container {
+  font-family: "Oswald";
+  font-weight: 500;
+  margin: 50px;
+  padding: 2em 4em;
+  border: 1px solid #d3d3d3;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.api-title{
+  font-size: 25px;
+  margin: 5px 0 25px 0;
+  font-weight: 400;
+}
+
+.api-body{
+  font-weight: 200;
+  font-size: 1em;
+  margin: 5px 0px;
+}
+
+.api-options{
+  margin: 15px 0;
+}
+
+.api-example{
+  background-color: rgba(0, 0, 0, 0.09) !important;
+  height: 250px;
+  padding: 0px 25px;
+  border: 1px solid #ccc;
+  font: 16px/26px Georgia, Garamond, Serif;
+  overflow: auto;
+}
+.code-highlight{
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+code{
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px 5px;
+  font-size: 1em;
+}
+
+.option-list{
+  font-size: 0.8em;
+}
+
+.option{
+  margin: 5px 0px;
+}
+
+.explanation{
+  font-weight: 300;
+  font-size: 1.2em;
+}
+
+.link-example{
+  margin: 25px 0 5px 0;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.code-link-example{
+  font-size: 0.8em;
+}
+
+.profile-link{
+  color: #35a0a8;
+}

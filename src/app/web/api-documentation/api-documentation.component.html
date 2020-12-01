@@ -1,0 +1,173 @@
+<header>
+  <app-navbar></app-navbar>
+</header>
+
+<div role="main" class="bg-image-search"></div>
+<div class="row">
+  <div class="loader" *ngIf="isLoading"></div>
+  <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
+
+    <div class="details-container">
+      <div class="flex-container">
+        <div class="api-title">
+          GET_ALL_RESORTS
+        </div>
+        <div class="api-body">
+          This API returns all resorts, their basic information and their summarised rating info.
+        </div>
+        <div class="api-options">
+          <ul class="option-list">
+            <li  class="option">
+              Required: <code>Api key</code>
+            </li>
+            <div class="explanation">
+              Your API key. Claim your free API key in <a [routerLink]="['/web/user-profile']" class="profile-link">My Profile</a>
+            </div>
+          </ul>
+        </div>
+        <div class="api-example">
+          <pre class="example">
+            <code class="code-highlight">{{getLocation| json}}</code>
+          </pre>
+        </div>
+        <div class="link-example">
+          Link example: <code class="code-link-example">https://us-central1-final-exam-9302a.cloudfunctions.net/getAllResorts</code>
+        </div>
+      </div>
+    </div>
+    <div class="details-container">
+      <div class="flex-container">
+        <div class="api-title">
+          GET_SINGLE_RESORT
+        </div>
+        <div class="api-body">
+          This API returns single resort with more detailed info.
+        </div>
+        <div class="api-options">
+          <ul class="option-list">
+            <li  class="option">
+              Required: <code>id</code>
+            </li>
+            <div class="explanation">
+              This is ID assigned to every resort.
+            </div>
+            <li  class="option">
+              Required: <code>Api key</code>
+            </li>
+            <div class="explanation">
+              Your API key. Claim your free API key in <a [routerLink]="['/web/user-profile']" class="profile-link">My Profile</a>
+            </div>
+          </ul>
+        </div>
+        <div class="api-example">
+          <pre class="example">
+            <code class="code-highlight">{{getSingleLocation| json}}</code>
+          </pre>
+        </div>
+        <div class="link-example">
+          Link example: <code class="code-link-example">https://us-central1-final-exam-9302a.cloudfunctions.net/getSingleResort?id=1</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="details-container">
+      <div class="flex-container">
+        <div class="api-title">
+          GET_FILTERED_RESORT
+        </div>
+        <div class="api-body">
+          This API returns single resort with detailed filtered rating data over a period of time.
+        </div>
+        <div class="api-options">
+          <ul class="option-list">
+            <li  class="option">
+              Required: <code>id</code>
+            </li>
+            <div class="explanation">
+              This is ID assigned to every resort.
+            </div>
+            <li  class="option optional">
+              Optional: <code>level</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings from users that marked a specific experience level they have. Levels: none, little, some, expert
+            </div>
+            <li  class="option optional">
+              Optional: <code>weeks</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings from users that marked a specific amount of weeks per year that they are skiing. Weeks: rare, common, frequent
+            </div>
+            <li  class="option optional">
+              Optional: <code>purpose</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings from users that marked a specific purpose for skiing. Purpose: school, offpiste, party, relax, spa, shopping
+            </div>
+            <li  class="option optional">
+              Optional: <code>snowboarder</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings from users that selected snowboarding as their preferred way of skiing. Format: true / false.
+            </div>
+            <li  class="option optional">
+              Optional: <code>age</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings from users whose age is in the range. Format: From age - To age. Example : 10-17
+            </div>
+            <li  class="option optional">
+              Optional: <code>skier</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings from users that selected skiing as their preferred way of skiing. Format: true / false.
+            </div>
+            <li  class="option optional">
+              Optional: <code>gender</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings that are from specific gender. Genders: male, female, other.
+            </div>
+            <li  class="option optional">
+              Optional: <code>country</code>
+            </li>
+            <div class="explanation">
+              This filter will only include ratings that are from specific country. Example: Denmark
+            </div>
+            <li  class="option optional">
+              Optional: <code>fromDate</code>
+            </li>
+            <div class="explanation">
+              This filter will include out all ratings from a specific date. Format : Year-Month-Dat. Example: 1970-07-15
+            </div>
+            <li  class="option optional">
+              Optional: <code>toDate</code>
+            </li>
+            <div class="explanation">
+              This filter will include out all ratings until a specific date. Format : Year-Month-Dat. Example: 1999-07-15
+            </div>
+            <li  class="option">
+              Required: <code>Api key</code>
+            </li>
+            <div class="explanation">
+              Your API key. Claim your free API key in <a [routerLink]="['/web/user-profile']" class="profile-link">My Profile</a>
+            </div>
+          </ul>
+        </div>
+        <div class="api-example">
+          <pre class="example">
+            <code class="code-highlight">{{getFilteredLocation| json}}</code>
+          </pre>
+        </div>
+        <div class="link-example">
+          Link example: <code class="code-link-example">https://us-central1-final-exam-9302a.cloudfunctions.net/getFilteredResort?id=1</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer bg-dark fixed-bottom">
+  <app-footer></app-footer>
+</footer>
