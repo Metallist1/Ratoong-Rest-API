@@ -2,11 +2,53 @@
   <app-navbar></app-navbar>
 </header>
 
-<div class="container-fluid shade"></div>
-<div class="container-fluid">
-Profile
+<div role="main" class="bg-image-search"></div>
+<div class="row">
+  <div class="loader" *ngIf="isLoading"></div>
+  <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
+    <div class="details-container">
+      <div class="flex-container">
+        <form class="userView" [formGroup]="userData" novalidate>
+        <h1 class="text-uppercase">WELCOME TO YOUR PROFILE</h1>
+        <p class="parag">Here you can generate your API key and change password</p>
+        <div class="big-flex">
+          <div class="display-flex slight-margin-right width-less-half">
+            <label class="your-profile">API INFO</label>
+            <div class="form-group">
+              <input type="text" readonly class="form-control profile-select" formControlName="apiKey" placeholder="API Key"/>
+            </div>
+            <div class="form-group flexing">
+              <input type="text" [type]="fieldTextType ? 'text' : 'password'" readonly class="form-control profile-select" formControlName="apiSecret" placeholder="API Secret"/>
+              <div class="input-group-append">
+                <span class="btn btn-outline-secondary eye-design no-borders" (click)="toggleFieldTextType()">
+                  <i class="far" [ngClass]="{'fa-eye-slash': !fieldTextType,'fa-eye': fieldTextType}"></i>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <a class="btn btn-info text-white radius" (click)="generateKey()">Generate API key</a>
+            </div>
+          </div>
+          <div class="display-flex slight-margin-right width-less-half">
+            <label class="your-profile">YOUR PROFILE</label>
+            <div class="form-group">
+              <input type="email" readonly class="form-control profile-select" formControlName="email" placeholder="EMAIL"/>
+            </div>
+            <div class="form-group">
+              <a (click)="open('Reset-Pass-Modal',resetPassword)" class="btn btn-info text-white radius">Change Password</a>
+            </div>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
 </footer>
+
+<ng-template #resetPassword>
+  <app-password-modal></app-password-modal>
+</ng-template>

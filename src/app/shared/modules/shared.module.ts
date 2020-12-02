@@ -3,22 +3,27 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import {LocationAdderComponent} from '../ui/modals/location-adder/location-adder.component';
+
+import {PasswordModalComponent} from '../ui/modals/password-modal/password-modal.component';
+
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   declarations: [
-    LocationAdderComponent
+    LocationAdderComponent,
+    PasswordModalComponent
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    LocationAdderComponent
+    LocationAdderComponent,
+    PasswordModalComponent
   ],
   entryComponents: [],
 })
