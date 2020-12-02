@@ -22,6 +22,7 @@ import { ModalService} from './shared/services';
 import {SharedModule} from './shared/modules/shared.module';
 
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+
 import {ResortsState} from './shared/states/resorts/resorts.state';
 import {UsersState} from './shared/states/users/users.state';
 import * as firebase from 'firebase';
@@ -47,7 +48,9 @@ firebase.initializeApp(environment.firebaseConfig);
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, ReactiveFormsModule, AngularFireAuthModule,
+
     NgxsModule.forRoot([ResortsState, UsersState, AdminAuthState], {
+
       developmentMode: !environment.production
     }),
     NgxsStoragePluginModule.forRoot({

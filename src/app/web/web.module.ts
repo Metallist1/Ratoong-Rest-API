@@ -6,6 +6,7 @@ import { SharedModule } from '../shared/modules/shared.module';
 import { RatingModule } from 'ngx-bootstrap/rating';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { NgbAlertModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RestRoutes } from './web-routing.module';
