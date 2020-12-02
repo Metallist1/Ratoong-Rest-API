@@ -1,7 +1,7 @@
 
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {CreateAccount, LoginAdmin, Logout} from './admin-auth.action';
+import {ChangePassword, CreateAccount, GenerateAPIKey, LoginAdmin, Logout} from './admin-auth.action';
 import {AdminAuthService} from './admin-auth.service';
 import {AdminsUsers} from './entities/AdminUser';
 
@@ -55,6 +55,27 @@ export class AdminAuthState {
         setState({
           ...state,
           adminUser: undefined,
+        });
+      }
+    ).catch(error => {
+      throw new Error(error.message);
+    });
+  }
+
+  @Action(ChangePassword)
+  changePassword({getState, setState}: StateContext<AdminAuthStateModel>, {currentPassword, newPassword}: ChangePassword): any {
+    return this.authService.changePassword(currentPassword, newPassword).catch(error => {
+      throw new Error(error.message);
+    });
+  }
+
+  @Action(GenerateAPIKey)
+  generateAPIKey({getState, setState}: StateContext<AdminAuthStateModel>): any {
+    return this.authService.generateAPIKeys(getState().adminUser).then((result) => {
+        const state = getState();
+        setState({
+          ...state,
+          adminUser: result,
         });
       }
     ).catch(error => {

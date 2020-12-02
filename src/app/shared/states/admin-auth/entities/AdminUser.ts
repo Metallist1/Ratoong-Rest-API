@@ -2,6 +2,6 @@ export class AdminsUsers {
   uid: string;
   email: string;
   apiSecret?: string;
-  apikey?: string;
+  apiKey?: string;
   isAdmin: boolean;
 }
