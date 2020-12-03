@@ -16,9 +16,6 @@ export type SortDirection = 'asc' | 'desc';
 const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: 'asc' };
 
 function matches(resort: Resort, term: string): boolean {
-  if (resort.name === undefined) {
-    return false;
-  }
   return resort.name.toLowerCase().includes(term.toLowerCase());
 }
 
