@@ -6,14 +6,36 @@
 <div class="row">
   <div class="loader" *ngIf="isLoading"></div>
   <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
-
     <div class="details-container">
       <div class="flex-container">
-        Summary
+          <ul class="list-group dropdown-list">
+            <div class="btn-group " ngbRadioGroup name="radioBasic" [(ngModel)]="selectedResort">
+            <ngb-accordion [closeOthers]="true">
+              <ngb-panel  *ngFor="let locations of locationSummaryList ; index as i" id="static-{{i}}">
+                <ng-template ngbPanelTitle>
+                  {{locations?.name}}
+                  <span class="badge badge-primary badge-pill">Towns: {{locations?.ResortList.length}}</span>
+                </ng-template>
+                <ng-template style="  padding: 10px 0 !important;" ngbPanelContent>
+                  <div class="inner-card">
+                    <label ngbButtonLabel class="btn-light" *ngFor="let resorts of locations.ResortList">
+                      <input ngbButton type="radio" value="{{resorts.id}}"> {{resorts.name}}
+                    </label>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+            </div>
+          </ul>
+        <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
+        {{startDate | json}}
+        {{endDate | json}}
+        {{selectedResort}}
       </div>
     </div>
   </div>
 </div>
+
 
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
