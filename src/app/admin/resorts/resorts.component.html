@@ -1,18 +1,16 @@
 <header>
 <app-navbar></app-navbar>
 </header>
-<div class="main">
-
   <div class="loader" *ngIf="isLoading"></div>
-  <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
+  <div class="main" *ngIf="!isLoading">
   <div class="form-group form-inline">
     Full text search: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
   <table class="table table-striped">
-    <thead style="border-bottom: #0A0A0A 2px solid">
+    <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
+      <th scope="col" (click)="onSort('id')">#</th>
+      <th scope="col" (click)="onSort('name')">Name</th>
     </tr>
     </thead>
     <tbody>
@@ -34,7 +32,6 @@
   </div>
 
   </div>
-</div>
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
 </footer>

@@ -3,9 +3,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {Observable, Subject} from 'rxjs';
 import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
-import {GetResorts, SetFilter} from '../../shared/states/resorts/resorts.action';
+import {GetResorts, SetFilter, SortResorts} from '../../shared/states/resorts/resorts.action';
 import {Resort} from '../../shared/states/resorts/entities/resort';
-import {Logout} from '../../shared/states/admin-auth/admin-auth.action';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -17,7 +16,7 @@ import {takeUntil} from 'rxjs/operators';
 
 export class ResortsComponent implements OnInit, OnDestroy {
 
-  isLoading = false;
+  isLoading = true;
   private ngUnsubscribe = new Subject();
 
   @Select(ResortsState.resortList) currentResorts: Observable<Resort[]>;
@@ -50,29 +49,26 @@ export class ResortsComponent implements OnInit, OnDestroy {
     });
   }
 
+  refreshResorts(): void {
+    this.resortsPage = this.resorts
+      // .map((resort, i) => ({id: i + 1, ...resort}))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(new GetResorts());
+  }
 
   ngOnDestroy(): any{
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  refreshResorts(): void {
-    this.resortsPage = this.resorts
-      .map((resort, i) => ({id: i + 1, ...resort}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
-
-
-  ngOnInit(): void {
-
-    this.isLoading = true;
-
-    this.store.dispatch(new GetResorts());
-  }
-
   updateFilter(str): void {
     this.isLoading = true;
-    
     this.store.dispatch(new SetFilter(str));
+  }
+  onSort(str): void {
+    this.store.dispatch(new SortResorts(str));
   }
 }

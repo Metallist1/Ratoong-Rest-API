@@ -1,12 +1,13 @@
 <header>
   <app-navbar></app-navbar>
 </header>
-<div class="main">
+<div class="loader" *ngIf="isLoading"></div>
+<div class="main" *ngIf="!isLoading">
   <div class="form-group form-inline">
     Full text search: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
   <table class="table table-striped">
-    <thead style="border-bottom: #0A0A0A 2px solid">
+    <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>

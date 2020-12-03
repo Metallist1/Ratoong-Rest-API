@@ -1,7 +1,6 @@
-
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetAllLocations, GetResorts, SetFilter} from './resorts.action';
+import {GetAllLocations, GetResorts, SetFilter, SortResorts} from './resorts.action';
 import {Resort} from './entities/resort';
 import {ResortsService} from './resorts.service';
 import {SummaryLocation} from './entities/summaryLocation';
@@ -9,12 +8,16 @@ import {SummaryLocation} from './entities/summaryLocation';
 export class ResortStateModel {
   resortList: Resort[];
   summaryLocationList: SummaryLocation[];
-  filterBy: string;
+  sortDirection: SortDirection;
+  filterStr: string;
 }
+
+export type SortDirection = 'asc' | 'desc';
+const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: 'asc' };
 
 function matches(resort: Resort, term: string): boolean {
   if (resort.name === undefined) {
-     return false;
+    return false;
   }
   return resort.name.toLowerCase().includes(term.toLowerCase());
 }
@@ -24,24 +27,27 @@ function matches(resort: Resort, term: string): boolean {
   defaults: {
     resortList: [],
     summaryLocationList: [],
-    filterBy: ''
+    sortDirection: 'asc',
+    filterStr: ''
   }
 })
 
 @Injectable()
 export class ResortsState {
 
-  constructor(private resortList: ResortsService) {}
+  constructor(private resortList: ResortsService) {
+  }
 
   @Selector()
   static resortList(state: ResortStateModel): any {
-    return state.resortList.filter(resort => matches(resort, state.filterBy));
+    return state.resortList.filter(resort => matches(resort, state.filterStr));
   }
 
   @Selector()
   static summaryLocationList(state: ResortStateModel): any {
     return state.summaryLocationList;
   }
+
   // Gets all resorts from DB
   @Action(GetResorts)
   getResorts(ctx: StateContext<ResortStateModel>): any {
@@ -63,11 +69,30 @@ export class ResortsState {
     );
   }
 
-
   @Action(SetFilter)
   setFilter(ctx: StateContext<ResortStateModel>, payload: SetFilter): any {
     ctx.patchState({
-      filterBy: payload.str
+      filterStr: payload.str
+    });
+  }
+
+  @Action(SortResorts)
+  sortResorts(ctx: StateContext<ResortStateModel>, payload: SortResorts): any {
+    const state = ctx.getState();
+    const sortedList = state.resortList.slice();
+    if (payload.str === 'id'){
+          sortedList.sort((a, b) => a.id - b.id);
+    }
+    else{
+          sortedList.sort((a, b) => (a[payload.str] > b[payload.str]) ? 1 : -1);
+    }
+    if (state.sortDirection === 'desc'){
+          sortedList.reverse();
+    }
+
+    ctx.patchState({
+      resortList: sortedList,
+      sortDirection: rotate[state.sortDirection]
     });
   }
 }

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {Select, Store} from '@ngxs/store';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {UsersState} from '../../shared/states/users/users.state';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {User} from '../../shared/states/users/entities/user';
 import {GetUsers, SetFilter} from '../../shared/states/users/users.action';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-users',
@@ -11,7 +12,12 @@ import {GetUsers, SetFilter} from '../../shared/states/users/users.action';
   styleUrls: ['./users.component.scss']
 })
 
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
+
+  isLoading = true;
+  private ngUnsubscribe = new Subject();
+
+
   @Select(UsersState.userList) currentUsers: Observable<User[]>;
   users = [];
   usersPage = [];
@@ -19,7 +25,18 @@ export class UsersComponent implements OnInit {
   page = 1;
   pageSize = 4;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private actions$: Actions) {
+
+    this.actions$.pipe(ofActionSuccessful(GetUsers),
+      takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      this.isLoading = false;
+    });
+
+    this.actions$.pipe(ofActionSuccessful(SetFilter),
+      takeUntil(this.ngUnsubscribe)).subscribe(() => {
+      this.isLoading = false;
+    });
+
     this.currentUsers.subscribe(data => {
       this.users = [];
       data.forEach((value) => {
@@ -38,6 +55,11 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new GetUsers());
+  }
+
+  ngOnDestroy(): any{
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   updateFilter(str): void {

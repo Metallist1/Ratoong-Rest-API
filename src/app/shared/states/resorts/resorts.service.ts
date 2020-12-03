@@ -16,7 +16,9 @@ export class ResortsService {
 
   async getResorts(): Promise<any> {
     return firebase.database().ref('/NewLocations').once('value').then((snapshot) => {
-      return snapshot.val().map(a => {
+      return snapshot.val().filter(a => {
+        return a.CityName !== undefined;
+      }).map(a => {
         const id = a.LocationId;
         const name = a.CityName;
         const commonId = a.CommonId;
