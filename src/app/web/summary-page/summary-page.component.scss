@@ -12,3 +12,33 @@
     background-size: cover
   }
 }
+
+.details-container {
+  font-family: "Oswald";
+  font-weight: 500 ;
+  margin: 50px;
+  padding: 2em 4em;
+  border: 1px solid $color-light-gray-83;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.dropdown-list{
+  position: relative;
+}
+
+.flex-container{
+  display: flex;
+}
+
+.inner-card{
+  display: flex;
+  flex-flow: column;
+}
+
+[type='radio'] {
+  display: none;
+}
+
+.card-body{
+  padding: 10px 0 !important;
+}

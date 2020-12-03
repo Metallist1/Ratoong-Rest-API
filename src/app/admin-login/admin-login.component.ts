@@ -1,13 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {CreateAccount, LoginAdmin} from '../shared/states/admin-auth/admin-auth.action';
+import { LoginAdmin} from '../shared/states/admin-auth/admin-auth.action';
 import {first, takeUntil} from 'rxjs/operators';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {Observable, Subject} from 'rxjs';
 import {AdminAuthState} from '../shared/states/admin-auth/admin-auth.state';
 import {AdminsUsers} from '../shared/states/admin-auth/entities/AdminUser';
-import {SetFilter} from '../shared/states/resorts/resorts.action';
 
 @Component({
   selector: 'app-admin-login',
@@ -56,8 +55,7 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
   ngOnInit(): any {
     this.loginDetail = this.fb.group({
       email : ['jakubrewald@gmail.com', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(200)])],
-      pwd : ['123456789', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(100)])],
-      toRegister : [null, ]
+      pwd : ['123456789', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(20)])],
     });
   }
 
@@ -73,10 +71,8 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
     if (this.loginDetail.invalid) {
       return;
     }
-    console.log(this.loginDetail.value.toRegister);
     this.isLoading = true;
-    if (this.loginDetail.value.toRegister){
-      this.store.dispatch(new CreateAccount(this.loginDetail.value.email, this.loginDetail.value.pwd))
+    this.store.dispatch(new LoginAdmin(this.loginDetail.value.email, this.loginDetail.value.pwd))
         .pipe(first())
         .subscribe(
           data => {
@@ -86,20 +82,7 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
             this.errorMsg = error;
             this.isLoading = false;
           });
-    }else{
-      this.store.dispatch(new LoginAdmin(this.loginDetail.value.email, this.loginDetail.value.pwd))
-        .pipe(first())
-        .subscribe(
-          data => {
-
-          },
-          error => {
-            this.errorMsg = error;
-            this.isLoading = false;
-          });
-    }
   }
-
 
   toggleFieldTextType(): any {
     this.fieldTextType = !this.fieldTextType;
