@@ -24,9 +24,9 @@ const routes: Routes = [
     component: ProfileComponent
   },*/
   {
-    path: 'web',
+    path: 'overview',
     canActivateChild: [GuardService],
-    loadChildren: () => import('./web/web.module').then(m => m.RestModule),
+    loadChildren: () => import('./overview/overview.module').then(m => m.RestModule),
   },
   {
     path: '404',
@@ -39,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
+  imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'enabled'
   })],
   exports: [RouterModule]

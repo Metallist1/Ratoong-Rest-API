@@ -146,8 +146,39 @@ exports.getFilteredResort = functions.https.onRequest((req, res) => {
 
 
 
-exports.addMessage = functions.https.onCall((data, context) => {
-  return {
-    firstNumber: "Help",
-  };
+exports.getFilteredData = functions.https.onCall((data, context) => {
+
+  let fromDate = '1971-01-01';
+  let toDate = '2049-01-01';
+
+  if(data.fromDate){
+    fromDate = String(data.fromDate)
+  }
+  if(data.toDate){
+    toDate = String(data.toDate)
+  }
+  let gender = 'None';
+
+  if(data.gender){
+    gender = String(data.gender)
+  }
+  let country = 'None';
+
+  if(data.country){
+    country = String(data.country)
+  }
+  let age = 'None';
+
+  if(data.age){
+    const userKeyRegExp = /^[0-9]{2}\-[0-9]{2}$/;
+
+    const valid = userKeyRegExp.test(String(data.age));
+
+    if(valid){
+      age = String(data.age)
+    }
+  }
+
+  return dependencyFactory.getResortController().getFilteredResort(Number(data.id), fromDate, toDate, gender, country, age, false, false, 'None', 'None', 'None');
+
 });

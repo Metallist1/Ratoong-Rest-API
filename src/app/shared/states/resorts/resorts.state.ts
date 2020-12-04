@@ -1,12 +1,14 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetAllLocations, GetResorts, SetFilter, SortResorts} from './resorts.action';
+import {GetAllCountries, GetAllLocations, GetResorts, SetFilter, SortResorts} from './resorts.action';
 import {Resort} from './entities/resort';
 import {ResortsService} from './resorts.service';
 import {SummaryLocation} from './entities/summaryLocation';
+import {Country} from './entities/country';
 
 export class ResortStateModel {
   resortList: Resort[];
+  countryList: Country[];
   summaryLocationList: SummaryLocation[];
   sortDirection: SortDirection;
   filterStr: string;
@@ -23,6 +25,7 @@ function matches(resort: Resort, term: string): boolean {
   name: 'resorts',
   defaults: {
     resortList: [],
+    countryList: [],
     summaryLocationList: [],
     sortDirection: 'asc',
     filterStr: ''
@@ -45,6 +48,11 @@ export class ResortsState {
     return state.summaryLocationList;
   }
 
+  @Selector()
+  static countryList(state: ResortStateModel): any {
+    return state.countryList;
+  }
+
   // Gets all resorts from DB
   @Action(GetResorts)
   getResorts(ctx: StateContext<ResortStateModel>): any {
@@ -61,6 +69,16 @@ export class ResortsState {
     return this.resortList.getAllLocations().then((result) => {
         ctx.patchState({
           summaryLocationList: result
+        });
+      }
+    );
+  }
+
+  @Action(GetAllCountries)
+  getAllCountries(ctx: StateContext<ResortStateModel>): any {
+    return this.resortList.getAllCountries().then((result) => {
+        ctx.patchState({
+          countryList: result
         });
       }
     );

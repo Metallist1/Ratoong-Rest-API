@@ -34,7 +34,7 @@ export class GuardService implements CanActivate {
 
   checkLogin(url: string): true|UrlTree {
     if (!this.currentU.isAdmin) {
-      if (url.includes('/web')){
+      if (url.includes('/overview')){
         return true;
       }
     }else{ // Admins can access both pages. Normal users should only access web

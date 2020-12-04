@@ -9,7 +9,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import {NgbAlertModule, NgbDatepickerModule, NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { RestRoutes } from './web-routing.module';
+import { RestRoutes } from './overview-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navigations/navbar/navbar.component';
 import { FooterComponent } from './navigations/footer/footer.component';

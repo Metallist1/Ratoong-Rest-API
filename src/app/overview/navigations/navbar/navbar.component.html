@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" [routerLink]="['/web']">
-    <img [routerLink]="['/web']" src="/assets/images/logo-w.png" alt="Ratoong">
+  <a class="navbar-brand" [routerLink]="['/overview']">
+    <img [routerLink]="['/overview']" src="/assets/images/logo-w.png" alt="Ratoong">
   </a>
   <button class="navbar-toggler ml-auto custom-toggler" type="button" data-toggle="collapse" (click)="isCollapsed= !isCollapsed">
     <span class="navbar-toggler-icon"></span>
@@ -11,14 +11,14 @@
         <a [routerLink]="['/admin']" (click)="isCollapsed= true;" class="nav-link padding-nav-link">Admin</a>
       </li>
       <li  class="nav-item">
-        <a [routerLink]="['/web/api']" [routerLinkActive]="['active']" (click)="isCollapsed= true;" class="nav-link padding-nav-link">API Documentation</a>
+        <a [routerLink]="['/overview/api']" [routerLinkActive]="['active']" (click)="isCollapsed= true;" class="nav-link padding-nav-link">API Documentation</a>
       </li>
       <li class="nav-item">
-        <a [routerLink]="['/web/summary']" [routerLinkActive]="['active']" (click)="isCollapsed= true;" class="nav-link padding-nav-link">Summary</a>
+        <a [routerLink]="['/overview/summary']" [routerLinkActive]="['active']" (click)="isCollapsed= true;" class="nav-link padding-nav-link">Summary</a>
       </li>
       <!-- item for mobile -->
       <li class="nav-item"  *ngIf="currentU"  (click)="isCollapsed= true;">
-        <a [routerLink]="['/web/user-profile']" [routerLinkActive]="['active']" class="nav-link padding-nav-link">
+        <a [routerLink]="['/overview/user-profile']" [routerLinkActive]="['active']" class="nav-link padding-nav-link">
           My Profile
         </a>
       </li>
