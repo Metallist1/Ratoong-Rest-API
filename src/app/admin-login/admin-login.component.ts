@@ -46,7 +46,7 @@ export class AdminLoginComponent implements OnInit, OnDestroy {
           if (data.isAdmin) {
             this.router.navigate(['/admin']);
           } else if (!data.isAdmin) {
-            this.router.navigate(['/web']);
+            this.router.navigate(['/overview']);
           }
         }
       });

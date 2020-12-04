@@ -27,10 +27,37 @@
             </ngb-accordion>
             </div>
           </ul>
+        <div class="form-group">
+          <label>Age</label>
+          <select [(ngModel)]='ageSelect' class="form-control profile-select">
+            <option value="None">All Ages</option>
+            <option value="18-25">18-25</option>
+            <option value="26-35">26-35</option>
+            <option value="36-45">36-45</option>
+            <option value="46-55">46-55</option>
+            <option value="55-100">55-100</option>
+          </select>
+        </div>
+        <div class="form-group slight-margin-right max-width">
+          <label>GENDER</label>
+          <select [(ngModel)]='genderSelect'  class="form-control profile-select">
+            <option value="None">All Genders</option>
+            <option value="male">MALE</option>
+            <option value="female">FEMALE</option>
+            <option value="donttell">DON'T WANNA TELL</option>
+          </select>
+        </div>
+        <div class="form-group max-width">
+          <label>COUNTRY</label>
+          <select [(ngModel)]='countrySelect' class="form-control profile-select">
+            <option value="None">All Countries</option>
+            <option *ngFor="let country of  listOfCountries| async" [ngValue]="country.name">
+              {{ country.name }}
+            </option>
+          </select>
+        </div>
         <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
-        {{startDate | json}}
-        {{endDate | json}}
-        {{selectedResort}}
+        <button type="button" [disabled]="selectedResort === null" class="btn btn-primary" (click)="getInfo()">Primary</button>
       </div>
     </div>
   </div>

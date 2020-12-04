@@ -14,5 +14,9 @@ export class SetFilter {
 }
 
 export class GetAllLocations {
-  static readonly type = 'getAllLocations';
+  static readonly type = 'GetAllLocations';
+}
+
+export class GetAllCountries {
+  static readonly type = 'GetAllCountries';
 }

@@ -1,15 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
-import {AdminAuthState} from '../../shared/states/admin-auth/admin-auth.state';
 import {Observable} from 'rxjs';
-import {AdminsUsers} from '../../shared/states/admin-auth/entities/AdminUser';
 import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {SummaryLocation} from '../../shared/states/resorts/entities/summaryLocation';
-import {GenerateAPIKey} from '../../shared/states/admin-auth/admin-auth.action';
-import {first} from 'rxjs/operators';
-import {GetAllLocations} from '../../shared/states/resorts/resorts.action';
+import {Country} from '../../shared/states/resorts/entities/country';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-summary-page',
@@ -17,17 +13,9 @@ import {GetAllLocations} from '../../shared/states/resorts/resorts.action';
   styleUrls: ['./summary-page.component.scss']
 })
 export class SummaryPageComponent implements OnInit {
-  constructor(private store: Store) {
-    this.store.dispatch(new GetAllLocations())
-      .pipe(first())
-      .subscribe(
-        data => {
-
-        },
-        error => {
-          this.isLoading = false;
-        });
-  }
+  genderSelect = 'None';
+  countrySelect = 'None';
+  ageSelect = 'None';
 
   isLoading = false;
   startDate = null;
@@ -35,7 +23,11 @@ export class SummaryPageComponent implements OnInit {
   selectedResort = null;
 
   @Select(ResortsState.summaryLocationList) summarList: Observable<SummaryLocation[]>;
+  @Select(ResortsState.countryList) listOfCountries: Observable<Country[]>;
   locationSummaryList: SummaryLocation[];
+
+  constructor(private store: Store) {
+  }
 
   ngOnInit(): void {
     this.summarList.subscribe(
@@ -50,11 +42,28 @@ export class SummaryPageComponent implements OnInit {
   }
 
   modifyStartDate(newDate: NgbDate): any {
-    this.startDate = newDate;
+    if (newDate != null){
+      this.startDate = newDate.year + '-' +  newDate.month + '-' + newDate.day;
+    }
   }
 
   modifyEndDate(newDate: NgbDate): any {
-    this.endDate = newDate;
+    if (newDate != null){
+      this.endDate = newDate.year + '-' +  newDate.month + '-' + newDate.day;
+    }
   }
 
+  getInfo(): any{
+    const getFilteredData = firebase.functions().httpsCallable('getFilteredData');
+    getFilteredData({ id: this.selectedResort,
+      country: this.countrySelect,
+      age: this.ageSelect,
+      gender: this.genderSelect,
+      fromDate: this.startDate,
+      toDate: this.endDate})
+      .then((result) => {
+        // Read result of the Cloud Function.
+        console.log(result.data);
+      });
+  }
 }
