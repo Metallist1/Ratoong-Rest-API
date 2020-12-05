@@ -12,6 +12,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {StatisticsFilter} from './shared/states/resorts/helpers/statistics';
 
 import { environment } from '../environments/environment';
 
@@ -63,7 +64,8 @@ firebase.initializeApp(environment.firebaseConfig);
     AppRoutingModule, // App routing needs to last for 404 detection
   ],
   providers: [
-    ModalService
+    ModalService,
+    StatisticsFilter
   ],
   exports: [],
   bootstrap: [AppComponent]

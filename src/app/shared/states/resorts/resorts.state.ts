@@ -1,15 +1,18 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetAllCountries, GetAllLocations, GetResorts, SetFilter, SortResorts} from './resorts.action';
+import {GetAllCountries, GetAllLocations, GetFilteredResortData, GetResorts, SetFilter, SortResorts} from './resorts.action';
 import {Resort} from './entities/resort';
 import {ResortsService} from './resorts.service';
-import {SummaryLocation} from './entities/summaryLocation';
 import {Country} from './entities/country';
+import {StatisticsFilter} from './helpers/statistics';
 
 export class ResortStateModel {
   resortList: Resort[];
   countryList: Country[];
-  summaryLocationList: SummaryLocation[];
+  summaryLocationList: Resort[];
+
+  statisticsObject: object;
+
   sortDirection: SortDirection;
   filterStr: string;
 }
@@ -27,6 +30,7 @@ function matches(resort: Resort, term: string): boolean {
     resortList: [],
     countryList: [],
     summaryLocationList: [],
+    statisticsObject: undefined,
     sortDirection: 'asc',
     filterStr: ''
   }
@@ -35,7 +39,8 @@ function matches(resort: Resort, term: string): boolean {
 @Injectable()
 export class ResortsState {
 
-  constructor(private resortList: ResortsService) {
+  constructor(private resortList: ResortsService,
+              private statisticsFilter: StatisticsFilter) {
   }
 
   @Selector()
@@ -46,6 +51,11 @@ export class ResortsState {
   @Selector()
   static summaryLocationList(state: ResortStateModel): any {
     return state.summaryLocationList;
+  }
+
+  @Selector()
+  static getStatistics(state: ResortStateModel): any {
+    return state.statisticsObject;
   }
 
   @Selector()
@@ -65,11 +75,21 @@ export class ResortsState {
   }
 
   @Action(GetAllLocations)
-  getAllLocations(ctx: StateContext<ResortStateModel>): any {
-    return this.resortList.getAllLocations().then((result) => {
+  getAllLocations(ctx: StateContext<ResortStateModel>, {id}: GetAllLocations): any {
+    return this.resortList.getAllLocations(id).then((result) => {
         ctx.patchState({
           summaryLocationList: result
         });
+      }
+    );
+  }
+
+  @Action(GetFilteredResortData)
+  getFilteredResortData(ctx: StateContext<ResortStateModel>, {id, country, age, gender, fromDate, toDate}: GetFilteredResortData): any {
+    return this.resortList.getFilteredResortData(id, country, age, gender, fromDate, toDate).then((result) => {
+      ctx.patchState({
+        statisticsObject: this.statisticsFilter.calculateData(result)
+      });
       }
     );
   }

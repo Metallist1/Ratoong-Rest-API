@@ -28,6 +28,7 @@
 
 .flex-container{
   display: flex;
+  flex-flow: column;
 }
 
 .inner-card{
@@ -41,4 +42,22 @@
 
 .card-body{
   padding: 10px 0 !important;
+}
+
+.form-group{
+  width: 100%;
+  max-width: 200px;
+  margin: 25px;
+}
+
+.important-search{
+  display: flex;
+}
+
+.optional-search{
+  display: flex;
+}
+
+.accordion > .card > .card-header {
+  padding: 0 !important;
 }

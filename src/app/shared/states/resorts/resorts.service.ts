@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {Resort} from './entities/resort';
-import {SummaryLocation} from './entities/summaryLocation';
 import {Country} from './entities/country';
 
 @Injectable({
@@ -28,27 +27,15 @@ export class ResortsService {
     });
   }
 
-  async getAllLocations(): Promise<SummaryLocation[]>  {
+  async getAllLocations(id: number): Promise<Resort[]>  {
     const allresortList = await this.getResorts();
-    const snapshot = await firebase.database().ref('/ResortCommon').once('value');
-    const list = [];
-    await snapshot.forEach((child) => {
-      const name = child.val().Name;
-      const id = child.val().CommonId;
-      const resortList = [];
-      for (let i = 0; i < allresortList.length; i++) {
-        if (allresortList[i].commonId === id) {
+    const resortList = [];
+    for (let i = 0; i < allresortList.length; i++) {
+      if (allresortList[i].commonId === String(id)) {
           resortList.push(allresortList[i]);
         }
       }
-      const location: SummaryLocation = {
-        id,
-        name,
-        ResortList: resortList
-      };
-      list.push(location);
-    });
-    return list;
+    return resortList;
   }
 
   async getAllCountries(): Promise<Country[]> {
@@ -59,5 +46,10 @@ export class ResortsService {
         const region = a.Region;
         return {countryId: countId, name, region} as Country;
     });
+  }
+
+  async getFilteredResortData(id: string, country: string, age: string, gender: string, fromDate: string, toDate: string): Promise<any>{
+    const getFilteredData = await firebase.functions().httpsCallable('getFilteredData');
+    return getFilteredData({ id, country, age, gender, fromDate, toDate});
   }
 }

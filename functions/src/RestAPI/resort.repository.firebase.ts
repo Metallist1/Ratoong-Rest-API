@@ -225,8 +225,8 @@ export class ResortRepositoryFirebase implements ResortRepository {
             let holidayType = '';
 
           if (userData.val().hasOwnProperty('preferences')) {
-             snowboarder = userData.val().preferences.snowboarder;
-             skier =userData.val().preferences.skier;
+             snowboarder = (userData.val().preferences.snowboarder === '') ? false : userData.val().preferences.snowboarder;
+             skier = (userData.val().preferences.skier === '') ? false : userData.val().preferences.skier;
              tripCount =userData.val().preferences.tripCount;
              skillLevel =userData.val().preferences.skillLevel;
              holidayType =userData.val().preferences.holidayType;

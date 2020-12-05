@@ -8,38 +8,29 @@
   <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
     <div class="details-container">
       <div class="flex-container">
-          <ul class="list-group dropdown-list">
-            <div class="btn-group " ngbRadioGroup name="radioBasic" [(ngModel)]="selectedResort">
-            <ngb-accordion [closeOthers]="true">
-              <ngb-panel  *ngFor="let locations of locationSummaryList ; index as i" id="static-{{i}}">
-                <ng-template ngbPanelTitle>
-                  {{locations?.name}}
-                  <span class="badge badge-primary badge-pill">Towns: {{locations?.ResortList.length}}</span>
-                </ng-template>
-                <ng-template style="  padding: 10px 0 !important;" ngbPanelContent>
-                  <div class="inner-card">
-                    <label ngbButtonLabel class="btn-light" *ngFor="let resorts of locations.ResortList">
-                      <input ngbButton type="radio" value="{{resorts.id}}"> {{resorts.name}}
-                    </label>
-                  </div>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
-            </div>
-          </ul>
+        <div class="important-search">
+          <div class="form-group max-width">
+            <select [(ngModel)]='selectedResort' class="form-control profile-select">
+              <option value="default" disabled>Select Town</option>
+              <option *ngFor="let town of  locationSummaryList" [ngValue]="town.id">
+                {{ town.name }}
+              </option>
+            </select>
+          </div>
+        <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
+        </div>
+        <div class="optional-search">
         <div class="form-group">
-          <label>Age</label>
           <select [(ngModel)]='ageSelect' class="form-control profile-select">
             <option value="None">All Ages</option>
             <option value="18-25">18-25</option>
             <option value="26-35">26-35</option>
             <option value="36-45">36-45</option>
             <option value="46-55">46-55</option>
-            <option value="55-100">55-100</option>
+            <option value="55-100">55+</option>
           </select>
         </div>
         <div class="form-group slight-margin-right max-width">
-          <label>GENDER</label>
           <select [(ngModel)]='genderSelect'  class="form-control profile-select">
             <option value="None">All Genders</option>
             <option value="male">MALE</option>
@@ -48,7 +39,6 @@
           </select>
         </div>
         <div class="form-group max-width">
-          <label>COUNTRY</label>
           <select [(ngModel)]='countrySelect' class="form-control profile-select">
             <option value="None">All Countries</option>
             <option *ngFor="let country of  listOfCountries| async" [ngValue]="country.name">
@@ -56,8 +46,8 @@
             </option>
           </select>
         </div>
-        <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
-        <button type="button" [disabled]="selectedResort === null" class="btn btn-primary" (click)="getInfo()">Primary</button>
+        <button type="button" [disabled]="selectedResort === 'default'" class="btn btn-primary" (click)="getInfo()">Display</button>
+        </div>
       </div>
     </div>
   </div>

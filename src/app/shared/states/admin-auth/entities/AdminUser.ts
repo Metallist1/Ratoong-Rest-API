@@ -4,4 +4,5 @@ export class AdminsUsers {
   apiSecret?: string;
   apiKey?: string;
   isAdmin: boolean;
+  resortID: number;
 }

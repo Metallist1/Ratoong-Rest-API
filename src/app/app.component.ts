@@ -10,7 +10,6 @@ export class AppComponent implements OnInit, OnDestroy{
   title = 'ratoong';
   constructor(private store: Store) {
     this.store.dispatch(new GetAllCountries());
-    this.store.dispatch(new GetAllLocations());
   }
 
   ngOnInit(): any{
