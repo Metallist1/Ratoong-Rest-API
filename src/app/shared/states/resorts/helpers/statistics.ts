@@ -3,11 +3,12 @@ export class StatisticsFilter {
   calculateData(params: object): any {
     // @ts-ignore
     const userData = this.getUserData(params.data.processedData);
-    console.log(userData);
     // @ts-ignore
     const ratingData = this.getRatingData(params.data.processedData);
-
-    return [];
+    return {
+      userData,
+      ratingData
+    };
   }
 
   getUserData(arr): any{
@@ -24,7 +25,27 @@ export class StatisticsFilter {
   }
 
   getRatingData(arr): any{
+    const map = new Map();
+    arr.forEach((obj) => {
+      obj.questionRatings.forEach((rating) => {
+        if (map.has(rating.questionId)){
+          const currentRating = map.get(rating.questionId);
+          const data = {
+            totalScore: currentRating.totalScore + rating.rating,
+            totalCount: currentRating.totalCount + 1
+          };
+          map.set(rating.questionId, data);
+        }else{
+          const data = {
+            totalScore: rating.rating,
+            totalCount: 1
+          };
+          map.set(rating.questionId, data);
+        }
+      });
+    });
 
+    return Array.from(map.entries());
   }
 
   mapData(arr, type): any{

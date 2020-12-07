@@ -50,6 +50,18 @@
         </div>
       </div>
     </div>
+    <div class="details-container" *ngIf="statistics| async">
+      <app-summary-gender [genderData]="locationSummaryList" ></app-summary-gender>
+    </div>
+    <div class="details-container" *ngIf="statistics| async">
+      <app-summary-rating-table [ratings]="locationSummaryList" ></app-summary-rating-table>
+    </div>
+    <div class="details-container" *ngIf="statistics| async">
+      <app-summary-type [types]="locationSummaryList" ></app-summary-type>
+    </div>
+    <div class="details-container" *ngIf="statistics| async">
+      <app-summary-preferences [preferences]="locationSummaryList" ></app-summary-preferences>
+    </div>
   </div>
 </div>
 

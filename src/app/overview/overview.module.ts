@@ -18,6 +18,11 @@ import { SummaryPageComponent } from './summary-page/summary-page.component';
 import { ApiDocumentationComponent } from './api-documentation/api-documentation.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { SummaryCalendarComponent } from './summary-page/summary-calendar/summary-calendar.component';
+import { SummaryGenderComponent } from './summary-page/summary-gender/summary-gender.component';
+import { SummaryPreferencesComponent } from './summary-page/summary-preferences/summary-preferences.component';
+import { SummaryTypeComponent } from './summary-page/summary-type/summary-type.component';
+import { SummaryRatingTableComponent } from './summary-page/summary-rating-table/summary-rating-table.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -31,7 +36,8 @@ import { SummaryCalendarComponent } from './summary-page/summary-calendar/summar
     FontAwesomeModule,
     NgbAlertModule,
     NgbDropdownModule,
-    NgbModule
+    NgbModule,
+    ChartsModule
   ],
   providers: [],
   exports: [],
@@ -42,7 +48,11 @@ import { SummaryCalendarComponent } from './summary-page/summary-calendar/summar
     SummaryPageComponent,
     ApiDocumentationComponent,
     CompanyProfileComponent,
-    SummaryCalendarComponent
+    SummaryCalendarComponent,
+    SummaryGenderComponent,
+    SummaryPreferencesComponent,
+    SummaryTypeComponent,
+    SummaryRatingTableComponent,
   ]
 })
 export class RestModule { }
