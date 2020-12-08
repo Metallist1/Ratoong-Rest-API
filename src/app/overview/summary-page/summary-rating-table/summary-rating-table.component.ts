@@ -42,7 +42,7 @@ export class NgbdSortableHeader {
 })
 export class SummaryRatingTableComponent implements OnInit {
 
-  @Input() preferences: Array<object>;
+  @Input() ratings: Array<object>;
   totalLocations: Location[];
   currentLocations: Location[];
   currentPage = 1;

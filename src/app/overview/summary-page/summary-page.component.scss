@@ -47,17 +47,64 @@
 .form-group{
   width: 100%;
   max-width: 200px;
-  margin: 25px;
+  margin: 20px 0 5px 15px;
 }
 
 .important-search{
   display: flex;
+  flex-flow: column;
 }
 
 .optional-search{
   display: flex;
+  flex-flow: column;
 }
 
 .accordion > .card > .card-header {
   padding: 0 !important;
+}
+
+.display-name{
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.important-text{
+  color: red;
+  margin-left: 5px;
+}
+
+.form-group{
+  max-width: max-content !important;
+}
+
+.added-margin{
+  position: relative;
+  color: $color-ratoong-blue-43;
+  border: 1px solid $color-ratoong-blue-43;
+  font-weight: 300;
+  background: none;
+  cursor: pointer;
+  transition: 0.2s ease all;
+  border-radius: 0 !important;
+  margin-right: 10px;
+  background: transparent;
+}
+.added-margin:hover {
+  box-shadow: 0 0 0 1px $color-ratoong-blue-43 !important;
+  background: transparent;
+  color: $color-ratoong-blue-43;
+}
+
+.region-tick{
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  height: 90%;
+}
+
+.uppercase{
+  font-size: 1.7em;
+  text-transform: uppercase;
 }
