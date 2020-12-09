@@ -72,6 +72,7 @@
 
 .important-text{
   color: red;
+  font-weight: 400;
   margin-left: 5px;
 }
 
@@ -107,4 +108,26 @@
 .uppercase{
   font-size: 1.7em;
   text-transform: uppercase;
+}
+
+.optional-text{
+  font-weight: 400;
+  margin-left: 5px;
+}
+
+.select-button{
+  padding: 10px 55px;
+  font-size: 1.2rem;
+  border-radius: 0;
+}
+
+.most-important-data{
+  display: flex;
+  flex-flow: row;
+}
+
+.most-optional-data{
+  display: flex;
+  flex-flow: row;
+  width: 100%;
 }

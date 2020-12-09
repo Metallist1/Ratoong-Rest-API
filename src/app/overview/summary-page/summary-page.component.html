@@ -10,7 +10,7 @@
       <div class="flex-container">
         <div class="picture-display">
           <div class="col-md-12 text-allign">
-            <div class="display-name uppercase">Summary of Cia bus resort</div>
+            <div class="display-name uppercase">Summary of {{locationSummaryList[0].resortName}}</div>
           </div>
         </div>
         <div class="important-search">
@@ -24,7 +24,7 @@
             </select>
           </div>
           <div class="form-group max-width">
-            <div class="display-name">Countries (Optional)</div>
+            <div class="display-name">Countries <div class="optional-text">(Optional)</div></div>
             <select [(ngModel)]='countrySelect' class="form-control profile-select">
               <option value="None">All Countries</option>
               <option *ngFor="let country of  listOfCountries| async" [ngValue]="country.name">
@@ -35,7 +35,7 @@
         </div>
         <div class="optional-search">
           <div class="form-group">
-            <div class="display-name">Age groups (Optional)</div>
+            <div class="display-name">Age groups <div class="optional-text">(Optional)</div></div>
             <div class="btn-group btn-group-toggle" ngbRadioGroup name="ageRadio" [(ngModel)]="ageSelect">
               <label ngbButtonLabel class="added-margin">
                 <img *ngIf="ageSelect == 'None'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="form-group slight-margin-right max-width">
-            <div class="display-name">Genders (Optional)</div>
+            <div class="display-name">Genders <div class="optional-text">(Optional)</div></div>
             <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="genderSelect">
               <label ngbButtonLabel class="added-margin">
                 <img *ngIf="genderSelect == 'None'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
@@ -93,26 +93,34 @@
             </div>
           </div>
           <div class="form-group slight-margin-right max-width">
-            <div class="display-name">Time Period (Optional)</div>
+            <div class="display-name">Time Period <div class="optional-text">(Optional)</div></div>
             <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
           </div>
           <div class="form-group slight-margin-right max-width">
-            <button type="button" [disabled]="selectedResort === 'default'" class="btn btn-primary" (click)="getInfo()">Display Data</button>
+            <button type="button" [disabled]="selectedResort === 'default'" class="btn btn-info select-button" (click)="getInfo()">Display Data</button>
           </div>
         </div>
       </div>
     </div>
-    <div class="details-container" *ngIf="statistics| async">
-      <app-summary-gender [genderData]="locationSummaryList" ></app-summary-gender>
-    </div>
-    <div class="details-container" *ngIf="statistics| async">
-      <app-summary-rating-table [ratings]="locationSummaryList" ></app-summary-rating-table>
-    </div>
-    <div class="details-container" *ngIf="statistics| async">
-      <app-summary-type [types]="locationSummaryList" ></app-summary-type>
-    </div>
-    <div class="details-container" *ngIf="statistics| async">
-      <app-summary-preferences [preferences]="locationSummaryList" ></app-summary-preferences>
+    <div class="details-container">
+      <div class="flex-container">
+        <div class="picture-display">
+          <div class="col-md-12 text-allign">
+            <div class="display-name uppercase">TOWN NAME, {{locationSummaryList[0].resortName}} Data Summary</div>
+            <div class="single-rating margin-upper max-strech-width">
+              <div class="rating-text big-rating">Total Ratings {{1}}</div>
+              <div class="rating-text big-rating">Overall Score {{1.5}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="most-important-data">
+          <app-summary-rating-table [ratings]="locationSummaryList" ></app-summary-rating-table>
+          <app-summary-preferences [preferences]="locationSummaryList" ></app-summary-preferences>
+        </div>
+        <div class="most-optional-data">
+          <app-summary-gender style="width: 100%" [genderData]="locationSummaryList" ></app-summary-gender>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -22,7 +22,8 @@ export class ResortsService {
         const id = a.LocationId;
         const name = a.CityName;
         const commonId = a.CommonId;
-        return {id, commonId, name} as Resort;
+        const resortName = a.Name;
+        return {id, commonId, name, resortName} as Resort;
       });
     });
   }
