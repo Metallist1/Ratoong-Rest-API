@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GetAllCountries, GetAllLocations} from './shared/states/resorts/resorts.action';
+import {GetAllCountries, GetAllLocations, GetQuestions} from './shared/states/resorts/resorts.action';
 import {Store} from '@ngxs/store';
 @Component({
   selector: 'app-root',
@@ -10,6 +10,7 @@ export class AppComponent implements OnInit, OnDestroy{
   title = 'ratoong';
   constructor(private store: Store) {
     this.store.dispatch(new GetAllCountries());
+    this.store.dispatch(new GetQuestions());
   }
 
   ngOnInit(): any{

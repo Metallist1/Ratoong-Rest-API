@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {Resort} from './entities/resort';
 import {Country} from './entities/country';
+import {Question} from './entities/question';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,22 @@ export class ResortsService {
         return {id, commonId, name, resortName} as Resort;
       });
     });
+  }
+
+  async getQuestions(): Promise<Question[]>  {
+    const child = [];
+    await firebase.database().ref('/SubCategories').once('value').then((snapshot) => {
+      snapshot.forEach((obj) => {
+        if (obj.val().active) {
+          const id = obj.val().SubCategoryId;
+          const name = obj.val().CategoryName;
+          if (obj.val().active){
+            child.push({id, name} as Question);
+          }
+        }
+      });
+    });
+    return child;
   }
 
   async getAllLocations(id: number): Promise<Resort[]>  {

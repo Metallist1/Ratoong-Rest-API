@@ -1,16 +1,17 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetAllCountries, GetAllLocations, GetFilteredResortData, GetResorts, SetFilter, SortResorts} from './resorts.action';
+import {GetAllCountries, GetAllLocations, GetFilteredResortData, GetQuestions, GetResorts, SetFilter, SortResorts} from './resorts.action';
 import {Resort} from './entities/resort';
 import {ResortsService} from './resorts.service';
 import {Country} from './entities/country';
 import {StatisticsFilter} from './helpers/statistics';
+import {Question} from './entities/question';
 
 export class ResortStateModel {
   resortList: Resort[];
   countryList: Country[];
   summaryLocationList: Resort[];
-
+  listOfQuestions: Question[];
   statisticsObject: object;
 
   sortDirection: SortDirection;
@@ -29,6 +30,7 @@ function matches(resort: Resort, term: string): boolean {
   defaults: {
     resortList: [],
     countryList: [],
+    listOfQuestions: [],
     summaryLocationList: [],
     statisticsObject: undefined,
     sortDirection: 'asc',
@@ -46,6 +48,11 @@ export class ResortsState {
   @Selector()
   static resortList(state: ResortStateModel): any {
     return state.resortList.filter(resort => matches(resort, state.filterStr));
+  }
+
+  @Selector()
+  static questionList(state: ResortStateModel): any {
+    return state.listOfQuestions;
   }
 
   @Selector()
@@ -102,6 +109,17 @@ export class ResortsState {
         });
       }
     );
+  }
+
+  @Action(GetQuestions)
+  getSubCategories({getState, setState}: StateContext<ResortStateModel>): any {
+    this.resortList.getQuestions().then((result) => {
+      const state = getState();
+      setState({
+        ...state,
+        listOfQuestions: result,
+      });
+    });
   }
 
   @Action(SetFilter)

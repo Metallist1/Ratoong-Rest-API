@@ -22,6 +22,10 @@ export class GetAllCountries {
   static readonly type = 'GetAllCountries';
 }
 
+export class GetQuestions {
+  static readonly type = 'GetQuestions';
+}
+
 export class GetFilteredResortData {
   constructor(public id: string, public country: string, public age: string, public gender: string,
               public fromDate: string, public toDate: string) {}

@@ -71,8 +71,8 @@ export class SummaryGenderComponent implements OnInit {
     }
   };
 
-  public typeLabels: Label[] = ['Skier', 'Snowboarder', 'Not Specified'];
-  public typeData: SingleDataSet = [50, 60, 200];
+  public typeLabels: Label[] = ['Skier', 'Snowboarder'];
+  public typeData: SingleDataSet = [50, 60];
 
   @Input() genderData: Array<object>;
 

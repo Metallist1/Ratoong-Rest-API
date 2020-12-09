@@ -21,7 +21,7 @@ import { SummaryCalendarComponent } from './summary-page/summary-calendar/summar
 import { SummaryGenderComponent } from './summary-page/summary-gender/summary-gender.component';
 import { SummaryPreferencesComponent } from './summary-page/summary-preferences/summary-preferences.component';
 import { SummaryTypeComponent } from './summary-page/summary-type/summary-type.component';
-import { SummaryRatingTableComponent } from './summary-page/summary-rating-table/summary-rating-table.component';
+import {NgbdSortableHeader, SummaryRatingTableComponent} from './summary-page/summary-rating-table/summary-rating-table.component';
 import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
@@ -53,6 +53,7 @@ import {ChartsModule} from 'ng2-charts';
     SummaryPreferencesComponent,
     SummaryTypeComponent,
     SummaryRatingTableComponent,
+    NgbdSortableHeader,
   ]
 })
 export class RestModule { }

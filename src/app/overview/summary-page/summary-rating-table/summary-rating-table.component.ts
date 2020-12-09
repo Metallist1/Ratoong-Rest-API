@@ -1,14 +1,14 @@
 import {Component, Directive, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {AngularFireAnalytics} from '@angular/fire/analytics';
+import {ResortsState} from '../../../shared/states/resorts/resorts.state';
+import {Question} from '../../../shared/states/resorts/entities/question';
 
 export type SortColumn = keyof Location | '';
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: '', '': 'asc' };
 
-const compare = (v1: string | ((url: string) => void) | DOMStringList | { (): void; (forcedReload: boolean): void } | (() => string),
-                 v2: string | ((url: string) => void) | DOMStringList | { (): void; (forcedReload: boolean): void } | (() => string)) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 export interface SortEvent {
   column: SortColumn;
@@ -43,16 +43,19 @@ export class NgbdSortableHeader {
 export class SummaryRatingTableComponent implements OnInit {
 
   @Input() ratings: Array<object>;
-  totalLocations: Location[];
-  currentLocations: Location[];
-  currentPage = 1;
-  itemsPerPage = 10;
+  totalQuestionList: Question[];
+  currentQuestionList: Question[];
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
-
+  @Select(ResortsState.questionList) questions: Observable<Question[]>;
+  questionList: Question[];
   constructor() {}
 
   ngOnInit(): any{
+    this.questions.subscribe( (data) => {
+      this.totalQuestionList = data;
+      this.currentQuestionList = data;
+    });
    /* this.listOfLocations.subscribe(
       (data) => {
         this.currentPage = 1;
@@ -76,20 +79,12 @@ export class SummaryRatingTableComponent implements OnInit {
 
     // sorting countries
     if (direction === '' || column === '') {
-      this.currentLocations = this.totalLocations;
+      this.currentQuestionList = this.totalQuestionList;
     } else {
-      this.currentLocations = [...this.totalLocations].sort((a, b) => {
+      this.currentQuestionList = [...this.totalQuestionList].sort((a, b) => {
         const res = compare(a[column], b[column]);
         return direction === 'asc' ? res : -res;
       });
     }
-  }
-
-  getNextLocations(): void {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    const end = (this.currentPage * this.itemsPerPage);
-    this.currentLocations.push(...this.totalLocations
-      .slice(start, end));
-    this.currentPage++;
   }
 }

@@ -5,15 +5,15 @@
       <thead>
       <tr>
         <th scope="col" sortable="name" (sort)="onSort($event)">Question</th>
-        <th scope="col" sortable="cityName" (sort)="onSort($event)">Total Rated</th>
-        <th scope="col" sortable="countryName"  (sort)="onSort($event)">Average</th>
+        <th scope="col" sortable="count" (sort)="onSort($event)">Total Rated</th>
+        <th scope="col" sortable="average"  (sort)="onSort($event)">Average</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td scope="row" class="simple-table-text">Offpiste</td>
-        <td> 200 </td>
-        <td> 3.4 </td>
+      <tr *ngFor="let question of currentQuestionList ; index as i">
+        <td scope="row" class="simple-table-text">{{question.name}}</td>
+        <td> {{question.id}} </td>
+        <td> {{question.id}} </td>
       </tr>
       </tbody>
     </table>
