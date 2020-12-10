@@ -33,6 +33,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   @Select(ResortsState.countryList) listOfCountries: Observable<Country[]>;
 
   @Select(ResortsState.getStatistics) statistics: Observable<object>;
+  allStats: object;
   locationSummaryList: Resort[];
 
   constructor(private store: Store,
@@ -62,6 +63,7 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
     this.statistics.subscribe(
       (data) => {
         console.log(data);
+        this.allStats = data;
       });
   }
 

@@ -49,23 +49,29 @@ export class SummaryRatingTableComponent implements OnInit {
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   @Select(ResortsState.questionList) questions: Observable<Question[]>;
   questionList: Question[];
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit(): any{
     this.questions.subscribe( (data) => {
-      this.totalQuestionList = data;
-      this.currentQuestionList = data;
+      const newData = data.map((item) => {
+        let totalCount = 0;
+        let average = '0';
+
+        for (let i = 0; i <  this.ratings.length; i++) {
+          if ( Number(this.ratings[i][0]) === Number(item.id)) {
+            totalCount = Number(this.ratings[i][1].totalCount);
+            average = (Math.round((this.ratings[i][1].totalScore / this.ratings[i][1].totalCount) * 100) / 100).toFixed(2);
+            break;
+          }
+        }
+
+        return { id: item.id, name: item.name, totalCount, average } as Question;
+      });
+      this.totalQuestionList = newData;
+      this.currentQuestionList = newData;
+
     });
-   /* this.listOfLocations.subscribe(
-      (data) => {
-        this.currentPage = 1;
-        const currentData = data.filter((el) => {
-          return (el.cityName != null && el.cityName !== '') && (el.countryName != null && el.countryName !== 'undefined');
-        });
-        this.totalLocations = currentData;
-        this.currentLocations = currentData.slice(0, this.itemsPerPage);
-        this.currentPage++;
-      });*/
   }
 
   onSort({column, direction}: SortEvent): any {

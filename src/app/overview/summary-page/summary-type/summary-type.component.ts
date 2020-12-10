@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ChartOptions, ChartType} from 'chart.js';
+import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSet} from 'ng2-charts';
 
 @Component({
@@ -9,14 +9,28 @@ import {Label, monkeyPatchChartJsLegend, monkeyPatchChartJsTooltip, SingleDataSe
 })
 export class SummaryTypeComponent implements OnInit {
 
-  public pieChartOptions: ChartOptions = {
+  public barChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      position: 'bottom',
+    },
+    title: {
+      text: 'TYPE OF SKIER',
+      display: true
+    }
   };
-  public pieChartLabels: Label[] = ['Skier', 'Snowboarder', 'Not Specified'];
-  public pieChartData: SingleDataSet = [50, 60, 200];
-  public pieChartType: ChartType = 'pie';
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+  public barChartLabels: Label[] = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+  public barChartType: ChartType = 'horizontalBar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
+  public barChartData: ChartDataSets[] = [
+    { data: [65], label: 'Beginner' },
+    { data: [28], label: 'Intermediate' },
+    { data: [29], label: 'Advanced' },
+    { data: [45], label: 'Expert' }
+  ];
 
   @Input() types: Array<object>;
 
