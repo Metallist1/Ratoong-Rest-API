@@ -16,14 +16,18 @@ export class UsersService {
   async getUsers(): Promise<any> {
     return firebase.database().ref('/NewUsers').once('value').then((snapshot) => {
       const array: any = Object.values(snapshot.val());
-      return array.map(a => {
+      return array.filter(a => {
+        return a.firstname !== undefined;
+      }).map((a, i) => {
+        const uId = a.uid;
         const firstName = a.firstname;
         const lastName = a.surname;
         const gender = a.gender;
         const country = a.country;
         const email = a.email;
         const source = a.source;
-        return {firstName, lastName, gender, country, email, source} as User;
+        const id = i + 1;
+        return {uId, firstName, lastName, gender, country, email, source, id} as User;
       });
     });
   }

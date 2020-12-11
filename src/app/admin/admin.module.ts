@@ -18,6 +18,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import {NgbAlertModule, NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {AdminRoutes} from './admin-routing.module';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { ResortDetailsComponent } from './resort-details/resort-details.component';
 
 @NgModule({
 
@@ -37,6 +39,6 @@ import {AdminRoutes} from './admin-routing.module';
   ],
   providers: [],
   exports: [],
-  declarations: [ResortsComponent, UsersComponent, FooterComponent, NavbarComponent]
+  declarations: [ResortsComponent, UsersComponent, FooterComponent, NavbarComponent, UserDetailsComponent, ResortDetailsComponent]
 })
 export class AdminModule { }

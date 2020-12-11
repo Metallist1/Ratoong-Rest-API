@@ -3,7 +3,7 @@ import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {UsersState} from '../../shared/states/users/users.state';
 import {Observable, Subject} from 'rxjs';
 import {User} from '../../shared/states/users/entities/user';
-import {GetUsers, SetFilter} from '../../shared/states/users/users.action';
+import {GetUsers, SetFilter, SortUsers} from '../../shared/states/users/users.action';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -48,10 +48,8 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   refreshUsers(): void {
     this.usersPage = this.users
-      .map((user, i) => ({id: i + 1, ...user}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
-
 
   ngOnInit(): void {
     this.store.dispatch(new GetUsers());
@@ -64,5 +62,9 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   updateFilter(str): void {
     this.store.dispatch(new SetFilter(str));
+  }
+
+  onSort(str): void {
+    this.store.dispatch(new SortUsers(str));
   }
 }

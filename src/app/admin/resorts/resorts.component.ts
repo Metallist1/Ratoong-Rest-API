@@ -50,9 +50,7 @@ export class ResortsComponent implements OnInit, OnDestroy {
   }
 
   refreshResorts(): void {
-    this.resortsPage = this.resorts
-      // .map((resort, i) => ({id: i + 1, ...resort}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    this.resortsPage = this.resorts.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   ngOnInit(): void {

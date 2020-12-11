@@ -15,7 +15,7 @@ export class ResortStateModel {
   statisticsObject: object;
 
   sortDirection: SortDirection;
-  filterStr: string;
+  filterBy: string;
 }
 
 export type SortDirection = 'asc' | 'desc';
@@ -34,7 +34,7 @@ function matches(resort: Resort, term: string): boolean {
     summaryLocationList: [],
     statisticsObject: undefined,
     sortDirection: 'asc',
-    filterStr: ''
+    filterBy: ''
   }
 })
 
@@ -47,7 +47,7 @@ export class ResortsState {
 
   @Selector()
   static resortList(state: ResortStateModel): any {
-    return state.resortList.filter(resort => matches(resort, state.filterStr));
+    return state.resortList.filter(resort => matches(resort, state.filterBy));
   }
 
   @Selector()
@@ -125,7 +125,7 @@ export class ResortsState {
   @Action(SetFilter)
   setFilter(ctx: StateContext<ResortStateModel>, payload: SetFilter): any {
     ctx.patchState({
-      filterStr: payload.str
+      filterBy: payload.str
     });
   }
 
@@ -137,7 +137,7 @@ export class ResortsState {
           sortedList.sort((a, b) => a.id - b.id);
     }
     else{
-          sortedList.sort((a, b) => (a[payload.str] > b[payload.str]) ? 1 : -1);
+          sortedList.sort((a, b) => (a[payload.str].toLowerCase() > b[payload.str].toLowerCase()) ? 1 : -1);
     }
     if (state.sortDirection === 'desc'){
           sortedList.reverse();
