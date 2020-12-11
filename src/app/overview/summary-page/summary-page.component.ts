@@ -10,6 +10,7 @@ import {AdminAuthState} from '../../shared/states/admin-auth/admin-auth.state';
 import {AdminsUsers} from '../../shared/states/admin-auth/entities/AdminUser';
 import {LoginAdmin} from '../../shared/states/admin-auth/admin-auth.action';
 import {takeUntil} from 'rxjs/operators';
+import {Question} from '../../shared/states/resorts/entities/question';
 
 @Component({
   selector: 'app-summary-page',
@@ -24,7 +25,8 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   isLoading = false;
   startDate = null;
   endDate = null;
-
+  totalRatings = 0;
+  totalAverage = '0';
 
   private ngUnsubscribe = new Subject();
 
@@ -33,13 +35,16 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   @Select(ResortsState.countryList) listOfCountries: Observable<Country[]>;
 
   @Select(ResortsState.getStatistics) statistics: Observable<object>;
+  @Select(ResortsState.questionList) questions: Observable<Question[]>;
+  questionList: Question[];
+
   allStats: object;
   locationSummaryList: Resort[];
 
   constructor(private store: Store,
               private actions$: Actions) {
 
-    this.actions$.pipe(ofActionCompleted(GetAllLocations),
+    this.actions$.pipe(ofActionSuccessful(GetAllLocations),
       takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.isLoading = false;
     });
@@ -56,14 +61,44 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.questions.subscribe( (data) => {
+      this.questionList = data;
+    });
+
     this.summarList.subscribe(
       (data) => {
         this.locationSummaryList = data;
       });
+
     this.statistics.subscribe(
       (data) => {
-        console.log(data);
-        this.allStats = data;
+        if (data) {
+          console.log(data);
+          this.allStats = data;
+
+          const splicedData = this.questionList.slice();
+          splicedData.shift();
+          let totalScore = 0;
+          let totalCount = 0;
+          splicedData.map((item) => {
+
+          // @ts-ignore
+          for (let i = 0; i < data.ratingData.length; i++) {
+            // @ts-ignore
+            if (Number(data.ratingData[i][0]) === Number(item.id)) {
+              // @ts-ignore
+              totalCount = totalCount + Number(data.ratingData[i][1].totalCount);
+              // @ts-ignore
+              totalScore = totalScore + Number(data.ratingData[i][1].totalScore);
+            }
+          }
+          this.totalRatings = totalCount;
+          if (totalCount !== 0 && totalScore !== 0) {
+            this.totalAverage = (Math.round((totalScore / totalCount) * 100) / 100).toFixed(2);
+          }
+          });
+        }
       });
   }
 

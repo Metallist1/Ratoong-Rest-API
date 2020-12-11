@@ -49,7 +49,7 @@ export class ResortsService {
     const allresortList = await this.getResorts();
     const resortList = [];
     for (let i = 0; i < allresortList.length; i++) {
-      if (allresortList[i].commonId === String(id)) {
+      if (String(allresortList[i].commonId) === String(id)) {
           resortList.push(allresortList[i]);
         }
       }

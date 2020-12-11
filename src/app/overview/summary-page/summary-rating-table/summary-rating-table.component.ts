@@ -54,7 +54,9 @@ export class SummaryRatingTableComponent implements OnInit {
 
   ngOnInit(): any{
     this.questions.subscribe( (data) => {
-      const newData = data.map((item) => {
+      const splicedData = data.slice();
+      splicedData.shift();
+      const newData = splicedData.map((item) => {
         let totalCount = 0;
         let average = '0';
 

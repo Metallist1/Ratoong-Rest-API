@@ -31,7 +31,6 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import {AdminAuthState} from './shared/states/admin-auth/admin-auth.state';
 import {NotfoundComponent} from './notfound/notfound.component';
 import { SizeDetectorComponent } from './shared/ui/size-detector/size-detector.component';
-import { AdminSignupComponent } from './admin-signup/admin-signup.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 
@@ -40,8 +39,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AppComponent,
     AdminLoginComponent,
     NotfoundComponent,
-    SizeDetectorComponent,
-    AdminSignupComponent,
+    SizeDetectorComponent
   ],
   imports: [
     BrowserModule,

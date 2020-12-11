@@ -4,10 +4,14 @@ export class StatisticsFilter {
     // @ts-ignore
     const userData = this.getUserData(params.data.processedData);
     // @ts-ignore
+    console.log(params.data);
+    // @ts-ignore
     const ratingData = this.getRatingData(params.data.processedData);
     return {
       userData,
-      ratingData
+      ratingData,
+      // @ts-ignore
+      name: params.data.cityName
     };
   }
 

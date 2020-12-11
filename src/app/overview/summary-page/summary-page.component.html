@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="important-search">
-          <div class="form-group max-width">
+          <div class="form-group max-width decrease-margin">
             <div class="display-name">Town <div class="important-text">(Required)</div></div>
             <select [(ngModel)]='selectedResort' class="form-control profile-select">
               <option value="default" disabled>Select Town</option>
@@ -42,32 +42,32 @@
                 <input ngbButton type="radio" value="None"> All Ages
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '0-14'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="0-14"> 0-14
+                <img *ngIf="ageSelect == '13–17'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="13–17"> 13–17
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '14-18'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="14-18"> 14-18
+                <img *ngIf="ageSelect == '18-24'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="18-24"> 18-24
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '18-25'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="18-25"> 18-25
+                <img *ngIf="ageSelect == '25–34'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="25–34"> 25–34
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '26-35'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="26-35"> 26-35
+                <img *ngIf="ageSelect == '35-44'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="35-44"> 35-44
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '36-45'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="36-45"> 36-45
+                <img *ngIf="ageSelect == '45-54'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="45-54"> 45-54
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '46-55'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="46-55"> 46-55
+                <img *ngIf="ageSelect == '55-64'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="55-64"> 55-64
               </label>
               <label ngbButtonLabel class="added-margin">
-                <img *ngIf="ageSelect == '55-100'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
-                <input ngbButton type="radio" value="55-100"> 55+
+                <img *ngIf="ageSelect == '65-100'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="65-100"> +65
               </label>
             </div>
           </div>
@@ -96,29 +96,30 @@
             <div class="display-name">Time Period <div class="optional-text">(Optional)</div></div>
             <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
           </div>
-          <div class="form-group slight-margin-right max-width">
+          <div class="form-group slight-margin-right max-width increase-margin">
             <button type="button" [disabled]="selectedResort === 'default'" class="btn btn-info select-button" (click)="getInfo()">Display Data</button>
           </div>
         </div>
       </div>
     </div>
+
     <div class="details-container" *ngIf="allStats">
       <div class="flex-container">
         <div class="picture-display">
           <div class="col-md-12 text-allign">
-            <div class="display-name uppercase">TOWN NAME, {{locationSummaryList[0].resortName}} Data Summary</div>
+            <div class="display-name uppercase">{{allStats.name}}, {{locationSummaryList[0].resortName}} Data Summary</div>
             <div class="single-rating margin-upper max-strech-width">
-              <div class="rating-text big-rating">Total Ratings {{1}}</div>
-              <div class="rating-text big-rating">Overall Score {{1.5}}</div>
+              <div class="rating-text big-rating">Total Ratings {{totalRatings}}</div>
+              <div class="rating-text big-rating">Overall Score {{totalAverage}}</div>
             </div>
           </div>
         </div>
         <div class="most-important-data">
           <app-summary-rating-table style="width: 100%" [ratings]="allStats.ratingData" ></app-summary-rating-table>
-          <app-summary-preferences style="width: 100%" [preferences]="allStats" ></app-summary-preferences>
+          <app-summary-preferences style="width: 100%" [preferences]="allStats.userData" ></app-summary-preferences>
         </div>
         <div class="most-optional-data">
-          <app-summary-gender style="width: 100%" [genderData]="locationSummaryList" ></app-summary-gender>
+          <app-summary-gender style="width: 100%" [genderData]="allStats.userData" ></app-summary-gender>
         </div>
       </div>
     </div>
