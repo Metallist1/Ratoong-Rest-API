@@ -1,0 +1,22 @@
+
+<div class="ratoong-destination-block">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col" sortable="name" (sort)="onSort($event)">Rating Parameter</th>
+        <th scope="col" sortable="id" (sort)="onSort($event)">Total Rated</th>
+        <th scope="col" sortable="id"  (sort)="onSort($event)">Average Rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let question of currentQuestionList ; index as i">
+        <td scope="row" class="simple-table-text">{{question.name}}</td>
+        <td> {{question.totalCount | number}} </td>
+        <td> {{question.average}} </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

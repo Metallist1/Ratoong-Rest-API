@@ -8,56 +8,119 @@
   <div class="col-md-10 offset-md-1" *ngIf="!isLoading">
     <div class="details-container">
       <div class="flex-container">
-          <ul class="list-group dropdown-list">
-            <div class="btn-group " ngbRadioGroup name="radioBasic" [(ngModel)]="selectedResort">
-            <ngb-accordion [closeOthers]="true">
-              <ngb-panel  *ngFor="let locations of locationSummaryList ; index as i" id="static-{{i}}">
-                <ng-template ngbPanelTitle>
-                  {{locations?.name}}
-                  <span class="badge badge-primary badge-pill">Towns: {{locations?.ResortList.length}}</span>
-                </ng-template>
-                <ng-template style="  padding: 10px 0 !important;" ngbPanelContent>
-                  <div class="inner-card">
-                    <label ngbButtonLabel class="btn-light" *ngFor="let resorts of locations.ResortList">
-                      <input ngbButton type="radio" value="{{resorts.id}}"> {{resorts.name}}
-                    </label>
-                  </div>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
+        <div class="picture-display">
+          <div class="col-md-12 text-allign">
+            <div class="display-name uppercase">Summary of {{locationSummaryList[0].resortName}}</div>
+          </div>
+        </div>
+        <div class="important-search">
+          <div class="form-group max-width decrease-margin">
+            <div class="display-name">Town <div class="important-text">(Required)</div></div>
+            <select [(ngModel)]='selectedResort' class="form-control profile-select">
+              <option value="default" disabled>Select Town</option>
+              <option *ngFor="let town of  locationSummaryList" [ngValue]="town.id">
+                {{ town.name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group max-width">
+            <div class="display-name">Countries <div class="optional-text">(Optional)</div></div>
+            <select [(ngModel)]='countrySelect' class="form-control profile-select">
+              <option value="None">All Countries</option>
+              <option *ngFor="let country of  listOfCountries| async" [ngValue]="country.name">
+                {{ country.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="optional-search">
+          <div class="form-group">
+            <div class="display-name">Age groups <div class="optional-text">(Optional)</div></div>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="ageRadio" [(ngModel)]="ageSelect">
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == 'None'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="None"> All Ages
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '13–17'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="13–17"> 13–17
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '18-24'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="18-24"> 18-24
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '25–34'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="25–34"> 25–34
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '35-44'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="35-44"> 35-44
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '45-54'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="45-54"> 45-54
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '55-64'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="55-64"> 55-64
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="ageSelect == '65-100'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="65-100"> +65
+              </label>
             </div>
-          </ul>
-        <div class="form-group">
-          <label>Age</label>
-          <select [(ngModel)]='ageSelect' class="form-control profile-select">
-            <option value="None">All Ages</option>
-            <option value="18-25">18-25</option>
-            <option value="26-35">26-35</option>
-            <option value="36-45">36-45</option>
-            <option value="46-55">46-55</option>
-            <option value="55-100">55-100</option>
-          </select>
+          </div>
+          <div class="form-group slight-margin-right max-width">
+            <div class="display-name">Genders <div class="optional-text">(Optional)</div></div>
+            <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="genderSelect">
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="genderSelect == 'None'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="None"> All Genders
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="genderSelect == 'male'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="male"> MALE
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="genderSelect == 'female'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="female"> FEMALE
+              </label>
+              <label ngbButtonLabel class="added-margin">
+                <img *ngIf="genderSelect == 'donttell'" class="region-tick" src="./assets/images/summary/selected-checkmark.svg"/>
+                <input ngbButton type="radio" value="donttell"> DON'T WANNA TELL
+              </label>
+            </div>
+          </div>
+          <div class="form-group slight-margin-right max-width">
+            <div class="display-name">Time Period <div class="optional-text">(Optional)</div></div>
+            <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
+          </div>
+          <div class="form-group slight-margin-right max-width increase-margin">
+            <button type="button" [disabled]="selectedResort === 'default'" class="btn btn-info select-button" (click)="getInfo()">Display Data</button>
+          </div>
         </div>
-        <div class="form-group slight-margin-right max-width">
-          <label>GENDER</label>
-          <select [(ngModel)]='genderSelect'  class="form-control profile-select">
-            <option value="None">All Genders</option>
-            <option value="male">MALE</option>
-            <option value="female">FEMALE</option>
-            <option value="donttell">DON'T WANNA TELL</option>
-          </select>
+      </div>
+    </div>
+
+    <div class="details-container" *ngIf="allStats">
+      <div class="flex-container">
+        <div class="picture-display">
+          <div class="col-md-12 text-allign">
+            <div class="display-name uppercase">{{allStats.name}}, {{locationSummaryList[0].resortName}} Data Summary</div>
+            <div class="single-rating margin-upper max-strech-width">
+              <div class="rating-text big-rating">Total Ratings {{totalRatings}}</div>
+              <div class="rating-text big-rating">Overall Score {{totalAverage}}</div>
+            </div>
+          </div>
         </div>
-        <div class="form-group max-width">
-          <label>COUNTRY</label>
-          <select [(ngModel)]='countrySelect' class="form-control profile-select">
-            <option value="None">All Countries</option>
-            <option *ngFor="let country of  listOfCountries| async" [ngValue]="country.name">
-              {{ country.name }}
-            </option>
-          </select>
+        <div class="most-important-data">
+          <app-summary-rating-table style="width: 100%" [ratings]="allStats.ratingData" ></app-summary-rating-table>
+          <app-summary-preferences style="width: 100%" [preferences]="allStats.userData" ></app-summary-preferences>
         </div>
-        <app-summary-calendar (startDate)="modifyStartDate($event)" (endDate)="modifyEndDate($event)"></app-summary-calendar>
-        <button type="button" [disabled]="selectedResort === null" class="btn btn-primary" (click)="getInfo()">Primary</button>
+        <div class="most-optional-data">
+          <app-summary-gender style="width: 100%" [genderData]="allStats.userData" ></app-summary-gender>
+        </div>
       </div>
     </div>
   </div>

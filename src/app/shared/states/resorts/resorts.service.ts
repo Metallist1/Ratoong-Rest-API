@@ -2,8 +2,8 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import {Resort} from './entities/resort';
-import {SummaryLocation} from './entities/summaryLocation';
 import {Country} from './entities/country';
+import {Question} from './entities/question';
 
 @Injectable({
   providedIn: 'root'
@@ -23,32 +23,37 @@ export class ResortsService {
         const id = a.LocationId;
         const name = a.CityName;
         const commonId = a.CommonId;
-        return {id, commonId, name} as Resort;
+        const resortName = a.Name;
+        return {id, commonId, name, resortName} as Resort;
       });
     });
   }
 
-  async getAllLocations(): Promise<SummaryLocation[]>  {
+  async getQuestions(): Promise<Question[]>  {
+    const child = [];
+    await firebase.database().ref('/SubCategories').once('value').then((snapshot) => {
+      snapshot.forEach((obj) => {
+        if (obj.val().active) {
+          const id = obj.val().SubCategoryId;
+          const name = obj.val().CategoryName;
+          if (obj.val().active){
+            child.push({id, name} as Question);
+          }
+        }
+      });
+    });
+    return child;
+  }
+
+  async getAllLocations(id: number): Promise<Resort[]>  {
     const allresortList = await this.getResorts();
-    const snapshot = await firebase.database().ref('/ResortCommon').once('value');
-    const list = [];
-    await snapshot.forEach((child) => {
-      const name = child.val().Name;
-      const id = child.val().CommonId;
-      const resortList = [];
-      for (let i = 0; i < allresortList.length; i++) {
-        if (allresortList[i].commonId === id) {
+    const resortList = [];
+    for (let i = 0; i < allresortList.length; i++) {
+      if (String(allresortList[i].commonId) === String(id)) {
           resortList.push(allresortList[i]);
         }
       }
-      const location: SummaryLocation = {
-        id,
-        name,
-        ResortList: resortList
-      };
-      list.push(location);
-    });
-    return list;
+    return resortList;
   }
 
   async getAllCountries(): Promise<Country[]> {
@@ -59,5 +64,10 @@ export class ResortsService {
         const region = a.Region;
         return {countryId: countId, name, region} as Country;
     });
+  }
+
+  async getFilteredResortData(id: string, country: string, age: string, gender: string, fromDate: string, toDate: string): Promise<any>{
+    const getFilteredData = await firebase.functions().httpsCallable('getFilteredData');
+    return getFilteredData({ id, country, age, gender, fromDate, toDate});
   }
 }

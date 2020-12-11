@@ -3,4 +3,5 @@ export interface Resort {
   name: string;
   score?: number;
   id?: number;
+  resortName?: string;
 }

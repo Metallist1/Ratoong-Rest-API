@@ -48,7 +48,7 @@ export class AdminAuthService {
     await firebase.database().ref().update(updates).catch(error => {
       throw new Error(error.message);
     });
-    return await this.generateUser(user.uid, email, isAdmin, apiKey, apiSecret);
+    return await this.generateUser(user.uid, email, isAdmin, 1, apiKey, apiSecret);
   }
 
   async loginWithEmail(email: string, password: string): Promise<AdminsUsers> {
@@ -60,13 +60,13 @@ export class AdminAuthService {
     if (snapshot.val() != null) {
       const apiSecret = (snapshot.val().apiSecret == null) ? null : snapshot.val().apiSecret;
       const apiKey = (snapshot.val().apiKey == null) ? null : snapshot.val().apiKey;
-      return await this.generateUser(user.uid, snapshot.val().email, snapshot.val().isAdmin, apiKey, apiSecret);
+      return await this.generateUser(user.uid, snapshot.val().email, snapshot.val().isAdmin, snapshot.val().resortID, apiKey, apiSecret);
     }
     return undefined;
   }
 
-  private async generateUser(uid, email, isAdmin, apiKey?, apiSecret?): Promise<AdminsUsers>{
-    return {uid, email, isAdmin, apiKey, apiSecret} as AdminsUsers;
+  private async generateUser(uid, email, isAdmin, resortID, apiKey?, apiSecret?): Promise<AdminsUsers>{
+    return {uid, email, isAdmin, apiKey, apiSecret, resortID} as AdminsUsers;
   }
 
   async logout(): Promise<any> {
