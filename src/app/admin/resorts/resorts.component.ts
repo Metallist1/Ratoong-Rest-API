@@ -3,7 +3,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {Observable, Subject} from 'rxjs';
 import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
-import {GetResorts, SetFilter, SortResorts} from '../../shared/states/resorts/resorts.action';
+import {GetResortDetails, GetResorts, SetFilter, SortResorts} from '../../shared/states/resorts/resorts.action';
 import {Resort} from '../../shared/states/resorts/entities/resort';
 import {takeUntil} from 'rxjs/operators';
 
@@ -51,6 +51,10 @@ export class ResortsComponent implements OnInit, OnDestroy {
 
   refreshResorts(): void {
     this.resortsPage = this.resorts.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  selectResort(id): void{
+    this.store.dispatch(new GetResortDetails(id));
   }
 
   ngOnInit(): void {

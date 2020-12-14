@@ -32,4 +32,10 @@ export class UsersService {
     });
   }
 
+  async getUserDetails(id: string): Promise<any>{
+    return firebase.database().ref('/NewUsers').child(String(id)).once('value').then((snapshot) => {
+      return snapshot.val();
+    });
+  }
+
 }

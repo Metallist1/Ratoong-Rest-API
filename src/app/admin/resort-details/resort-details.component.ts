@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Select} from '@ngxs/store';
+import {ResortsState} from '../../shared/states/resorts/resorts.state';
+
 
 @Component({
   selector: 'app-resort-details',
@@ -7,14 +9,19 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
   styleUrls: ['./resort-details.component.scss']
 })
 export class ResortDetailsComponent implements OnInit {
-  id: number;
-  constructor(private route: ActivatedRoute) { }
+
+  @Select(ResortsState.selectedResort) selectedResort: any;
+
+  resort: any;
+
+  constructor() {
+    this.selectedResort.subscribe(data => {
+      this.resort = data;
+      console.log(this.resort);
+    });
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.id = +params.get('id');
-    });
-    console.log(this.id);
   }
 
 }

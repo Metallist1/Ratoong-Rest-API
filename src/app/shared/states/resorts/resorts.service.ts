@@ -29,6 +29,12 @@ export class ResortsService {
     });
   }
 
+  async getResortDetails(id: string): Promise<any>{
+    return firebase.database().ref('/NewLocations').child(String(id)).once('value').then((snapshot) => {
+      return snapshot.val();
+    });
+  }
+
   async getQuestions(): Promise<Question[]>  {
     const child = [];
     await firebase.database().ref('/SubCategories').once('value').then((snapshot) => {

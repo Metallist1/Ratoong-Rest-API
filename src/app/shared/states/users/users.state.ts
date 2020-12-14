@@ -1,12 +1,14 @@
 
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetUsers, SetFilter, SortUsers} from './users.action';
+import {GetUserDetails, GetUsers, SetFilter, SortUsers} from './users.action';
 import {User} from './entities/user';
 import {UsersService} from './users.service';
+import {GetResortDetails} from '../resorts/resorts.action';
 
 export class UsersStateModel {
   userList: User[];
+  selectedUser: any;
   filterBy: string;
   sortDirection: SortDirection;
 }
@@ -22,6 +24,7 @@ function matches(user: User, term: string): boolean {
   name: 'users',
   defaults: {
     userList: [],
+    selectedUser: null,
     sortDirection: 'asc',
     filterBy: ''
   }
@@ -36,12 +39,27 @@ export class UsersState {
   static userList(state: UsersStateModel): any {
     return state.userList.filter(resort => matches(resort, state.filterBy));
   }
+
+  @Selector()
+  static selectedUser(state: UsersStateModel): any {
+    return state.selectedUser;
+  }
   // Gets all users from DB
   @Action(GetUsers)
   getUsers(ctx: StateContext<UsersStateModel>): any {
     return this.usersService.getUsers().then((result) => {
       ctx.patchState({
           userList: result
+        });
+      }
+    );
+  }
+
+  @Action(GetUserDetails)
+  getUserDetails(ctx: StateContext<UsersStateModel>, {id}: GetUserDetails): any {
+    return this.usersService.getUserDetails(id).then((result) => {
+        ctx.patchState({
+          selectedUser: result
         });
       }
     );

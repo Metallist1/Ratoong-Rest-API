@@ -20,11 +20,11 @@ const routes = [
     component: UsersComponent
   },
   {
-    path: 'resortDetails/:id',
+    path: 'resortDetails',
     component: ResortDetailsComponent
   },
   {
-    path: 'userDetails/:uID',
+    path: 'userDetails',
     component: UserDetailsComponent
   }
 ];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Select} from '@ngxs/store';
+import {UsersState} from '../../shared/states/users/users.state';
 
 @Component({
   selector: 'app-user-details',
@@ -7,15 +8,19 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
   styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent implements OnInit {
-  uID: string;
 
-  constructor(private route: ActivatedRoute) { }
+  @Select(UsersState.selectedUser) selectedUser: any;
+
+  user: any;
+
+  constructor() {
+    this.selectedUser.subscribe(data => {
+      this.user = data;
+      console.log(this.user);
+    });
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.uID = params.get('uID');
-    });
-    console.log(this.uID);
   }
 
 }

@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of usersPage;" [routerLink]="['/admin/userDetails', user.uId]">
+    <tr *ngFor="let user of usersPage;" [routerLink]="['/admin/userDetails']" (click)="selectUser(user.uId)">
       <td style="width: 20%">{{ user.id}}</td>
       <td style="width: 80%">{{user.firstName}}</td>
     </tr>

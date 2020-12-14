@@ -1,6 +1,15 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetAllCountries, GetAllLocations, GetFilteredResortData, GetQuestions, GetResorts, SetFilter, SortResorts} from './resorts.action';
+import {
+  GetAllCountries,
+  GetAllLocations,
+  GetFilteredResortData,
+  GetQuestions,
+  GetResortDetails,
+  GetResorts,
+  SetFilter,
+  SortResorts
+} from './resorts.action';
 import {Resort} from './entities/resort';
 import {ResortsService} from './resorts.service';
 import {Country} from './entities/country';
@@ -9,6 +18,7 @@ import {Question} from './entities/question';
 
 export class ResortStateModel {
   resortList: Resort[];
+  selectedResort: any;
   countryList: Country[];
   summaryLocationList: Resort[];
   listOfQuestions: Question[];
@@ -19,7 +29,7 @@ export class ResortStateModel {
 }
 
 export type SortDirection = 'asc' | 'desc';
-const rotate: {[key: string]: SortDirection} = { asc: 'desc', desc: 'asc' };
+const rotate: { [key: string]: SortDirection } = {asc: 'desc', desc: 'asc'};
 
 function matches(resort: Resort, term: string): boolean {
   return resort.name.toLowerCase().includes(term.toLowerCase());
@@ -29,6 +39,7 @@ function matches(resort: Resort, term: string): boolean {
   name: 'resorts',
   defaults: {
     resortList: [],
+    selectedResort: null,
     countryList: [],
     listOfQuestions: [],
     summaryLocationList: [],
@@ -41,13 +52,18 @@ function matches(resort: Resort, term: string): boolean {
 @Injectable()
 export class ResortsState {
 
-  constructor(private resortList: ResortsService,
+  constructor(private resortsService: ResortsService,
               private statisticsFilter: StatisticsFilter) {
   }
 
   @Selector()
   static resortList(state: ResortStateModel): any {
     return state.resortList.filter(resort => matches(resort, state.filterBy));
+  }
+
+  @Selector()
+  static selectedResort(state: ResortStateModel): any {
+    return state.selectedResort;
   }
 
   @Selector()
@@ -73,7 +89,7 @@ export class ResortsState {
   // Gets all resorts from DB
   @Action(GetResorts)
   getResorts(ctx: StateContext<ResortStateModel>): any {
-    return this.resortList.getResorts().then((result) => {
+    return this.resortsService.getResorts().then((result) => {
         ctx.patchState({
           resortList: result
         });
@@ -81,9 +97,19 @@ export class ResortsState {
     );
   }
 
+  @Action(GetResortDetails)
+  getResortDetails(ctx: StateContext<ResortStateModel>, {id}: GetResortDetails): any {
+    return this.resortsService.getResortDetails(id).then((result) => {
+        ctx.patchState({
+          selectedResort: result
+        });
+      }
+    );
+  }
+
   @Action(GetAllLocations)
   getAllLocations(ctx: StateContext<ResortStateModel>, {id}: GetAllLocations): any {
-    return this.resortList.getAllLocations(id).then((result) => {
+    return this.resortsService.getAllLocations(id).then((result) => {
         ctx.patchState({
           summaryLocationList: result
         });
@@ -92,18 +118,25 @@ export class ResortsState {
   }
 
   @Action(GetFilteredResortData)
-  getFilteredResortData(ctx: StateContext<ResortStateModel>, {id, country, age, gender, fromDate, toDate}: GetFilteredResortData): any {
-    return this.resortList.getFilteredResortData(id, country, age, gender, fromDate, toDate).then((result) => {
-      ctx.patchState({
-        statisticsObject: this.statisticsFilter.calculateData(result)
-      });
+  getFilteredResortData(ctx: StateContext<ResortStateModel>, {
+    id,
+    country,
+    age,
+    gender,
+    fromDate,
+    toDate
+  }: GetFilteredResortData): any {
+    return this.resortsService.getFilteredResortData(id, country, age, gender, fromDate, toDate).then((result) => {
+        ctx.patchState({
+          statisticsObject: this.statisticsFilter.calculateData(result)
+        });
       }
     );
   }
 
   @Action(GetAllCountries)
   getAllCountries(ctx: StateContext<ResortStateModel>): any {
-    return this.resortList.getAllCountries().then((result) => {
+    return this.resortsService.getAllCountries().then((result) => {
         ctx.patchState({
           countryList: result
         });
@@ -113,7 +146,7 @@ export class ResortsState {
 
   @Action(GetQuestions)
   getSubCategories({getState, setState}: StateContext<ResortStateModel>): any {
-    this.resortList.getQuestions().then((result) => {
+    this.resortsService.getQuestions().then((result) => {
       const state = getState();
       setState({
         ...state,
@@ -123,24 +156,23 @@ export class ResortsState {
   }
 
   @Action(SetFilter)
-  setFilter(ctx: StateContext<ResortStateModel>, payload: SetFilter): any {
+  setFilter(ctx: StateContext<ResortStateModel>, {str}: SetFilter): any {
     ctx.patchState({
-      filterBy: payload.str
+      filterBy: str
     });
   }
 
   @Action(SortResorts)
-  sortResorts(ctx: StateContext<ResortStateModel>, payload: SortResorts): any {
+  sortResorts(ctx: StateContext<ResortStateModel>, {str}: SortResorts): any {
     const state = ctx.getState();
     const sortedList = state.resortList.slice();
-    if (payload.str === 'id'){
-          sortedList.sort((a, b) => a.id - b.id);
+    if (str === 'id') {
+      sortedList.sort((a, b) => a.id - b.id);
+    } else {
+      sortedList.sort((a, b) => (a[str].toLowerCase() > b[str].toLowerCase()) ? 1 : -1);
     }
-    else{
-          sortedList.sort((a, b) => (a[payload.str].toLowerCase() > b[payload.str].toLowerCase()) ? 1 : -1);
-    }
-    if (state.sortDirection === 'desc'){
-          sortedList.reverse();
+    if (state.sortDirection === 'desc') {
+      sortedList.reverse();
     }
 
     ctx.patchState({
