@@ -73,14 +73,14 @@ export class UsersState {
   }
 
   @Action(SortUsers)
-  sortUsers(ctx: StateContext<UsersStateModel>, payload: SortUsers): any {
+  sortUsers(ctx: StateContext<UsersStateModel>, {str}: SortUsers): any {
     const state = ctx.getState();
     const sortedList = state.userList.slice();
-    if (payload.str === 'id'){
+    if (str === 'id'){
       sortedList.sort((a, b) => a.id - b.id);
     }
     else{
-      sortedList.sort((a, b) => (a[payload.str].toLowerCase() > b[payload.str].toLowerCase()) ? 1 : -1);
+      sortedList.sort((a, b) => (a[str].toLowerCase() > b[str].toLowerCase()) ? 1 : -1);
     }
     if (state.sortDirection === 'desc'){
       sortedList.reverse();
