@@ -53,10 +53,6 @@ export class ResortsComponent implements OnInit, OnDestroy {
     this.resortsPage = this.resorts.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
-  selectResort(id): void{
-    this.store.dispatch(new GetResortDetails(id));
-  }
-
   ngOnInit(): void {
     this.store.dispatch(new GetResorts());
   }
@@ -72,5 +68,8 @@ export class ResortsComponent implements OnInit, OnDestroy {
   }
   onSort(str): void {
     this.store.dispatch(new SortResorts(str));
+  }
+  selectResort(id): void{
+    this.store.dispatch(new GetResortDetails(id));
   }
 }

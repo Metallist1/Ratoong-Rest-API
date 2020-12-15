@@ -1,7 +1,60 @@
 <header>
   <app-navbar></app-navbar>
 </header>
-<p>resort-details works!</p>
+<div *ngIf="resort" class="main bg-image-search">
+  <div class="main details-container">
+  <div class="d-inline-flex">
+    <h1>{{resort.CityName}}</h1>
+    <h2>{{resort.CountryName}}</h2>
+  </div>
+    <div class="d-inline-flex">
+      {{resort.Website}}
+    </div>
+  <div>
+    Airports
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col" >#</th>
+      <th scope="col">Name</th>
+      <th scope="col">City</th>
+      <th scope="col">Country</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let airport of resort.Airports; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{airport.name}}</td>
+      <td>{{airport.city}}</td>
+      <td>{{airport.country}}</td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="details-container">
+    <div class="col">Elevation</div>
+    <div class="row">
+      <div class="col">Max</div>
+      <div class="col">Min</div>
+    </div>
+    <div class="row">
+      <div class="col">{{resort.ElevationInfo.max}}</div>
+      <div class="col">{{resort.ElevationInfo.min}}</div>
+    </div>
+  </div>
+    <div class="details-container">
+      <div class="col text-center">Coordinates</div>
+      <div class="row">
+        <div class="col text-center">Lat</div>
+        <div class="col text-center">Long</div>
+      </div>
+      <div class="row">
+        <div class="col text-center">{{resort.Latitude}}</div>
+        <div class="col text-center">{{resort.Longitude}}</div>
+      </div>
+    </div>
+  </div>
+</div>
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
 </footer>

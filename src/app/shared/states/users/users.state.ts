@@ -4,7 +4,6 @@ import {Injectable} from '@angular/core';
 import {GetUserDetails, GetUsers, SetFilter, SortUsers} from './users.action';
 import {User} from './entities/user';
 import {UsersService} from './users.service';
-import {GetResortDetails} from '../resorts/resorts.action';
 
 export class UsersStateModel {
   userList: User[];

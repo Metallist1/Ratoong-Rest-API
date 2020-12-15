@@ -1,0 +1,19 @@
+@import "./src/styles";
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.details-container {
+  font-family: "Oswald";
+  font-weight: 300 ;
+  margin: 20px;
+  padding: 1em 2em;
+  border: 1px solid $color-light-gray-83;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+h1, h2{
+  padding: 10px;
+  margin-bottom: 0;
+}

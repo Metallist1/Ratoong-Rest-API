@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Select} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {UsersState} from '../../shared/states/users/users.state';
+
 
 @Component({
   selector: 'app-user-details',
