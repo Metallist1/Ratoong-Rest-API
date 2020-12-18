@@ -1,10 +1,11 @@
 <header>
 <app-navbar></app-navbar>
 </header>
-  <div class="loader" *ngIf="isLoading"></div>
+<div class="bg-image-search"></div>
+<div class="loader" *ngIf="isLoading"></div>
   <div class="main" *ngIf="!isLoading">
   <div class="form-group form-inline">
-    Full text search: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
+    Find resort: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
   <table class="table table-striped">
     <thead>
@@ -20,15 +21,15 @@
     </tr>
     </tbody>
   </table>
-  <div class="d-flex justify-content-between p-2">
-    <ngb-pagination [collectionSize]="resorts.length" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshResorts()">
-    </ngb-pagination>
-
+  <div class="d-flex flex-column justify-content-between p-2">
     <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshResorts()">
       <option [ngValue]="2">2 items per page</option>
       <option [ngValue]="4">4 items per page</option>
       <option [ngValue]="6">6 items per page</option>
     </select>
+
+    <ngb-pagination [collectionSize]="resorts.length" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshResorts()">
+    </ngb-pagination>
   </div>
 
   </div>
