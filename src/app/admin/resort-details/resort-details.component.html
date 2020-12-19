@@ -27,6 +27,27 @@
           </tbody>
         </table>
       </div>
+    <div class="row details-container">
+      <div class="col align-items-start">
+        <span>Easy</span>
+        <span>Medium</span>
+        <span>Hard</span>
+        <span style="white-space: nowrap">Off-piste</span>
+      </div>
+      <div style="padding: 0" class="col align-items-start">
+        <i class="fas fa-sort-amount-up-alt"></i>
+        <span style="background: #42A948" class="dot"></span>
+        <span style="background: #a96f42" class="dot"></span>
+        <span style="background: #a94242" class="dot"></span>
+        <span style="background: #1c1a1a" class="dot"></span>
+      </div>
+      <div class="col align-items-start">
+        <span>{{resort.ThePiste[1].km}}km</span>
+        <span>{{resort.ThePiste[2].km}}km</span>
+        <span>{{resort.ThePiste[0].km}}km</span>
+        <span>{{resort.ThePiste[3].km}}km</span>
+      </div>
+    </div>
     </div>
     <div class="col">
       <div class="d-inline-flex">
@@ -39,8 +60,8 @@
       <div style="width: 50%" class="details-container">
         <div class="col">Elevation</div>
         <div class="row">
-          <div class="col">Max</div>
-          <div class="col">Min</div>
+          <div class="col"><i class="fas fa-sort-amount-up-alt"></i></div>
+          <div class="col"><i class="fas fa-sort-amount-down-alt"></i></div>
         </div>
         <div class="row">
           <div class="col">{{resort.ElevationInfo.max}}</div>
@@ -50,8 +71,8 @@
       <div class="details-container">
         <div class="col text-center">Coordinates</div>
         <div class="row">
-          <div class="col text-center">Lat</div>
-          <div class="col text-center">Long</div>
+          <div class="col text-center"><i class="fas fa-arrows-alt-v"></i></div>
+          <div class="col text-center"><i class="fas fa-arrows-alt-h"></i></div>
         </div>
         <div class="row">
           <div class="col text-center">{{resort.Latitude}}</div>
@@ -60,6 +81,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
