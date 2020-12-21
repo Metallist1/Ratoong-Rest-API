@@ -4,11 +4,11 @@
 <div class="bg-image-search"></div>
 <div *ngIf="resort" class="main">
   <div class="container details-container">
-    <div class="row">
-    <div class="col">
+    <div style="padding-top: 15px; padding-bottom: 15px" class="row">
+    <div style="align-items: flex-start" class="col">
       <div>
         Airports
-        <table class="table table-striped">
+        <table style="border: #9f9f9f solid 1px; margin: 10px 10px 10px 0" class="table table-striped">
           <thead>
           <tr>
             <th scope="col" >#</th>
@@ -29,19 +29,19 @@
       </div>
       <div>
       Pistes
-    <div style="margin: 0" class="row details-container">
+    <div style="margin: 10px 10px 10px 0" class="row details-container">
       <div class="col align-items-start">
         <span>Easy</span>
         <span>Medium</span>
         <span>Hard</span>
         <span style="white-space: nowrap">Off-piste</span>
       </div>
-      <div style="padding: 0" class="col align-items-start">
+      <div  class="col align-items-start">
         <i class="fas fa-sort-amount-up-alt"></i>
         <span style="background: #42A948" class="dot"></span>
         <span style="background: #a96f42" class="dot"></span>
         <span style="background: #a94242" class="dot"></span>
-        <span style="background: #1c1a1a" class="dot"></span>
+        <span style="background: #1c1a1a" class="dot d-flex justify-content-center align-items-center"><i style="color: white; font-size: 17px" class="fas fa-skull"></i></span>
       </div>
       <div class="col align-items-start">
         <span>{{resort.ThePiste[1].km}}km</span>
@@ -53,6 +53,7 @@
       </div>
     </div>
     <div class="col">
+      <div class="d-flex flex-column justify-content-center align-items-center details-container">
       <div class="d-inline-flex">
         <h1>{{resort.CityName}}</h1>
         <h2>{{resort.CountryName}}</h2>
@@ -60,12 +61,13 @@
       <div class="d-inline-flex">
         {{resort.Website}}
       </div>
+    </div>
       <div>
-        Elevation
-      <div style="margin: 0" class="details-container">
+        Elevation [m]
+      <div style="margin: 10px 10px 10px 0" class="details-container">
         <div class="row">
-          <div class="col"><i class="fas fa-sort-amount-up-alt"></i></div>
-          <div class="col"><i class="fas fa-sort-amount-down-alt"></i></div>
+          <div class="col"><i style="transform: rotate(180deg)" class="fas fa-sort-amount-down"></i></div>
+          <div class="col"><i style="transform: rotate(180deg)" class="fas fa-sort-amount-up"></i></div>
         </div>
         <div class="row">
           <div class="col">{{resort.ElevationInfo.max}}</div>
@@ -74,8 +76,8 @@
       </div>
       </div>
       <div>
-      Coordinates
-      <div style="margin: 0" class="details-container">
+      Coordinates [°]
+      <div style="margin: 10px 10px 10px 0" class="details-container">
         <div class="row">
           <div class="col text-center"><i class="fas fa-arrows-alt-v"></i></div>
           <div class="col text-center"><i class="fas fa-arrows-alt-h"></i></div>

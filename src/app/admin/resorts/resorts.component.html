@@ -3,7 +3,8 @@
 </header>
 <div class="bg-image-search"></div>
 <div class="loader" *ngIf="isLoading"></div>
-  <div class="main" *ngIf="!isLoading">
+  <div style="height: 100%" class="col-md-10 offset-md-1">
+  <div class="main details-container" *ngIf="!isLoading">
   <div class="form-group form-inline">
     Find resort: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
@@ -32,6 +33,7 @@
     </ngb-pagination>
   </div>
 
+  </div>
   </div>
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>

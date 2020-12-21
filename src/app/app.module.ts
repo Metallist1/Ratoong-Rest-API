@@ -32,6 +32,7 @@ import {AdminAuthState} from './shared/states/admin-auth/admin-auth.state';
 import {NotfoundComponent} from './notfound/notfound.component';
 import { SizeDetectorComponent } from './shared/ui/size-detector/size-detector.component';
 
+
 firebase.initializeApp(environment.firebaseConfig);
 
 @NgModule({
