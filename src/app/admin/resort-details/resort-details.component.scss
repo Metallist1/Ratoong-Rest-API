@@ -17,6 +17,9 @@ td, th{
   border: 1px solid $color-light-gray-83;
   background-color: rgba(255, 255, 255, 0.8);
 }
+table{
+  border: 2px solid $color-light-gray-83;
+}
 h1, h2{
   padding: 10px;
   margin-bottom: 0;

@@ -15,6 +15,9 @@ td, th{
   justify-content: center;
   align-items: center;
 }
+table{
+  border: 2px solid $color-light-gray-83;
+}
 .details-container {
   font-family: "Oswald";
   font-weight: 300 ;
