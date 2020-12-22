@@ -1,7 +1,51 @@
 <header>
   <app-navbar></app-navbar>
 </header>
-<p>user-details works!</p>
+<div class="bg-image-search"></div>
+<div *ngIf="user" class="main">
+  <div class="container details-container">
+    <div class="row">
+      <div style="align-items: flex-start; justify-content: space-between" class="col">
+        <div class="d-flex flex-column details-container">
+        <i>Name: {{user.firstname}}</i>
+          <i>Last Name: {{user.surname}}</i>
+          <i>ID: {{user.uid}}</i>
+          <i>Country: {{user.country}}</i>
+          <i>Gender: {{user.gender}}</i>
+          <i>Email: {{user.email}}</i>
+        </div>
+      </div>
+      <div style="align-items: flex-end; justify-content: space-between" class="col">
+        <table style="border: #9f9f9f solid 1px; margin: 0;" class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Skill level</th>
+          <th scope="col">Snowboarder</th>
+          <th scope="col">Skier</th>
+          <th scope="col">Holiday type</th>
+          <th scope="col">Trip count</th>
+        </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <th>{{user.preferences.skillLevel}}</th>
+              <th>{{user.preferences.snowboarder}}</th>
+              <th>{{user.preferences.skier}}</th>
+              <th>{{user.preferences.holidayType}}</th>
+              <th>{{user.preferences.tripCount}}</th>
+            </tr>
+          </tbody>
+        </table>
+        <div style="width: 100%" class="d-flex flex-column details-container">
+          <i>Source: {{user.source}}</i>
+          <i>Last login: {{user.lastLogin | date:'dd/MM/yyyy'}}</i>
+          <i>Last changes: {{user.lastChanges | date:'dd/MM/yyyy'}}</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>
 </footer>

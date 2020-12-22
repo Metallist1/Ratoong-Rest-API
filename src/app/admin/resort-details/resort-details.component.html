@@ -5,10 +5,9 @@
 <div *ngIf="resort" class="main">
   <div class="container details-container">
     <div style="padding-top: 15px; padding-bottom: 15px" class="row">
-    <div style="align-items: flex-start" class="col">
-      <div>
-        Airports
-        <table style="border: #9f9f9f solid 1px; margin: 10px 10px 10px 0" class="table table-striped">
+    <div style="align-items: flex-start; justify-content: space-between" class="col">
+      <div class="d-flex flex-column align-items-lg-end">
+        <table style="border: #9f9f9f solid 1px; margin: 0px 0 10px 10px" class="table table-striped">
           <thead>
           <tr>
             <th scope="col" >#</th>
@@ -26,6 +25,7 @@
           </tr>
           </tbody>
         </table>
+        Airports
       </div>
       <div>
       Pistes
@@ -44,18 +44,18 @@
         <span style="background: #1c1a1a" class="dot d-flex justify-content-center align-items-center"><i style="color: white; font-size: 17px" class="fas fa-skull"></i></span>
       </div>
       <div class="col align-items-start">
-        <span>{{resort.ThePiste[1].km}}km</span>
-        <span>{{resort.ThePiste[2].km}}km</span>
-        <span>{{resort.ThePiste[0].km}}km</span>
-        <span>{{resort.ThePiste[3].km}}km</span>
+        <span>{{resort.ThePiste[1].km}}<span *ngIf="resort.ThePiste[1].km==''">0</span>km</span>
+        <span>{{resort.ThePiste[2].km}}<span *ngIf="resort.ThePiste[2].km==''">0</span>km</span>
+        <span>{{resort.ThePiste[0].km}}<span *ngIf="resort.ThePiste[0].km==''">0</span>km</span>
+        <span>{{resort.ThePiste[3].km}}<span *ngIf="resort.ThePiste[3].km==''">0</span>km</span>
       </div>
     </div>
       </div>
     </div>
-    <div class="col">
-      <div class="d-flex flex-column justify-content-center align-items-center details-container">
+    <div style="justify-content: space-between; align-items: flex-end" class="col">
+      <div style="margin: 0 0 15px;" class="d-flex flex-column justify-content-center align-items-center details-container">
       <div class="d-inline-flex">
-        <h1>{{resort.CityName}}</h1>
+        <h1 class="text-nowrap">{{resort.CityName}}</h1>
         <h2>{{resort.CountryName}}</h2>
       </div>
       <div class="d-inline-flex">

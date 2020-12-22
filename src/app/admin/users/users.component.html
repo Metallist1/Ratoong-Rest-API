@@ -3,15 +3,16 @@
 </header>
 <div class="bg-image-search"></div>
 <div class="loader" *ngIf="isLoading"></div>
-<div class="main" *ngIf="!isLoading">
+<div style="height: 100%" class="col-md-10 offset-md-1">
+<div class="main details-container" *ngIf="!isLoading">
   <div class="form-group form-inline">
     Find user: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col" (click)="onSort('id')">#</th>
-      <th scope="col" (click)="onSort('firstName')">Name</th>
+      <th scope="col" (click)="onSort('id')"><span style="cursor: pointer">#</span></th>
+      <th scope="col" (click)="onSort('firstName')"><span style="cursor: pointer">Name</span></th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +23,7 @@
     </tbody>
   </table>
   <div class="d-flex flex-column justify-content-between p-2">
-    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsers()">
+    <select class="custom-select" style="margin-bottom: 15px; width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsers()">
       <option [ngValue]="2">2 items per page</option>
       <option [ngValue]="4">4 items per page</option>
       <option [ngValue]="6">6 items per page</option>
@@ -31,6 +32,7 @@
     <ngb-pagination [collectionSize]="users.length" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshUsers()">
     </ngb-pagination>
   </div>
+</div>
 </div>
 <footer class="footer bg-dark fixed-bottom">
   <app-footer></app-footer>

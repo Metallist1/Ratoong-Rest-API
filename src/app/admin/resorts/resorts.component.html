@@ -11,8 +11,8 @@
   <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col" (click)="onSort('id')">#</th>
-      <th scope="col" (click)="onSort('name')">Name</th>
+      <th scope="col" (click)="onSort('id')"><span style="cursor: pointer">#</span></th>
+      <th scope="col" (click)="onSort('name')"><span style="cursor: pointer">Name</span></th>
     </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
     </tbody>
   </table>
   <div class="d-flex flex-column justify-content-between p-2">
-    <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshResorts()">
+    <select class="custom-select" style="margin-bottom: 15px; width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshResorts()">
       <option [ngValue]="2">2 items per page</option>
       <option [ngValue]="4">4 items per page</option>
       <option [ngValue]="6">6 items per page</option>

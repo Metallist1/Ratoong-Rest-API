@@ -57,7 +57,7 @@ firebase.initializeApp(environment.firebaseConfig);
       developmentMode: !environment.production
     }),
     NgxsStoragePluginModule.forRoot({
-      key: ['AdminAuth', 'resorts']
+      key: ['AdminAuth', 'resorts', 'users']
     }),
     NgbModule,
     FontAwesomeModule,
