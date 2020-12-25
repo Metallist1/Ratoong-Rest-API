@@ -7,7 +7,7 @@ import {
   GetQuestions,
   GetResortDetails,
   GetResorts,
-  SetFilter,
+  SetResortFilter,
   SortResorts
 } from './resorts.action';
 import {Resort} from './entities/resort';
@@ -54,6 +54,10 @@ export class ResortsState {
 
   constructor(private resortsService: ResortsService,
               private statisticsFilter: StatisticsFilter) {
+  }
+  @Selector()
+  static resortFilterBy(state: ResortStateModel): any {
+    return state.filterBy;
   }
 
   @Selector()
@@ -155,8 +159,9 @@ export class ResortsState {
     });
   }
 
-  @Action(SetFilter)
-  setFilter(ctx: StateContext<ResortStateModel>, {str}: SetFilter): any {
+  @Action(SetResortFilter)
+  setResortFilter(ctx: StateContext<ResortStateModel>, {str}: SetResortFilter): any {
+    console.log(str);
     ctx.patchState({
       filterBy: str
     });

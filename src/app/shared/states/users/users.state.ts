@@ -66,6 +66,7 @@ export class UsersState {
 
   @Action(SetFilter)
   setFilter(ctx: StateContext<UsersStateModel>, payload: SetFilter): any {
+    console.log(payload.str);
     ctx.patchState({
       filterBy: payload.str
     });

@@ -1,9 +1,14 @@
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {Observable, Subject} from 'rxjs';
 import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
-import {GetResortDetails, GetResorts, SetFilter, SortResorts} from '../../shared/states/resorts/resorts.action';
+import {
+  GetResortDetails,
+  GetResorts,
+  SetResortFilter,
+  SortResorts
+} from '../../shared/states/resorts/resorts.action';
 import {Resort} from '../../shared/states/resorts/entities/resort';
 import {takeUntil} from 'rxjs/operators';
 
@@ -20,8 +25,11 @@ export class ResortsComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   @Select(ResortsState.resortList) currentResorts: Observable<Resort[]>;
+  @Select(ResortsState.resortFilterBy) filterWord: Observable<string>;
+
   resorts = [];
   resortsPage = [];
+  filterBy = '';
 
   page = 1;
   pageSize = 4;
@@ -35,7 +43,7 @@ export class ResortsComponent implements OnInit, OnDestroy {
       this.isLoading = false;
     });
 
-    this.actions$.pipe(ofActionSuccessful(SetFilter),
+    this.actions$.pipe(ofActionSuccessful(SetResortFilter),
       takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.isLoading = false;
     });
@@ -55,8 +63,10 @@ export class ResortsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(new GetResorts());
+    this.filterWord.subscribe(data => {
+      this.filterBy = data;
+    });
   }
-
   ngOnDestroy(): any{
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
@@ -64,7 +74,7 @@ export class ResortsComponent implements OnInit, OnDestroy {
 
   updateFilter(str): void {
     this.isLoading = true;
-    this.store.dispatch(new SetFilter(str));
+    this.store.dispatch(new SetResortFilter(str));
   }
   onSort(str): void {
     this.store.dispatch(new SortResorts(str));

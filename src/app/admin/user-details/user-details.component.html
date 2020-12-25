@@ -7,16 +7,16 @@
     <div class="row">
       <div style="align-items: flex-start; justify-content: space-between" class="col">
         <div class="d-flex flex-column details-container">
-        <i>Name: {{user.firstname}}</i>
-          <i>Last Name: {{user.surname}}</i>
-          <i>ID: {{user.uid}}</i>
-          <i>Country: {{user.country}}</i>
-          <i>Gender: {{user.gender}}</i>
-          <i>Email: {{user.email}}</i>
+          <span>Name: <i>{{user.firstname}}</i></span>
+          <span>Last Name: <i>{{user.surname}}</i></span>
+          <span>ID: <i>{{user.uid}}</i></span>
+          <span>Country: <i>{{user.country}}</i></span>
+          <span>Gender: <i>{{user.gender}}</i></span>
+          <span>Email: <i>{{user.email}}</i></span>
         </div>
       </div>
       <div style="align-items: flex-end; justify-content: space-between" class="col">
-        <table style="margin: 0;" class="table table-striped">
+        <table *ngIf="user.preferences.skillLevel != '' || user.preferences.tripCount != '' || user.preferences.skier != ''" style="margin: 0;" class="table table-striped">
         <thead>
         <tr>
           <th scope="col">Skill level</th>
@@ -37,9 +37,9 @@
           </tbody>
         </table>
         <div style="width: 100%" class="d-flex flex-column details-container">
-          <i>Source: {{user.source}}</i>
-          <i>Last login: {{user.lastLogin | date:'dd/MM/yyyy'}}</i>
-          <i>Last changes: {{user.lastChanges | date:'dd/MM/yyyy'}}</i>
+          <span>Source: <i>{{user.source}}</i></span>
+          <span>Last login: <i>{{user.lastLogin | date:'dd/MM/yyyy'}}</i></span>
+          <span>Last changes: <i>{{user.lastChanges | date:'dd/MM/yyyy'}}</i></span>
         </div>
       </div>
     </div>

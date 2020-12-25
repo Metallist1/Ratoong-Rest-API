@@ -13,9 +13,9 @@ export class SortResorts {
   static readonly type = 'SortResorts';
 }
 
-export class SetFilter {
+export class SetResortFilter {
   constructor(public str: string) {}
-  static readonly type = 'SetFilter';
+  static readonly type = 'SetResortFilter';
 }
 
 export class GetAllLocations {
