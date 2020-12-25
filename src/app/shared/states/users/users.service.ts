@@ -20,7 +20,7 @@ export class UsersService {
         return a.firstname !== undefined;
       }).map((a, i) => {
         const uId = a.uid;
-        const firstName = a.firstname;
+        const firstName = (a.firstname === '') ? 'User' : a.firstname;
         const lastName = a.surname;
         const gender = a.gender;
         const country = a.country;

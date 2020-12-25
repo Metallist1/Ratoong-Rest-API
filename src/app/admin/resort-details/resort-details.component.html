@@ -6,8 +6,9 @@
   <div class="container details-container">
     <div style="padding-top: 15px; padding-bottom: 15px" class="row">
     <div style="align-items: flex-start; justify-content: space-between" class="col">
-      <div class="d-flex flex-column align-items-lg-end">
-        <table style="margin: 0 0 10px 10px" class="table table-striped">
+      <div class="d-flex flex-column align-items-lg-start">
+        Airports
+        <table style="margin: 10px 10px 10px 0" class="table table-striped">
           <thead>
           <tr>
             <th scope="col" >#</th>
@@ -25,7 +26,6 @@
           </tr>
           </tbody>
         </table>
-        Airports
       </div>
       <div>
       Pistes
@@ -39,9 +39,9 @@
       <div  class="col align-items-start">
         <i class="fas fa-sort-amount-up-alt"></i>
         <span style="background: #4783c3" class="dot"></span>
-        <span style="background: #ae3c3c" class="dot"></span>
-        <span style="background: #1c1a1a" class="dot"></span>
+        <span style="background: #ae5c3c" class="dot"></span>
         <span style="background: #1c1a1a" class="dot d-flex justify-content-center align-items-center"><i style="color: white; font-size: 17px" class="fas fa-skull"></i></span>
+        <span style="background: #aea83c" class="dot"></span>
       </div>
       <div class="col align-items-start">
         <span>{{resort.ThePiste[1].km}}<span *ngIf="resort.ThePiste[1].km==''">0</span>km</span>
