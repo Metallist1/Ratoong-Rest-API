@@ -6,9 +6,9 @@
 <div style="height: 100%" class="col-md-10 offset-md-1">
 <div class="main details-container" *ngIf="!isLoading">
   <div style="align-self: flex-end" class="form-group form-inline">
-    Find user: <input #searchField class="form-control ml-2" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
+    Find user: <input #searchField class="form-control ml-2" value="{{filterBy}}" type="text" name="searchTerm" (keyup)="updateFilter(searchField.value)"/>
   </div>
-  <table class="table table-striped">
+  <table class="table table-striped table-hover table-bordered">
     <thead>
     <tr>
       <th scope="col" (click)="onSort('id')"><span style="cursor: pointer">#</span></th>

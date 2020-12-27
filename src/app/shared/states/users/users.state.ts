@@ -40,6 +40,11 @@ export class UsersState {
   }
 
   @Selector()
+  static userFilterBy(state: UsersStateModel): any {
+    return state.filterBy;
+  }
+
+  @Selector()
   static selectedUser(state: UsersStateModel): any {
     return state.selectedUser;
   }
@@ -47,6 +52,7 @@ export class UsersState {
   @Action(GetUsers)
   getUsers(ctx: StateContext<UsersStateModel>): any {
     return this.usersService.getUsers().then((result) => {
+      console.log(result);
       ctx.patchState({
           userList: result
         });

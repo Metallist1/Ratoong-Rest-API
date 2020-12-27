@@ -19,11 +19,13 @@ export class UsersComponent implements OnInit, OnDestroy {
 
 
   @Select(UsersState.userList) currentUsers: Observable<User[]>;
+  @Select(UsersState.userFilterBy) filterWord: Observable<string>;
   users = [];
   usersPage = [];
 
   page = 1;
   pageSize = 4;
+  filterBy = '';
 
   constructor(private store: Store, private actions$: Actions) {
 
@@ -53,6 +55,9 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch(new GetUsers());
+    this.filterWord.subscribe(data => {
+      this.filterBy = data;
+    });
   }
 
   ngOnDestroy(): any{
