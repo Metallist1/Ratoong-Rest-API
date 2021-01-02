@@ -22,6 +22,7 @@ export class SummaryPreferencesComponent implements OnInit {
   public radarChartType: ChartType = 'radar';
 
   @Input() preferences: Array<object>;
+
   ngOnInit(): void {
     // @ts-ignore
     for (let i = 0; i <  this.preferences.type.length; i++) {

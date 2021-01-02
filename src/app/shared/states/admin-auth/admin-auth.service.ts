@@ -27,7 +27,7 @@ export class AdminAuthService {
       });
   }
 
-  private async updateUserData(email, isAdmin?, apiKey?, apiSecret?): Promise<AdminsUsers> {
+  private async updateUserData(email, isAdmin? , resortID?, apiKey?, apiSecret?): Promise<AdminsUsers> {
     if (email == null) {
       throwError('Email is needed');
     }
@@ -38,6 +38,7 @@ export class AdminAuthService {
       uid: firebase.auth().currentUser.uid,
       email,
       isAdmin,
+      resortID,
       apiKey,
       apiSecret
     };
@@ -92,7 +93,7 @@ export class AdminAuthService {
   public async generateAPIKeys(User: AdminsUsers): Promise<AdminsUsers>{
     const apiKey = this.newGuid('xxxxxxxxxxxxxxxxxxxxxxxx');
     const apiSecret =  this.newGuid('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
-    return await this.updateUserData(User.email, User.isAdmin, apiKey, apiSecret);
+    return await this.updateUserData(User.email, User.isAdmin, User.resortID, apiKey, apiSecret);
   }
 
   private newGuid(stringToReplace: string): any {

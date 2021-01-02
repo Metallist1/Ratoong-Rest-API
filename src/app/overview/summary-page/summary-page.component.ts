@@ -1,16 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgbDate} from '@ng-bootstrap/ng-bootstrap';
-import {Actions, ofActionCompleted, ofActionSuccessful, Select, Store} from '@ngxs/store';
+import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {Observable, Subject} from 'rxjs';
-import {ResortsState} from '../../shared/states/resorts/resorts.state';
-import {Country} from '../../shared/states/resorts/entities/country';
+import {Country} from '../../shared/states/summary/entities/country';
 import {Resort} from '../../shared/states/resorts/entities/resort';
-import {GetAllLocations, GetFilteredResortData} from '../../shared/states/resorts/resorts.action';
 import {AdminAuthState} from '../../shared/states/admin-auth/admin-auth.state';
 import {AdminsUsers} from '../../shared/states/admin-auth/entities/AdminUser';
-import {LoginAdmin} from '../../shared/states/admin-auth/admin-auth.action';
 import {takeUntil} from 'rxjs/operators';
-import {Question} from '../../shared/states/resorts/entities/question';
+import {Question} from '../../shared/states/summary/entities/question';
+import {SummaryState} from '../../shared/states/summary/summary.state';
+import {GetAllLocations, GetFilteredResortData} from '../../shared/states/summary/summary.action';
 
 @Component({
   selector: 'app-summary-page',
@@ -31,11 +30,11 @@ export class SummaryPageComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject();
 
   @Select(AdminAuthState.getAdminAuth) user: Observable<AdminsUsers>;
-  @Select(ResortsState.summaryLocationList) summarList: Observable<Resort[]>;
-  @Select(ResortsState.countryList) listOfCountries: Observable<Country[]>;
+  @Select(SummaryState.summaryLocationList) summarList: Observable<Resort[]>;
+  @Select(SummaryState.countryList) listOfCountries: Observable<Country[]>;
 
-  @Select(ResortsState.getStatistics) statistics: Observable<object>;
-  @Select(ResortsState.questionList) questions: Observable<Question[]>;
+  @Select(SummaryState.getStatistics) statistics: Observable<object>;
+  @Select(SummaryState.questionList) questions: Observable<Question[]>;
   questionList: Question[];
 
   allStats: object;

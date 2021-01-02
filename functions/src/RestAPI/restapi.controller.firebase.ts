@@ -1,8 +1,8 @@
-import {ResortService} from "./resort.service";
-import {ResortController} from './resort.controller';
+import {RestapiService} from "./restapi.service";
+import {RestapiController} from './restapi.controller';
 
-export class ResortControllerFirebase implements ResortController {
-  constructor(private resortService: ResortService) {}
+export class RestapiControllerFirebase implements RestapiController {
+  constructor(private resortService: RestapiService) {}
 
 
   getAllResorts(): Promise<void> {

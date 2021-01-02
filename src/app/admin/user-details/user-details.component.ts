@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Select, Store} from '@ngxs/store';
+import {Select} from '@ngxs/store';
 import {UsersState} from '../../shared/states/users/users.state';
 
 

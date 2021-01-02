@@ -1,5 +1,5 @@
 
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ResortsState} from '../../shared/states/resorts/resorts.state';
 import {Observable, Subject} from 'rxjs';
 import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';

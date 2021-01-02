@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GetAllCountries, GetAllLocations, GetQuestions} from './shared/states/resorts/resorts.action';
 import {Store} from '@ngxs/store';
+import {GetAllCountries, GetQuestions} from './shared/states/summary/summary.action';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +19,5 @@ export class AppComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): any {
   }
-
 
 }

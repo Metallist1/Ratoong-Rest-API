@@ -1,10 +1,10 @@
-import {ResortRepository} from './resort.repository';
+import {RestapiRepository} from './restapi.repository';
 
-export class ResortService {
+export class RestapiService {
 
   CurrentDate = new Date();
 
-  constructor(private resortRepository: ResortRepository) {
+  constructor(private resortRepository: RestapiRepository) {
   }
 
   getAllResorts() {

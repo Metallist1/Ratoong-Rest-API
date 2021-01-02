@@ -1,5 +1,5 @@
 
-export interface ResortController {
+export interface RestapiController {
 
   getAllResorts(): Promise<void>;
 

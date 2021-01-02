@@ -12,7 +12,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {StatisticsFilter} from './shared/states/resorts/helpers/statistics';
+import {StatisticsFilter} from './shared/states/summary/helpers/statistics';
 
 import { environment } from '../environments/environment';
 
@@ -31,6 +31,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import {AdminAuthState} from './shared/states/admin-auth/admin-auth.state';
 import {NotfoundComponent} from './notfound/notfound.component';
 import { SizeDetectorComponent } from './shared/ui/size-detector/size-detector.component';
+import {SummaryState} from './shared/states/summary/summary.state';
 
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -52,7 +53,7 @@ firebase.initializeApp(environment.firebaseConfig);
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule, ReactiveFormsModule, AngularFireAuthModule,
 
-    NgxsModule.forRoot([ResortsState, UsersState, AdminAuthState], {
+    NgxsModule.forRoot([ResortsState, UsersState, AdminAuthState, SummaryState], {
 
       developmentMode: !environment.production
     }),

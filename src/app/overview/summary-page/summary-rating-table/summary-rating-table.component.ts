@@ -1,8 +1,8 @@
 import {Component, Directive, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import {Select} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {ResortsState} from '../../../shared/states/resorts/resorts.state';
-import {Question} from '../../../shared/states/resorts/entities/question';
+import {Question} from '../../../shared/states/summary/entities/question';
+import {SummaryState} from '../../../shared/states/summary/summary.state';
 
 export type SortColumn = keyof Location | '';
 export type SortDirection = 'asc' | 'desc' | '';
@@ -47,7 +47,7 @@ export class SummaryRatingTableComponent implements OnInit {
   currentQuestionList: Question[];
 
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
-  @Select(ResortsState.questionList) questions: Observable<Question[]>;
+  @Select(SummaryState.questionList) questions: Observable<Question[]>;
   questionList: Question[];
   constructor() {
   }

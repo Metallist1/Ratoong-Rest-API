@@ -5,7 +5,7 @@ import {AdminsUsers} from '../../shared/states/admin-auth/entities/AdminUser';
 import {Observable} from 'rxjs';
 import {AdminAuthState} from '../../shared/states/admin-auth/admin-auth.state';
 import {Select, Store} from '@ngxs/store';
-import {GenerateAPIKey, LoginAdmin} from '../../shared/states/admin-auth/admin-auth.action';
+import {GenerateAPIKey} from '../../shared/states/admin-auth/admin-auth.action';
 import {first} from 'rxjs/operators';
 
 @Component({

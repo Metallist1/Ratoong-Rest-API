@@ -4,11 +4,11 @@ import {RatingRepositoryFirebase} from './ratings/rating.repository.firebase';
 import {RatingRepository} from './ratings/rating.repository';
 import {RatingService} from './ratings/rating.service';
 
-import {ResortController} from './RestAPI/resort.controller';
-import {ResortControllerFirebase} from './RestAPI/resort.controller.firebase';
-import {ResortService} from './RestAPI/resort.service';
-import {ResortRepositoryFirebase} from './RestAPI/resort.repository.firebase';
-import {ResortRepository} from './RestAPI/resort.repository';
+import {RestapiController} from './RestAPI/restapi.controller';
+import {RestapiControllerFirebase} from './RestAPI/restapi.controller.firebase';
+import {RestapiService} from './RestAPI/restapi.service';
+import {RestapiRepositoryFirebase} from './RestAPI/restapi.repository.firebase';
+import {RestapiRepository} from './RestAPI/restapi.repository';
 
 export class DependencyFactory {
 
@@ -18,9 +18,9 @@ export class DependencyFactory {
     return new RatingControllerFirebase(service)
   }
 
-  getResortController(): ResortController {
-    const repo: ResortRepository = new ResortRepositoryFirebase();
-    const service: ResortService = new ResortService(repo);
-    return new ResortControllerFirebase(service)
+  getResortController(): RestapiController {
+    const repo: RestapiRepository = new RestapiRepositoryFirebase();
+    const service: RestapiService = new RestapiService(repo);
+    return new RestapiControllerFirebase(service)
   }
 }

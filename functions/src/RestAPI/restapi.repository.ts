@@ -1,5 +1,5 @@
 
-export interface ResortRepository {
+export interface RestapiRepository {
 
   getAllResorts(): Promise<any>;
 

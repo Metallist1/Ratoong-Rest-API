@@ -1,10 +1,10 @@
 
-import {ResortRepository} from './resort.repository';
+import {RestapiRepository} from './restapi.repository';
 import * as admin from 'firebase-admin';
 import {Question} from '../Entities/Questions';
 
 
-export class ResortRepositoryFirebase implements ResortRepository {
+export class RestapiRepositoryFirebase implements RestapiRepository {
 
   questionlist: any[]
 
