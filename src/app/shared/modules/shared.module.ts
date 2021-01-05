@@ -5,14 +5,16 @@ import { RouterModule } from '@angular/router';
 import {LocationAdderComponent} from '../ui/modals/location-adder/location-adder.component';
 
 import {PasswordModalComponent} from '../ui/modals/password-modal/password-modal.component';
+import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NgbAlertModule,
+    ],
   declarations: [
     LocationAdderComponent,
     PasswordModalComponent

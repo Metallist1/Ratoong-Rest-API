@@ -15,7 +15,6 @@ export class PasswordModalComponent implements OnInit, OnDestroy {
 
   submitted = false;
   loading = false;
-  passwordMatch = true;
   passChange = false;
   password: string;
   private ngUnsubscribe = new Subject();
@@ -32,11 +31,13 @@ export class PasswordModalComponent implements OnInit, OnDestroy {
       takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.loading = false;
       this.passChange = true;
+      this.isError = false;
     });
     this.actions$.pipe(ofActionErrored(ChangePassword),
       takeUntil(this.ngUnsubscribe)).subscribe(() => {
       this.loading = false;
       this.isError = true;
+      this.passChange = false;
     });
   }
   ngOnDestroy(): any{
@@ -45,12 +46,10 @@ export class PasswordModalComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.recoveryForm = this.fb.group({
-      Cpassword : new FormControl(null, Validators.compose([Validators.required,
-        Validators.minLength(6), Validators.maxLength(100), Validators.pattern('[A-Za-z0-9]{6,20}')])),
-      newPass : new FormControl(null, Validators.compose([Validators.required,
-        Validators.minLength(6), Validators.maxLength(100), Validators.pattern('[A-Za-z0-9]{6,20}')])),
-      newPass2 : new FormControl(null, Validators.compose([Validators.required,
-        Validators.minLength(6), Validators.maxLength(100), Validators.pattern('[A-Za-z0-9]{6,20}')])),
+      currPass : new FormControl(null, Validators.compose([Validators.required, Validators.pattern('[A-Za-z0-9]{6,20}')])),
+      newPass : new FormControl(null, Validators.compose([Validators.required, Validators.minLength(6),
+        Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9]*$')])),
+      newPass2 : new FormControl(null, Validators.compose([Validators.required])),
     });
   }
 
@@ -58,14 +57,11 @@ export class PasswordModalComponent implements OnInit, OnDestroy {
 
   updatePassword(): any {
     this.submitted = true;
-    this.passwordMatch = true;
-    this.passChange = false;
-    this.isError = false;
     if (this.recoveryForm.invalid) {
       return;
     }
     this.loading = true;
-    this.store.dispatch(new ChangePassword(this.recoveryForm.value.Cpassword, this.recoveryForm.value.newPass));
+    this.store.dispatch(new ChangePassword(this.recoveryForm.value.currPass, this.recoveryForm.value.newPass));
   }
 
   closeModal(id): any {
