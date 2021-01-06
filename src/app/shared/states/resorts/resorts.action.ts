@@ -8,13 +8,13 @@ export class GetResortDetails {
   static readonly type = 'GetResortDetails';
 }
 
-export class SortResorts {
-  constructor(public str: string) {}
-  static readonly type = 'SortResorts';
-}
-
 export class SetResortFilter {
   constructor(public str: string) {}
   static readonly type = 'SetResortFilter';
+}
+
+export class SetResortSortKey {
+  constructor(public str: string) {}
+  static readonly type = 'SetResortSortKey';
 }
 

@@ -3,8 +3,7 @@ import {Injectable} from '@angular/core';
 import {
   GetResortDetails,
   GetResorts,
-  SetResortFilter,
-  SortResorts
+  SetResortFilter, SetResortSortKey
 } from './resorts.action';
 import {Resort} from './entities/resort';
 import {ResortsService} from './resorts.service';
@@ -12,7 +11,7 @@ import {ResortsService} from './resorts.service';
 export class ResortStateModel {
   resortList: Resort[];
   selectedResort: any;
-
+  sortKey: string;
   sortDirection: SortDirection;
   filterBy: string;
 }
@@ -24,11 +23,28 @@ function matches(resort: Resort, term: string): boolean {
   return resort.name.toLowerCase().includes(term.toLowerCase());
 }
 
+function sort(resortList: Resort[], sortKey: string, sortDir: string): any {
+  if (sortKey === '') {
+    return resortList;
+  }
+  resortList = resortList.slice();
+  if (sortKey === 'id') {
+    resortList.sort((a, b) => a.id - b.id);
+  } else {
+    resortList.sort((a, b) => (a[sortKey].toLowerCase() > b[sortKey].toLowerCase()) ? 1 : -1);
+  }
+  if (sortDir === 'desc') {
+    resortList.reverse();
+  }
+  return resortList;
+}
+
 @State<ResortStateModel>({
   name: 'resorts',
   defaults: {
     resortList: [],
     selectedResort: null,
+    sortKey: '',
     sortDirection: 'asc',
     filterBy: ''
   }
@@ -47,7 +63,7 @@ export class ResortsState {
 
   @Selector()
   static resortList(state: ResortStateModel): any {
-    return state.resortList.filter(resort => matches(resort, state.filterBy));
+    return sort(state.resortList, state.sortKey, state.sortDirection).filter(resort => matches(resort, state.filterBy));
   }
 
   @Selector()
@@ -59,9 +75,10 @@ export class ResortsState {
   @Action(GetResorts)
   getResorts(ctx: StateContext<ResortStateModel>): any {
     return this.resortsService.getResorts().then((result) => {
+      if (ctx.getState().resortList.length !== result.length){
         ctx.patchState({
           resortList: result
-        });
+        }); }
       }
     );
   }
@@ -78,28 +95,16 @@ export class ResortsState {
 
   @Action(SetResortFilter)
   setResortFilter(ctx: StateContext<ResortStateModel>, {str}: SetResortFilter): any {
-    console.log(str);
     ctx.patchState({
       filterBy: str
     });
   }
 
-  @Action(SortResorts)
-  sortResorts(ctx: StateContext<ResortStateModel>, {str}: SortResorts): any {
-    const state = ctx.getState();
-    const sortedList = state.resortList.slice();
-    if (str === 'id') {
-      sortedList.sort((a, b) => a.id - b.id);
-    } else {
-      sortedList.sort((a, b) => (a[str].toLowerCase() > b[str].toLowerCase()) ? 1 : -1);
-    }
-    if (state.sortDirection === 'desc') {
-      sortedList.reverse();
-    }
-
+  @Action(SetResortSortKey)
+  setResortSortKey(ctx: StateContext<ResortStateModel>, {str}: SetResortSortKey): any {
     ctx.patchState({
-      resortList: sortedList,
-      sortDirection: rotate[state.sortDirection]
+      sortKey: str,
+      sortDirection: rotate[ctx.getState().sortDirection]
     });
   }
 }

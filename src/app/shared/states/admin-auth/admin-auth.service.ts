@@ -74,7 +74,7 @@ export class AdminAuthService {
     await this.afAuth.signOut();
   }
 
-  public async changePassword(currentPassword, newPasswrd): Promise<any> {
+  public async changePassword(currentPassword, newPassword): Promise<any> {
     const user = firebase.auth().currentUser;
     const credential = await firebase.auth.EmailAuthProvider.credential(
       firebase.auth().currentUser.email,
@@ -85,7 +85,7 @@ export class AdminAuthService {
       throw new Error(error.message);
     });
 
-    await firebase.auth().currentUser.updatePassword(newPasswrd).catch(error => {
+    await firebase.auth().currentUser.updatePassword(newPassword).catch(error => {
         throw new Error(error.message);
       });
   }

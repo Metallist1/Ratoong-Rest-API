@@ -6,8 +6,7 @@ import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {
   GetResortDetails,
   GetResorts,
-  SetResortFilter,
-  SortResorts
+  SetResortFilter, SetResortSortKey
 } from '../../shared/states/resorts/resorts.action';
 import {Resort} from '../../shared/states/resorts/entities/resort';
 import {takeUntil} from 'rxjs/operators';
@@ -58,7 +57,8 @@ export class ResortsComponent implements OnInit, OnDestroy {
   }
 
   refreshResorts(): void {
-    this.resortsPage = this.resorts.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+    this.resortsPage = this.resorts.slice((this.page - 1) * this.pageSize,
+      (this.page - 1) * this.pageSize + this.pageSize);
   }
 
   ngOnInit(): void {
@@ -77,7 +77,7 @@ export class ResortsComponent implements OnInit, OnDestroy {
     this.store.dispatch(new SetResortFilter(str));
   }
   onSort(str): void {
-    this.store.dispatch(new SortResorts(str));
+    this.store.dispatch(new SetResortSortKey(str));
   }
   selectResort(id): void{
     this.store.dispatch(new GetResortDetails(id));

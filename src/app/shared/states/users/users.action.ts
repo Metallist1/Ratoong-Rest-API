@@ -17,3 +17,8 @@ export class SetFilter {
   constructor(public str: string) {}
   static readonly type = 'SetFilter';
 }
+
+export class SetUserSortKey {
+  constructor(public str: string) {}
+  static readonly type = 'SetUserSortKey';
+}

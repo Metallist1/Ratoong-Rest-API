@@ -3,7 +3,7 @@ import {Actions, ofActionSuccessful, Select, Store} from '@ngxs/store';
 import {UsersState} from '../../shared/states/users/users.state';
 import {Observable, Subject} from 'rxjs';
 import {User} from '../../shared/states/users/entities/user';
-import {GetUserDetails, GetUsers, SetFilter, SortUsers} from '../../shared/states/users/users.action';
+import {GetUserDetails, GetUsers, SetFilter, SetUserSortKey, SortUsers} from '../../shared/states/users/users.action';
 import {takeUntil} from 'rxjs/operators';
 
 @Component({
@@ -54,6 +54,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.store.dispatch(new GetUsers());
     this.filterWord.subscribe(data => {
       this.filterBy = data;
@@ -70,11 +71,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   onSort(str): void {
-    this.store.dispatch(new SortUsers(str));
+    this.store.dispatch(new SetUserSortKey(str));
   }
 
   selectUser(id): void {
-    console.log(id);
     this.store.dispatch(new GetUserDetails(id));
   }
 }

@@ -1,7 +1,7 @@
 
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {GetUserDetails, GetUsers, SetFilter, SortUsers} from './users.action';
+import {GetUserDetails, GetUsers, SetFilter, SetUserSortKey} from './users.action';
 import {User} from './entities/user';
 import {UsersService} from './users.service';
 
@@ -10,6 +10,7 @@ export class UsersStateModel {
   selectedUser: any;
   filterBy: string;
   sortDirection: SortDirection;
+  sortKey: string;
 }
 
 export type SortDirection = 'asc' | 'desc';
@@ -19,12 +20,29 @@ function matches(user: User, term: string): boolean {
   return user.firstName.toLowerCase().includes(term.toLowerCase());
 }
 
+function sort(userList: User[], sortKey: string, sortDir: string): any {
+  if (sortKey === '') {
+    return userList;
+  }
+  userList = userList.slice();
+  if (sortKey === 'id') {
+    userList.sort((a, b) => a.id - b.id);
+  } else {
+    userList.sort((a, b) => (a[sortKey].toLowerCase() > b[sortKey].toLowerCase()) ? 1 : -1);
+  }
+  if (sortDir === 'desc') {
+    userList.reverse();
+  }
+  return userList;
+}
+
 @State<UsersStateModel>({
   name: 'users',
   defaults: {
     userList: [],
     selectedUser: null,
     sortDirection: 'asc',
+    sortKey: '',
     filterBy: ''
   }
 })
@@ -36,7 +54,8 @@ export class UsersState {
 
   @Selector()
   static userList(state: UsersStateModel): any {
-    return state.userList.filter(resort => matches(resort, state.filterBy));
+    console.log(state);
+    return sort(state.userList, state.sortKey, state.sortDirection).filter(resort => matches(resort, state.filterBy));
   }
 
   @Selector()
@@ -52,7 +71,6 @@ export class UsersState {
   @Action(GetUsers)
   getUsers(ctx: StateContext<UsersStateModel>): any {
     return this.usersService.getUsers().then((result) => {
-      console.log(result);
       ctx.patchState({
           userList: result
         });
@@ -72,29 +90,17 @@ export class UsersState {
 
   @Action(SetFilter)
   setFilter(ctx: StateContext<UsersStateModel>, payload: SetFilter): any {
-    console.log(payload.str);
     ctx.patchState({
       filterBy: payload.str
     });
   }
 
-  @Action(SortUsers)
-  sortUsers(ctx: StateContext<UsersStateModel>, {str}: SortUsers): any {
-    const state = ctx.getState();
-    const sortedList = state.userList.slice();
-    if (str === 'id'){
-      sortedList.sort((a, b) => a.id - b.id);
-    }
-    else{
-      sortedList.sort((a, b) => (a[str].toLowerCase() > b[str].toLowerCase()) ? 1 : -1);
-    }
-    if (state.sortDirection === 'desc'){
-      sortedList.reverse();
-    }
-    console.log(sortedList);
+  @Action(SetUserSortKey)
+  setUserSortKey(ctx: StateContext<UsersStateModel>, {str}: SetUserSortKey): any {
+    console.log(str);
     ctx.patchState({
-      userList: sortedList,
-      sortDirection: rotate[state.sortDirection]
+      sortKey: str,
+      sortDirection: rotate[ctx.getState().sortDirection]
     });
   }
 }
